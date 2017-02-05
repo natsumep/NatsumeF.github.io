@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{
+		padding: 0;
+		margin:0;
+	}
+
+	html,body,main{
+		height: 100%;
+		width: 100%;
+	}
+	.box{
+		height: 20px;
+		width: 20px;
+		border-radius: 50%;
+		background:red;
+		position: absolute;
+		left: 0;
+		right: 0;
+	}
+	.lookFood{
+		font-size: 20px;
+		position: absolute;
+		left: 50%;
+		top:40px;
+		transform: translateX(-50%);
+	}
+	.food{
+		height: 20px;
+		width: 20px;
+		background: #faa;
+		border-radius: 50%;
+		position: absolute;
+	}
+	#food-speed {
+		position: absolute;
+		left: 50px;
+		top: 50px;
+	}
+	footer span{
+		position: absolute;
+		bottom: 20px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	</style>
+
+</head>
+<body>
+<div id="food-speed">
+	速度
+	<input type="text" value="200" class="food-speed">
+</div>
+<main>
+	<div class="lookFood">获取了<span>0</span>个food</div>
+	<div class="box"></div>
+	<div class="food"></div>
+</main>	
+<footer>
+	<span>小提示:按下↑↓←→方向键开始收集食物吧</span>
+</footer>
+</body>
+
+<script>
+var box = document.getElementsByClassName("box")[0],
+	food = document.getElementsByClassName("food")[0],
+	span = document.getElementsByTagName("span")[0],
+	//获取的食物个数
+	i = 0;
+//初始化food的位置;每次吃到调用
+function foodInit() {
+	food.style.left = Math.random() * parseInt(window.getComputedStyle(document.body).width) - 20 + "px";
+	food.style.top = Math.random() * parseInt(window.getComputedStyle(document.body).height) - 20 + "px";
+	//获取随机的16进制颜色值;
+	food.style.background = '#' + (~~(Math.random() * (1 << 24))).toString(16);
+}
+//小球每次运动调用这个函数 判断有没有找到食物;
+function start() {
+	var boxLeft = parseInt(window.getComputedStyle(box).left),
+		boxTop = parseInt(window.getComputedStyle(box).top),
+		foodLeft = parseInt(window.getComputedStyle(food).left),
+		foodTop = parseInt(window.getComputedStyle(food).top);
+	//console.log(Math.abs(boxLeft - foodLeft) + "left+" + Math.abs(boxTop - foodTop) + "top+" + parseInt(window.getComputedStyle(food).height))
+	if (Math.abs(boxLeft - foodLeft) < parseInt(window.getComputedStyle(food).width) && Math.abs(boxTop - foodTop) < parseInt(window.getComputedStyle(food).height)) {
+		span.innerHTML = ++i;
+		foodInit()
+	}
+}
+
+/**
+ *键盘上下左右触发dom移动;
+ *可以同时触发两个方向的事件;
+ *传入四个参数:dom 需要移动的dom;
+ *main 移动的范围容器
+ *speed 每秒移动速度;
+ *callback 每次执行触发的函数;
+ */
+var KeyDomMove = function(dom, main, speed, callback) {
+	//通过闭包保存变量
+	this.keyCode = {
+		//每次按下上下左右的将当前按下的方向保存 为ture;
+		downKeyCode: function(e) {
+			var e = e || window.event;
+			//只需要用到上下左右 只保存4个键值;
+			if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) {
+				this.keyCode[e.keyCode] = true;
+			}
+		}.bind(this),
+		//每次弹起上下左右的将当前弹起的方向修改为flase;
+		upKeyCode: function(e) {
+			var e = e || window.event;
+			if (this.keyCode[e.keyCode]) {
+				this.keyCode[e.keyCode] = false;
+			}
+		}.bind(this),
+		//用于保存当前的setInterval;通过定时器增强小球移动的连贯性;
+		time: {},
+	};
+	this.speed = speed;
+	this.dom = dom;
+	this.main = main;
+	this.callback = callback;
+	this.init()
+}
+KeyDomMove.prototype.init = function() {
+	if (typeof this.speed != "number") {
+		this.speed = 1;
+	} else {
+		//速度必须大于60px每秒;每次移动的像素小于1px 浏览器会修正为0px;这也是因为运用了定时器的缺点;
+		//除以60是因为浏览器播放动画每秒60帧可以保持动画的流畅性;
+		this.speed = (this.speed / 60) > 1 ? (this.speed / 60) : 1;
+	}
+	var left = parseInt(window.getComputedStyle(this.dom).marginLeft),
+		top = parseInt(window.getComputedStyle(this.dom).marginTop),
+		mainHeigeht = parseInt(window.getComputedStyle(this.main).height) - 20,
+		mainWidth = parseInt(window.getComputedStyle(this.main).width) - 20,
+		me = this,
+		//用于左右 和上下穿透;
+		changeXY = function(xy, min, max) {
+			if (xy < min) {
+				xy = max;
+			} else if (xy >= max) {
+				xy = min;
+			}
+			return xy;
+		};
+	document.addEventListener("keydown", function(e) {
+		me.keyCode.downKeyCode();
+		if (me.keyCode[37] && !me.keyCode.time[37]) {
+			me.keyCode.time[e.keyCode] = setInterval(function() {
+				var x = me.dom.offsetLeft - left - me.speed;
+				//console.log(x)
+				x = changeXY(x, 0, mainWidth);
+				me.dom.style.left = x + "px";
+				me.callback && me.callback();
+			}, 50 / 3)
+
+		};
+		if (me.keyCode[38] && !me.keyCode.time[38]) {
+			me.keyCode.time[e.keyCode] = setInterval(function() {
+				var y = me.dom.offsetTop - top - me.speed
+				y = changeXY(y, 0, mainHeigeht);
+				me.dom.style.top = y + "px";
+				me.callback && me.callback();
+			}, 50 / 3)
+
+		};
+		if (me.keyCode[39] && !me.keyCode.time[39]) {
+			me.keyCode.time[e.keyCode] = setInterval(function() {
+				var x = me.dom.offsetLeft - left + me.speed;
+				x = changeXY(x, 0, mainWidth);
+				me.dom.style.left = x + "px";
+				me.callback && me.callback();
+			}, 50 / 3)
+
+		};
+		if (me.keyCode[40] && !me.keyCode.time[40]) {
+			me.keyCode.time[e.keyCode] = setInterval(function() {
+				var y = me.dom.offsetTop - top + me.speed;
+				y = changeXY(y, 0, mainHeigeht);
+				me.dom.style.top = y + "px";
+				me.callback && me.callback();
+			}, 50 / 3)
+
+		};
+		//每次弹起按键 移除当前方向的定时器 ;
+		document.addEventListener("keyup", function(e) {
+			me.keyCode.upKeyCode();
+			clearInterval(me.keyCode.time[e.keyCode]);
+			me.keyCode.time[e.keyCode] = null;
+		})
+	})
+};
+KeyDomMove.prototype.changeSpeed = function(speed) {
+	this.speed = (speed / 60) > 1 ? (speed / 60) : 1;
+};
+
+function init() {
+	var speed = document.querySelector(".food-speed"),
+		speedValue = parseInt(speed.value);
+	foodInit(food);
+	var findFood = new KeyDomMove(box, document.body, speedValue, start);
+	speed.onblur = function() {
+		speedValue = parseInt(speed.value);
+		findFood.changeSpeed(speedValue);
+	}
+}
+init()
+
+
+//PS: 同时按下两个方向键时;斜着移动的动画晃动不是很连贯; 如果追求平滑;个人建议可以加入四个同时按下两个键的判断;
+//    加入另一个同时改变两个方向的函数;修正定时器非同时修改当前left和top值导致的晃动;
+</script>
+</html>
