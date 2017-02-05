@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>NatsuneF.github.io fangpeng</title>
+	<style>
+	body,image,div,ul,li,a,header{
+		padding: 0;
+		margin: 0;
+	}
+	a{
+		text-decoration:none;
+		color:#000;
+	}
+	html,body{
+		height: 100%;
+		width: 100%;
+		font-size: 16px;
+	}
+	body{
+		background: url("images/body.jpeg") no-repeat ;
+		background-size: cover;
+	}
+	header{
+		width: 25%;
+		height: 100%;
+		padding: 30px;
+		background:#c3c2c2;
+	}
+	header div{
+		width: 150px;
+		margin:0 auto;
+	}
+	header a img{
+		display: inline-block;
+		height: 150px;
+		width: 150px;
+		border-radius: 50%;
+	}
+	header a img:hover{
+		background: url("images/body.jpeg") no-repeat ;
+	}
+	header ul{
+		padding-top: 50px;
+	}
+	header li{
+		padding: 20px;
+
+	}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="my_self">
+			<a href=""><img src="images/my_self.jpeg" alt="头像" title="头像"></a>
+		</div>
+		<div>
+			<ul>
+				<li><a href="">demo</a></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li><a href="https://github.com/NatsumeF/NatsuneF.github.io/issues">留言板</a></li>
+			</ul>
+		</div>
+	</header>
+</body>
+<script>
+var my_self=document.querySelector(".my_self"),
+	my_self_img=document.querySelector("img");
+	my_self.onmouseover=function(){
+		my_self_img.src="images/my_self_hover.jpeg"
+	};
+	my_self.onmouseout=function(){
+		my_self_img.src="images/my_self.jpeg"
+	}
+
+
+
+</script>
+</html>
