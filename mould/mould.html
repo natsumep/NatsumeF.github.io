@@ -162,7 +162,6 @@ init()
 		i = 0,
 		len = round.length,
 		timeHours = new Date().getHours() + 1;
-		alert(round[~~(timeHours / 3)] + String(timeHours) + "时")
 	history.replaceState({}, "", "#" + round[~~(timeHours / 3)] + String(timeHours) + "时");
 	setInterval(function() {
 		var timeHours = new Date().getHours() + 1;
