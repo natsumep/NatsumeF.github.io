@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>NatsuneF.github.io fangpeng</title>
 	<style>
-	body,image,div,ul,li,a,header,h1,h2,main{
+	body,img,div,ul,li,a,header,h1,h2,main{
 		padding: 0;
 		margin: 0;
 	}
@@ -16,10 +16,13 @@
 		height: 100%;
 		width: 100%;
 		font-size: 16px;
+		font-family: "微软雅黑",arial;
 	}
 	body{
 		background: url("images/body.jpeg") repeat-y ;
 		background-size: cover;
+		max-width: 1250px;
+		margin: 0 auto;
 	}
 	header{
 		width: 25%;
@@ -49,22 +52,27 @@
 		margin:0 auto;
 	}
 	header .lists li{
+		font-size: 20px;
 		display: block;
 		text-align: center;
 		text-decoration: none;
 		list-style: none;
 		width: auto;
+		font-weight: 700;
 		margin: 40px auto;
+	}
+	header .lists li a {
+		color: #fff;
 	}
 	header .lists li:hover{
 		text-decoration: underline;
+		transform: scale(1.2);
 	}
 	main{
 		width: 75%;
-		height: 100%;
+		height:100%;
 		float:right;
 		color: #fff;
-		background: #1889c5;
 	}
 	main::after{
 		content: "";
@@ -76,11 +84,6 @@
 		margin:40px auto;
 		text-align:center;
 	}
-	
-	footer{
-	
-	}
-
 	.go-top{
 		display: none;
 		position: fixed;
@@ -140,8 +143,9 @@
 		</div>
 		<div class="lists">
 			<ul>
-				<li><a href="">images</a></li>
+				<li><a href="my-photo/index.html">images</a></li>
 				<li><a href="">demo</a></li>
+				<li><a href="">插件</a></li>
 				<li><a href="">文章</a></li>
 				<li><a href="https://github.com/NatsumeF/NatsuneF.github.io/issues">留言板</a></li>
 			</ul>
@@ -151,13 +155,8 @@
 	<main>
 		<h1>hello world</h1>
 		<h2>这个博主正在求职,只留下以下信息</h2>
-
-
 	</main>
 	
-	<footer>
-		
-	</footer>
 
 	<a class="go-top" href="#" >
 		<div class="go-top-left"></div>
@@ -176,28 +175,30 @@ function init() {
 		my_self_img = document.querySelector("img"),
 		goTop = document.querySelector(".go-top");
 	my_self.onmouseover = function() {
-		my_self_img.src = "images/my_self_hover.jpeg"
+		my_self_img.src = "images/my_self_hover.jpeg";
 	}
 	my_self.onmouseout = function() {
-		my_self_img.src = "images/my_self.jpeg"
+		my_self_img.src = "images/my_self.jpeg";
 	}
 
 	function goTopShow() {
-		console.log(document.body.scrollTop)
 		if (document.body.scrollTop > 0) {
-			goTop.style.display = "block"
+			goTop.style.display = "block";
 		} else if (document.body.scrollTop === 0) {
-			goTop.style.display = "none"
+			goTop.style.display = "none";
 		}
 	}
+
+	goTopShow();
+	new ImageDraws(document.querySelectorAll(".down-images"));
+	new ImgLazyLoad(document.querySelectorAll(".down-images"),500);
 	util.addEvent(window,"scroll",goTopShow);
 	util.animetionScroll(500);
-	util.addBr(10)
+	util.addBr(10);
 }
 init();
 //给地址栏添加太阳图标和时间;
 ~ function() {
-
 	var round = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘","🌘"],
 		i = 0,
 		len = round.length,

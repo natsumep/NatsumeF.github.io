@@ -219,7 +219,7 @@
 		//添加事件
 	ImageDraws.prototype.addEvent = function() {
 			var me = this;
-			for (let i = 0; i < this.dom.length; i++) {
+			/*for (let i = 0; i < this.dom.length; i++) {
 				this.dom[i].addEventListener("click", function(e) {
 					me.createImg(this);
 					me.alt=me.dom[i].alt||null;
@@ -230,7 +230,23 @@
 					}
 					me.show();
 				})
-			};
+			};*/
+			window.addEventListener("click",function(e){
+				if(e.target.tagName==="IMG"){
+					for(let i = 0 ; i<me.dom.length;i++){
+						if(e.target===me.dom[i]){
+								me.createImg(e.target);
+					me.alt=me.dom[i].alt||null;
+					me.index=i;
+					me.goButtonChangeColor();
+					if(me.removeDown){
+						me.share.removeChild(me.downLoad);
+					}
+					me.show();
+						}
+					}
+				}
+			})
 			this.shade.addEventListener("click", function(e) {
 				e.preventDefault()
 				if (e.target === me.close) {

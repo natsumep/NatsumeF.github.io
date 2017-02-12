@@ -170,6 +170,7 @@
 			<ul>
 				<li><a href="">images</a></li>
 				<li><a href="">demo</a></li>
+				<li><a href="">插件</a></li>
 				<li><a href="">文章</a></li>
 				<li><a href="https://github.com/NatsumeF/NatsuneF.github.io/issues">留言板</a></li>
 			</ul>
@@ -291,9 +292,6 @@
 				<li >
 					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery9.min.jpg" data-down-src="images/photo-js/jQuery9.jpg">
 				</li>
-				<li style="font-size:10px;"> 
-					asadsad
-				</li>
 			</ul>
 		</div>
 	</main>
@@ -342,48 +340,81 @@ function init() {
 init();
 
 ;~function(window,undefined){
-	var SeeNineImg=function(doms,length){
-		this.dom=[].slice.call(doms);
-		this.data=[];
-		this.length=length||9;
+	"use strict"
+	var SeeAliteDom=function(dom,height){
+		this.dom=dom;
+		this.showHeight=window.getComputedStyle(this.dom).height;
 		this.flag=true;
+		this.height=height||400;
 		this.init();
-
 	};
-	SeeNineImg.prototype.init=function(){
-		this.dataDom();
-		this.createDom();
+	SeeAliteDom.prototype.init=function(){
+		if(parseInt(this.showHeight)>this.height){
+			this.hideDom();
+			this.createDom();
+			this.addEvent();
+		}
 	}
-	SeeNineImg.prototype.dataDom=function(){
-		if(this.dom.length>this.length){
-			for(let i= this.length;i<this.dom.length;i++){
-				this.data.push(this.dom[i]);
+	SeeAliteDom.prototype.hideDom=function(){
+		this.dom.style.height=this.height+"px";
+		this.dom.style.overflow="hidden";
+		this.dom.style.position="relative";
+		this.dom.style.transition="height 0.3s";
+	}
+	SeeAliteDom.prototype.createDom = function() {
+		this.div = document.createElement("div");
+		this.p = document.createElement("p");
+		var showDivStyle = {
+				height: "80px",
+				width: window.getComputedStyle(this.dom).width,
+				position: "absolute",
+				bottom: 0,
+				left: 0,
+				background: "linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.8))",
+			},
+			pStyle = {
+				position: "absolute",
+				color: "#00515c",
+				fontSize: "20px",
+				lineHeight: "80px",
+				left: "50%",
+				transform: "translate(-50%,-50%)",
+				textDecoration: "underline",
+				cursor: "pointer",
 			}
+		for (let i in pStyle) {
+			this.p.style[i] = pStyle[i];
 		}
-		this.removeDom();
-	}
-	SeeNineImg.prototype.removeDom=function(){
-		for(let i=0; i<this.data.length;i++){
-			this.data[i].parentNode.removeChild(this.data[i]);
+		for (let i in showDivStyle) {
+			this.div.style[i] = showDivStyle[i];
 		}
+		this.changeDom();
+		this.div.appendChild(this.p);
+		this.dom.appendChild(this.div);
 	}
-	SeeNineImg.prototype.createDom=function(){
-		var html;
+	SeeAliteDom.prototype.addEvent=function(){
+		this.p.addEventListener("click",function(){
+			if(this.flag){
+				this.dom.style.height=this.showHeight;
+			}else{
+				this.dom.style.height=this.height+"px";
+			}
+			this.flag=!this.flag;
+			this.changeDom();
+			
+		}.bind(this))
+	}
+	SeeAliteDom.prototype.changeDom=function(){
 		if(this.flag){
-			html="..."
+			this.p.innerHTML="加载更多";
 		}else{
-			html="∧"
+			this.p.innerHTML="收起";
 		}
-			this.click=document.createElement("li");	
-			this.click.innerHTML=html;
-			this.click.style.color="#fff";
-			this.click.style.fontSize="30px";
-			this.click.style.height=window.getComputedStyle(this.dom[0]).height;
-			//this.dom[0].parentNode.appendChild(this.click);
 	}
-	var imgUl=document.querySelector(".images-all"),
-		imgLi=imgUl.querySelectorAll("li");
-		new SeeNineImg(imgLi);
+	var imgUl=document.querySelectorAll(".images-all");
+		for(let i=0;i<imgUl.length;i++){
+			new SeeAliteDom(imgUl[i],350);
+		}
 }(window)
 
 //给地址栏添加太阳图标和时间;
