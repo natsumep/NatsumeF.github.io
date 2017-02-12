@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>NatsuneF.github.io fangpeng</title>
 	<style>
-	body,image,div,ul,li,a,header{
+	body,image,div,ul,li,a,header,h1,h2,main{
 		padding: 0;
 		margin: 0;
 	}
@@ -18,7 +18,7 @@
 		font-size: 16px;
 	}
 	body{
-		background: url("images/body.jpeg") no-repeat ;
+		background: url("images/body.jpeg") repeat-y ;
 		background-size: cover;
 	}
 	header{
@@ -26,6 +26,7 @@
 		height: 100%;
 		box-sizing: border-box;
 		padding-top: 40px;
+		float:left;
 	}
 	header div{
 		width: 150px;
@@ -36,6 +37,7 @@
 		height: 150px;
 		width: 150px;
 		transition: .5s;
+		border: 7px solid #669;
 		border-radius: 50%;
 	}
 	header a img:hover{
@@ -43,16 +45,41 @@
 		transform: scale(1.2);
 	}
 	header .lists ul{
-		padding-top: 50px;
+		padding-top: 20px;
+		margin:0 auto;
 	}
 	header .lists li{
 		display: block;
 		text-align: center;
 		text-decoration: none;
 		list-style: none;
+		width: auto;
 		margin: 40px auto;
 	}
-
+	header .lists li:hover{
+		text-decoration: underline;
+	}
+	main{
+		width: 75%;
+		height: 100%;
+		float:right;
+		color: #fff;
+		background: #1889c5;
+	}
+	main::after{
+		content: "";
+		display: table;
+		clear: both;
+	}
+	main h1,main h2{
+		display: block;
+		margin:40px auto;
+		text-align:center;
+	}
+	
+	footer{
+	
+	}
 
 	.go-top{
 		display: none;
@@ -120,6 +147,17 @@
 			</ul>
 		</div>
 	</header>
+	
+	<main>
+		<h1>hello world</h1>
+		<h2>这个博主正在求职,只留下以下信息</h2>
+
+
+	</main>
+	
+	<footer>
+		
+	</footer>
 
 	<a class="go-top" href="#" >
 		<div class="go-top-left"></div>

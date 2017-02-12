@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>NatsuneF.github.io fangpeng</title>
+	<style>
+	body,img,div,ul,li,a,header,h1,h2,main{
+		padding: 0;
+		margin: 0;
+	}
+	a{
+		text-decoration:none;
+		color:#000;
+	}
+	html,body{
+		height: 100%;
+		width: 100%;
+		font-size: 16px;
+		font-family: "微软雅黑",arial;
+	}
+	body{
+		background: url("images/body.jpeg") repeat-y ;
+		background-size: cover;
+		max-width: 1250px;
+		margin: 0 auto;
+	}
+	header{
+		width: 25%;
+		height: 100%;
+		box-sizing: border-box;
+		padding-top: 40px;
+		float:left;
+	}
+	header div{
+		width: 150px;
+		margin:0 auto;
+	}
+	header a img{
+		display: inline-block;
+		height: 150px;
+		width: 150px;
+		transition: .5s;
+		border: 7px solid #669;
+		border-radius: 50%;
+	}
+	header a img:hover{
+		background: url("images/body.jpeg") no-repeat ;
+		transform: scale(1.2);
+	}
+	header .lists ul{
+		padding-top: 20px;
+		margin:0 auto;
+	}
+	header .lists li{
+		font-size: 20px;
+		display: block;
+		text-align: center;
+		text-decoration: none;
+		list-style: none;
+		width: auto;
+		font-weight: 700;
+		margin: 40px auto;
+	}
+	header .lists li a {
+		color: #fff;
+	}
+	header .lists li:hover{
+		text-decoration: underline;
+		transform: scale(1.2);
+	}
+	main{
+		width: 75%;
+		height:100%;
+		float:right;
+		color: #fff;
+	}
+	main::after{
+		content: "";
+		display: table;
+		clear: both;
+	}
+	main li{
+		width: 20%;
+		height: auto;
+		list-style: none;
+		display: inline-block;
+		padding:  20px 0;
+
+	}
+	main li img{
+		height: 100px;
+		width: 100px;
+		margin: 0 auto;
+		display: block;
+		transition: all 1500ms;
+	}
+	main li img:hover{
+		transform: scale(2);
+		cursor: pointer;
+	}
+	main ul{
+		margin:20px;
+		background: #363;
+		font-size: 0;
+	}
+	main ul p{
+		padding-top: 20px;
+		font-size: 16px;
+		line-height: 2;
+		text-indent: 22px;
+	}
+	.go-top{
+		display: none;
+		position: fixed;
+		bottom:30px;
+		right: 30px;
+		height:30px;
+		width: 30px;
+	}
+	.go-top div{
+		transition: all 0.4s;
+	}
+	.go-top .go-top-main{
+		width: 26px;
+		height: 0;
+		border: 2px solid #000;
+		position: absolute;
+		top: 13px;
+	}
+	.go-top .go-top-left{
+		content: "";
+		width: 26px;
+		height: 0;
+		border: 2px solid #000;
+		position: absolute;
+		top: 3px;
+	}
+	.go-top .go-top-right{
+		content: "";
+		width: 26px;
+		height: 0;
+		border: 2px solid #000;
+		position: absolute;
+		bottom: 3px;
+	}
+	.go-top:hover .go-top-main{
+		transform: rotate(90deg);
+		top:8px;
+	}
+	.go-top:hover .go-top-left{
+		transform: rotate(-45deg);
+		width: 12px;
+		top:0;
+		left:0;
+	}
+	.go-top:hover .go-top-right{
+		transform: rotate(45deg);
+		width: 12px;
+		top:0;
+		right:0;
+	}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="my_self">
+			<a href="https://github.com/NatsumeF"><img src="images/my_self.jpeg" alt="头像" title="头像"></a>
+		</div>
+		<div class="lists">
+			<ul>
+				<li><a href="">images</a></li>
+				<li><a href="">demo</a></li>
+				<li><a href="">文章</a></li>
+				<li><a href="https://github.com/NatsumeF/NatsuneF.github.io/issues">留言板</a></li>
+			</ul>
+		</div>
+	</header>
+	
+	<main>
+		<div>
+			<ul class="images-all">
+				<p>javaScrip基础 + 《JavaScript高级程序设计 (第3版)(红宝书)》 笔记 * 21</p>
+				<li >
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/js-惰性加载.min.jpg" data-down-src="images/photo-js/js-惰性加载.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu.min.jpg" data-down-src="images/photo-js/jsjichu.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu1.min.jpg" data-down-src="images/photo-js/jsjichu1.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu2.min.jpg" data-down-src="images/photo-js/jsjichu2.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu3.min.jpg" data-down-src="images/photo-js/jsjichu3.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu4.min.jpg" data-down-src="images/photo-js/jsjichu4.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu5.min.jpg" data-down-src="images/photo-js/jsjichu5.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu6.min.jpg" data-down-src="images/photo-js/jsjichu6.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu7.min.jpg" data-down-src="images/photo-js/jsjichu7.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu8.min.jpg" data-down-src="images/photo-js/jsjichu8.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu9.min.jpg" data-down-src="images/photo-js/jsjichu9.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother.min.jpg" data-down-src="images/photo-js/jsother.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother.min.jpg" data-down-src="images/photo-js/jsother.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother2.min.jpg" data-down-src="images/photo-js/jsother2.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother3.min.jpg" data-down-src="images/photo-js/jsother3.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother4.min.jpg" data-down-src="images/photo-js/jsother4.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother5.min.jpg" data-down-src="images/photo-js/jsother5.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother6.min.jpg" data-down-src="images/photo-js/jsother6.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother8.min.jpg" data-down-src="images/photo-js/jsother8.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother9.min.jpg" data-down-src="images/photo-js/jsother9.jpg">
+				</li>
+				<li >
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/js-yangemoshi.min.jpg" data-down-src="images/photo-js/js-yangemoshi.jpg">
+				</li>
+			</ul>
+			<ul class="images-all">
+				<p>《你不知道的JavaScript · 上册》笔记 * 5</p>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs1.min.jpg" data-down-src="images/photo-js/youdonotkownjs1.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs2.min.jpg" data-down-src="images/photo-js/youdonotkownjs2.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs3.min.jpg" data-down-src="images/photo-js/youdonotkownjs3.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs4.min.jpg" data-down-src="images/photo-js/youdonotkownjs4.jpg">
+				</li>
+				<li class="clear-both">
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs5.min.jpg" data-down-src="images/photo-js/youdonotkownjs5.jpg">
+				</li>
+			</ul>
+			<ul class="images-all">
+				<p>《锋利的jQuery》笔记 * 9</p>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery1.min.jpg" data-down-src="images/photo-js/jQuery1.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery2.min.jpg" data-down-src="images/photo-js/jQuery2.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery3.min.jpg" data-down-src="images/photo-js/jQuery3.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery4.min.jpg" data-down-src="images/photo-js/jQuery4.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery5.min.jpg" data-down-src="images/photo-js/jQuery5.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery6.min.jpg" data-down-src="images/photo-js/jQuery6.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery7.min.jpg" data-down-src="images/photo-js/jQuery7.jpg">
+				</li>
+				<li>
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery8.min.jpg" data-down-src="images/photo-js/jQuery8.jpg">
+				</li>
+				<li >
+					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery9.min.jpg" data-down-src="images/photo-js/jQuery9.jpg">
+				</li>
+				<li style="font-size:10px;"> 
+					asadsad
+				</li>
+			</ul>
+		</div>
+	</main>
+	
+
+	<a class="go-top" href="#" >
+		<div class="go-top-left"></div>
+		<div class="go-top-main"></div>
+		<div class="go-top-right"></div>
+	</a>
+	<br>
+	<br>
+
+	<br>
+</body>
+<script src="js/util.js"></script>
+<script src="js/imageDraws.js"></script>
+<script src="js/ImgLazyLoad.js"></script>
+<script>
+function init() {
+	var my_self = document.querySelector(".my_self"),
+		my_self_img = document.querySelector("img"),
+		goTop = document.querySelector(".go-top");
+	my_self.onmouseover = function() {
+		my_self_img.src = "images/my_self_hover.jpeg";
+	}
+	my_self.onmouseout = function() {
+		my_self_img.src = "images/my_self.jpeg";
+	}
+
+	function goTopShow() {
+		if (document.body.scrollTop > 0) {
+			goTop.style.display = "block";
+		} else if (document.body.scrollTop === 0) {
+			goTop.style.display = "none";
+		}
+	}
+
+	goTopShow();
+	new ImageDraws(document.querySelectorAll(".down-images"));
+	new ImgLazyLoad(document.querySelectorAll(".down-images"),500);
+	util.addEvent(window,"scroll",goTopShow);
+	util.animetionScroll(500);
+	util.addBr(10);
+}
+init();
+
+;~function(window,undefined){
+	var SeeNineImg=function(doms,length){
+		this.dom=[].slice.call(doms);
+		this.data=[];
+		this.length=length||9;
+		this.flag=true;
+		this.init();
+
+	};
+	SeeNineImg.prototype.init=function(){
+		this.dataDom();
+		this.createDom();
+	}
+	SeeNineImg.prototype.dataDom=function(){
+		if(this.dom.length>this.length){
+			for(let i= this.length;i<this.dom.length;i++){
+				this.data.push(this.dom[i]);
+			}
+		}
+		this.removeDom();
+	}
+	SeeNineImg.prototype.removeDom=function(){
+		for(let i=0; i<this.data.length;i++){
+			this.data[i].parentNode.removeChild(this.data[i]);
+		}
+	}
+	SeeNineImg.prototype.createDom=function(){
+		var html;
+		if(this.flag){
+			html="..."
+		}else{
+			html="∧"
+		}
+			this.click=document.createElement("li");	
+			this.click.innerHTML=html;
+			this.click.style.color="#fff";
+			this.click.style.fontSize="30px";
+			this.click.style.height=window.getComputedStyle(this.dom[0]).height;
+			//this.dom[0].parentNode.appendChild(this.click);
+	}
+	var imgUl=document.querySelector(".images-all"),
+		imgLi=imgUl.querySelectorAll("li");
+		new SeeNineImg(imgLi);
+}(window)
+
+//给地址栏添加太阳图标和时间;
+~ function() {
+	var round = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘","🌘"],
+		i = 0,
+		len = round.length,
+		timeHours = new Date().getHours() + 1;
+	history.replaceState({}, "", "#" + round[~~(timeHours / 3)] + String(timeHours) + "时");
+	setInterval(function() {
+		var timeHours = new Date().getHours() + 1;
+		history.replaceState({}, "", "#" + round[~~(timeHours / 3)] + String(timeHours) + "时")
+		i++;
+	}, 6000 * 60)
+}()
+</script>
+</html>
