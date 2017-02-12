@@ -74,7 +74,7 @@
 					cursor: "pointer",
 					borderRadius: "5px",
 					margin: " 9px 20px",
-					fontSize: "15px",
+					fontSize: "14px",
 					lineHeight: 1,
 					marginRight: 0,
 					background: "#444",
@@ -133,6 +133,7 @@
 		var me = this;
 		me.image.addEventListener("mousedown", function(e) {
 			e.stopPropagation();
+			e.preventDefault();
 			var x = e.clientX,
 				y = e.clientY,
 				//这里通过加上一个margin来补偿多减去的offsetLeft
@@ -187,6 +188,14 @@
 						me.reduceSize(0.1)
 				}
 			})
+				me.image.addEventListener("DOMMouseScroll",function(e){
+					e.preventDefault();
+					if(e.detail>0){
+						me.addSize(0.1)
+					}else if(e.detail<0){
+						me.reduceSize(0.1)
+					}
+				})
 			}
 		}
 		//显示图片
@@ -217,6 +226,9 @@
 			this.image.style.width = this.getWidth(this.image) - this.getWidth(this.image) * size + "px";
 		}
 		//添加事件
+	ImageDraws.prototype.getAlt=function(dom){
+		this.alt = dom.getAttribute("alt")||null;
+	}
 	ImageDraws.prototype.addEvent = function() {
 			var me = this;
 			/*for (let i = 0; i < this.dom.length; i++) {
@@ -231,12 +243,13 @@
 					me.show();
 				})
 			};*/
+			//事件委托到window上;
 			window.addEventListener("click",function(e){
 				if(e.target.tagName==="IMG"){
 					for(let i = 0 ; i<me.dom.length;i++){
 						if(e.target===me.dom[i]){
 								me.createImg(e.target);
-					me.alt=me.dom[i].alt||null;
+					me.getAlt(e.target);
 					me.index=i;
 					me.goButtonChangeColor();
 					if(me.removeDown){
@@ -309,6 +322,7 @@
 			this.index++;
 			this.goButtonChangeColor();
 			this.image.src=this.getSrc(this.dom[this.index]);
+			this.getAlt(this.dom[this.index]);
 		}
 	}
 	ImageDraws.prototype.goPrevFn=function(){
@@ -319,6 +333,7 @@
 			this.index--;
 			this.goButtonChangeColor();
 			this.image.src=this.getSrc(this.dom[this.index]);
+			this.getAlt(this.dom[this.index]);
 		}
 	}
 	//添加关闭回调

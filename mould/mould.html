@@ -67,6 +67,7 @@
 	header .lists li:hover{
 		text-decoration: underline;
 		transform: scale(1.2);
+		color:#fff;
 	}
 	main{
 		width: 75%;
@@ -183,8 +184,6 @@ function init() {
 	}
 
 	goTopShow();
-	new ImageDraws(document.querySelectorAll(".down-images"));
-	new ImgLazyLoad(document.querySelectorAll(".down-images"),500);
 	util.addEvent(window,"scroll",goTopShow);
 	util.animetionScroll(500);
 	util.addBr(10);

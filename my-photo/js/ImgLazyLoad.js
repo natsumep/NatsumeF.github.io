@@ -14,13 +14,21 @@
 	}
 	ImgLazyLoad.prototype.init=function(){
 		this.addEvent();
-		this.show(this.index);
+		this.show();
 	}
 	//实现图片加载
+	ImgLazyLoad.prototype.getScrollTop = function() {
+		if (document.documentElement && document.documentElement.scrollTop) {
+			return document.documentElement.scrollTop;
+		} else {
+			return document.body.scrollTop;
+		}
+	}
 	ImgLazyLoad.prototype.show = function() {
 		for (let i = 0; i < this.dom.length; i++) {
 			if (!this.dom[i]["flag"]) {
-				if (this.getDomTop(this.dom[i]) < (document.body.scrollTop + this.height) && this.getDomBotton(this.dom[i]) > (document.body.scrollTop)) {
+				if (this.getDomTop(this.dom[i]) < (this.getScrollTop() + this.height) && this.getDomBotton(this.dom[i]) > 
+					this.getScrollTop()) {
 					this.dom[i]["flag"]=true;
 					setInterval(function() {
 						if (this.dom[i].getAttribute("data-src")) {
@@ -50,7 +58,6 @@
 	ImgLazyLoad.prototype.addEvent = function() {
 		var me = this;
 		var show = function() {
-			console.log(1)
 			me.show(me.index);
 		};
 		window.addEventListener("scroll", me.throttlev(show, null, me))
