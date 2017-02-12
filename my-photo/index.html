@@ -160,6 +160,40 @@
 		top:0;
 		right:0;
 	}
+
+	.down-all{
+		height: 30px;
+		width: 30px;
+		position: fixed;
+		bottom: 70px;
+		right: 30px;
+		cursor: pointer;
+	}
+	.down-all-i{
+		height: 26px;
+		border: 2px solid #3f3a3a;
+		position: fixed;
+		bottom: 72px;
+		right: 42px;
+	}
+	.down-all-i::after{
+		content: "";
+		height: 15px;
+		border: 2px solid #3f3a3a;
+		position: fixed;
+		bottom: 70px;
+		right: 51px;
+		transform: rotate(125deg);
+	}
+	.down-all-i::before{
+		content: "";
+		height: 15px;
+		border: 2px solid #3f3a3a;
+		position: fixed;
+		bottom: 70px;
+		right: 33px;
+		transform: rotate(-125deg);
+	}
 	</style>
 </head>
 <body>
@@ -297,7 +331,9 @@
 		</div>
 	</main>
 	
-
+	<div class="down-all">
+		<i class="down-all-i"></i>
+	</div>
 	<a class="go-top" href="#" >
 		<div class="go-top-left"></div>
 		<div class="go-top-main"></div>
@@ -315,7 +351,8 @@
 function init() {
 	var my_self = document.querySelector(".my_self"),
 		my_self_img = document.querySelector("img"),
-		goTop = document.querySelector(".go-top");
+		goTop = document.querySelector(".go-top"),
+		downAll=document.querySelector(".down-all");
 	my_self.onmouseover = function() {
 		my_self_img.src = "images/my_self_hover.jpeg";
 	}
@@ -324,16 +361,19 @@ function init() {
 	}
 
 	function goTopShow() {
-		if (document.body.scrollTop > 0) {
+		if (util.getScrollTop() > 0) {
 			goTop.style.display = "block";
-		} else if (document.body.scrollTop === 0) {
+		} else if (util.getScrollTop() === 0) {
 			goTop.style.display = "none";
 		}
 	}
-
 	goTopShow();
-	new ImageDraws(document.querySelectorAll(".down-images"));
+	var downImgs=new ImageDraws(document.querySelectorAll(".down-images"));
 	new ImgLazyLoad(document.querySelectorAll(".down-images"),500);
+	downAll.onclick=function(e){
+		e.stopPropagation();
+		downImgs.downImageAll();
+	}
 	util.addEvent(window,"scroll",goTopShow);
 	util.animetionScroll(500);
 	util.addBr(10);

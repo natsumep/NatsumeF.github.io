@@ -46,6 +46,7 @@
 					color: "#fff",
 					position: "absolute",
 					top: 0,
+					display:"block",
 					right: "2px",
 					height: " 50px",
 					width: "50px",
@@ -53,7 +54,8 @@
 					border: 0,
 					outline: 0,
 					fontSize: "55px",
-					lineHeight: "30px",
+					lineHeight: "50px",
+					overflow:"hide",
 					borderRadius: "50%",
 					cursor: "pointer",
 					zIndex: 1000,
@@ -152,13 +154,13 @@
 	};
 	//获取当前图片src;
 	ImageDraws.prototype.getSrc=function(dom){
+		console.log(dom.getAttribute("data-down-src")||dom.getAttribute("src"))
 		return dom.getAttribute("data-down-src")||dom.getAttribute("src");
 	}
 	//创建放大的图片
 	ImageDraws.prototype.createImg = function(dom) {
 			this.image = document.createElement("img");
 			this.image.src = this.getSrc(dom);
-
 			var height,
 				me = this,
 				width;
@@ -202,12 +204,16 @@
 	ImageDraws.prototype.show = function() {
 			document.body.appendChild(this.shade);
 		}
-		//移除图片
+		//移除图片层
 	ImageDraws.prototype.hide = function() {
 			document.body.removeChild(this.shade);
-			this.shade.removeChild(this.image);
+			this.hideImg();
 		}
-		//获取元素的高
+		//移除当前图层中的图片
+	ImageDraws.prototype.hideImg=function(){
+		this.shade.removeChild(this.image);
+	}
+	//获取元素的高
 	ImageDraws.prototype.getHeight = function(dom) {
 			return parseInt(window.getComputedStyle(dom).height);
 		}
@@ -268,7 +274,7 @@
 				} else if (e.target === me.shade) {
 					me.hide();
 				} else if (e.target === me.downLoad) {
-					me.downImage(me.image.src);
+					me.downImage(me.getSrc(me.dom[me.index]));
 				} else if (e.target === me.max) {
 					me.addSize(0.2);
 				} else if (e.target === me.min) {
@@ -293,7 +299,7 @@
 	ImageDraws.prototype.downImage = function(src) {
 			var a = document.createElement("a");
 			a.href = src;
-			a.setAttribute("download", this.alt||a.herf);	
+		a.setAttribute("download", this.alt + src.slice(src.lastIndexOf("."))||a.herf);	
 			document.body.appendChild(a);
 			a.click();
 			document.body.removeChild(a);
@@ -301,7 +307,7 @@
 		//下载给定的元素数组所有的图片
 	ImageDraws.prototype.downImageAll = function() {
 		for (let i = 0; i < this.dom.length; i++) {
-			this.downImage(this.dom[i].src)
+			this.downImage(this.getSrc(this.dom[i]))
 		}
 	}
 	ImageDraws.prototype.goButtonChangeColor=function(){
@@ -321,7 +327,8 @@
 			this.goPrev.style.background="rgb(153,153,153)";
 			this.index++;
 			this.goButtonChangeColor();
-			this.image.src=this.getSrc(this.dom[this.index]);
+			this.hideImg();
+			this.createImg(this.dom[this.index]);
 			this.getAlt(this.dom[this.index]);
 		}
 	}
@@ -332,7 +339,8 @@
 			this.goPrev.style.background="rgb(153,153,153)";
 			this.index--;
 			this.goButtonChangeColor();
-			this.image.src=this.getSrc(this.dom[this.index]);
+			this.hideImg();
+			this.createImg(this.dom[this.index]);
 			this.getAlt(this.dom[this.index]);
 		}
 	}

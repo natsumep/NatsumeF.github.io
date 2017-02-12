@@ -1,4 +1,6 @@
+"use strict"
 var util = {
+	//添加事件兼容
 	addEvent: function(dom, type, fn) {
 		if (dom.addEventListener) {
 			dom.addEventListener(type, fn)
@@ -33,21 +35,22 @@ var util = {
 			}
 		}
 	},
-	//子类继承父类的原型 父是一个类;  原型引用原型;
-	extends: function(a, b) {
-		var _O = function() {};
-		_O.prototype = b.prototype;
-		a.prototype = new _O;
-		a.prototype.constructor = a;
-	},
-	//原型式继承，父是一个单例对象;
-	clone: function(a) {
-		function F() {};
-		F.prototype = a;
-		return new F();
+	//子类继承
+	extends: function(child, Super) {
+		if (typeof Super === "function") {
+			var _O = function() {};
+			_O.prototype = Super.prototype;
+			child.prototype = new _O;
+			child.prototype.constructor = child;
+		} else if (typeof Super === "Object") {
+			function F() {};
+			F.prototype = a;
+			child.prototype = new F();
+		}
+		return child;
 	},
 	//方法复制;A复制到B
-	extend: function(a, b) {
+	clone: function(a, b) {
 		if (!b) {
 			return a;
 		}
@@ -55,9 +58,6 @@ var util = {
 			a[x] = b[x];
 		}
 		return a;
-	},
-	method: function(a, name, fn) {
-		a.prototype[name] = fn;
 	},
 	//Ajax;  4个参数(meth, url, callback, poseDate) 
 	ajax: (function() {
@@ -105,13 +105,6 @@ var util = {
 			return http;
 		}
 	})(),
-	//替换字符串中的{}中的内容 如果传入内容不是字符串和数字 不做替换
-	substitute: function(s, o) {
-		return s.replace(/{([^{}]*)})/g, function(a, b) {
-			var r = o[b];
-			return typeof r === "string" || typeof r === "number" ? r : a;
-		})
-	},
 	//深拷贝;从P拷贝到C
 	deepCopy: function(p, c) {
 		c = c || {};
@@ -132,13 +125,14 @@ var util = {
 	 *flag 用于标示拖动的方向 如果不传 表示按鼠标移动的X Y 改变;如果传入"x" / "y"表示按x/y方向移动距离等比例缩放;
 	 */
 	drag: function(bod, dom, flag) {
+		var me = this;
 		dom.addEventListener("mousedown", function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 			var x = e.clientX,
 				y = e.clientY,
-				height = parseInt(window.getComputedStyle(bod).height),
-				width = parseInt(window.getComputedStyle(bod).width),
+				height = parseInt(me.getStyle(bod, height)),
+				width = parseInt(me.getStyle(bod, width)),
 				_darg = function(e) {
 					e.preventDefault();
 					var _x = e.clientX,
@@ -176,6 +170,7 @@ var util = {
 		var me = this;
 		ele.addEventListener("mousedown", function(e) {
 			e.stopPropagation();
+			e.preventDefault();
 			var x = e.clientX,
 				y = e.clientY,
 				//这里通过加上一个margin来补偿多减去的offsetLeft
@@ -203,6 +198,7 @@ var util = {
 		}
 	},
 	//节流函数 传入3个参数; fn 节流的函数, time节流的间隔时间,默认50 , context :函数作用域,默认window ;
+	//间隔时间调用;
 	throttlev: function(fn, time, context) {
 		var old = new Date().getTime();
 		return function() {
@@ -216,6 +212,14 @@ var util = {
 				old = now;
 			}
 		}
+	},
+	//节流函数2 
+	//停止后多少秒调用
+	throttle: function(fn, time, context) {
+		clearTimeout(fn.id);
+		fn.id = setTimeout(function() {
+			fn.call(context)
+		}, time)
 	},
 	//16进制颜色转rgb
 	//参数传入"#xxx" || "#xxxxxx"
@@ -259,9 +263,17 @@ var util = {
 		}
 		console.log("请输入正确的颜色");
 	},
-	getCode: function() {
+	//获取键值
+	getKeyCode: function(e) {
 		var e = e || window.event;
-		return e.keyCode || e.which;
+		return me.getKeyCode(e) || e.which;
+	},
+	getScrollTop: function() {
+		if (document.documentElement && document.documentElement.scrollTop) {
+			return document.documentElement.scrollTop;
+		} else {
+			return document.body.scrollTop;
+		}
 	},
 	/**
 	 *键盘上下左右触发dom移动;
@@ -269,18 +281,19 @@ var util = {
 	 *传入两个参数:dom 需要移动的dom;
 	 *speed 移动速度,不传默认为50像素每秒;ps:为了保持动画连贯,最低每秒移动50像素
 	 */
-	keyDomMove: keyDomMove = (function() {
+	keyDomMove: (function() {
+		var me = this;
 		var keyCode = {
 			downKeyCode: function(e) {
 				var e = e || window.event;
-				if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) {
-					keyCode[e.keyCode] = true;
+				if (me.getKeyCode(e) === 37 || me.getKeyCode(e) === 38 || me.getKeyCode(e) === 39 || me.getKeyCode(e) === 40) {
+					keyCode[me.getKeyCode(e)] = true;
 				}
 			},
 			upKeyCode: function(e) {
 				var e = e || window.event;
-				if (keyCode[e.keyCode]) {
-					keyCode[e.keyCode] = false;
+				if (keyCode[me.getKeyCode(e)]) {
+					keyCode[me.getKeyCode(e)] = false;
 				}
 			},
 			time: {},
@@ -297,29 +310,29 @@ var util = {
 			document.addEventListener("keydown", function(e) {
 				keyCode.downKeyCode();
 				if (keyCode[37] && !keyCode.time[37]) {
-					keyCode.time[e.keyCode] = setInterval(function() {
+					keyCode.time[me.getKeyCode(e)] = setInterval(function() {
 						dom.style.left = box.offsetLeft - left - speed + "px";
 					}, 20)
 				};
 				if (keyCode[38] && !keyCode.time[38]) {
-					keyCode.time[e.keyCode] = setInterval(function() {
+					keyCode.time[me.getKeyCode(e)] = setInterval(function() {
 						dom.style.top = dom.offsetTop - top - speed + "px";
 					}, 20)
 				};
 				if (keyCode[39] && !keyCode.time[39]) {
-					keyCode.time[e.keyCode] = setInterval(function() {
+					keyCode.time[me.getKeyCode(e)] = setInterval(function() {
 						dom.style.left = dom.offsetLeft - left + speed + "px";
 					}, 20)
 				};
 				if (keyCode[40] && !keyCode.time[40]) {
-					keyCode.time[e.keyCode] = setInterval(function() {
+					keyCode.time[me.getKeyCode(e)] = setInterval(function() {
 						dom.style.top = dom.offsetTop - top + speed + "px";
 					}, 20)
 				};
 				document.addEventListener("keyup", function(e) {
 					keyCode.upKeyCode();
-					clearInterval(keyCode.time[e.keyCode]);
-					keyCode.time[e.keyCode] = null;
+					clearInterval(keyCode.time[me.getKeyCode(e)]);
+					keyCode.time[me.getKeyCode(e)] = null;
 				})
 			})
 
@@ -329,7 +342,7 @@ var util = {
 	//num代表需要添加多少个Br
 	//dom表示在上面元素之前添加;不传默认在body后面添加;
 	addBr: function(num, dom) {
-		for (let i = num; i >= 0; i--) {
+		for (var i = num; i >= 0; i--) {
 			var br = document.createElement("br");
 			if (!dom) {
 				document.body.appendChild(br);
@@ -343,17 +356,18 @@ var util = {
 	//dom 表示指定dom;不传表示所有锚链接都添加平缓移动动画;
 	animetionScroll: function(time, dom) {
 		time = time / 1000 || 2;
+		var me = this;
 
 		function show(dom, time) {
 			var y,
-				target = document.getElementById(dom.getAttribute("href").slice(1)) || "body";
+				target = dom.getAttribute("href").slice(1) ? document.getElementById(dom.getAttribute("href").slice(1)) : "body";
 			if (target === "body") {
 				y = 0;
 			} else {
 				y = target.offsetTop;
 			};
-			var _y = (y - document.body.scrollTop) / (time * 60),
-				top = document.body.scrollTop,
+			var _y = (y - me.getScrollTop()) / (time * 60),
+				top = me.getScrollTop(),
 				time = setInterval(function() {
 					top += _y;
 					if ((_y > 0 && top >= y) || (_y < 0 && top <= y)) {
@@ -379,7 +393,7 @@ var util = {
 			})
 		}
 	},
-	
+
 };
 
 
