@@ -66,13 +66,13 @@
 		text-decoration: none;
 		list-style: none;
 		width: auto;
-		font-weight: 700;
 		margin: 40px auto;
 	}
 	header .lists li a {
 		color: #fff;
 	}
 	header .lists li:hover{
+		font-weight: 700;
 		text-decoration: underline;
 		transform: scale(1.2);
 		color: #fff;
@@ -90,10 +90,17 @@
 		clear:both;
 		visibility:hidden
 	}
-	main h1,main h2{
-		display: block;
+	main h1,h2,h3,h4,h5{
 		margin:40px auto;
+		margin-bottom: 0; 
 		text-align:center;
+	}
+	main .call-me{
+		height: 50px;
+		width:50px;
+		display: block;
+		margin: 40px auto;
+		border-radius: 50%;
 	}
 	.go-top{
 		display: none;
@@ -161,13 +168,22 @@
 						<li><a href="">插件</a></li>
 						<li><a href="">文章</a></li>
 						<li><a href="https://github.com/NatsumeF/NatsuneF.github.io/issues">留言板</a></li>
+						<li><a href="">关于我</a></li>
 					</ul>
 				</div>
 			</header>
 			
 			<main>
-				<h1>hello world</h1>
-				<h2>这个博主正在求职,只留下以下信息</h2>
+				<h1 data-value="hello world"></h1>
+				<h2 data-value="这个博主正在求职,并留下下列信息"></h2>
+				<h3 data-value="自学前段，目前正在寻找一份前端相关工作，能写页面，能写js，能写插件"></h3>
+				<h3 data-value="能干活，不偷懒，能加班。"></h3>
+				<h3 data-value="喜欢造轮子，坚持使用原生js写代码。"></h3>
+				<h3 data-value="能熟练运用闭包，面向对象写出能复用的封装良好的代码"></h3>
+				<h3 data-value="如果您还缺一个喜欢思考、喜欢琢磨的“前端工程师”，就联系我吧！"></h3>
+				<button class="call-me">
+					戳我
+				</button>
 			</main>
 			<a class="go-top" href="#" >
 				<div class="go-top-left"></div>
@@ -182,17 +198,17 @@
 function init() {
 	var mySelf = document.querySelector(".my_self"),
 		mySelfImg = mySelf.querySelector("img"),
-		backBody=document.querySelector(".back_body"),
+		backBody = document.querySelector(".back_body"),
 		goTop = document.querySelector(".go-top");
 	mySelf.onmouseover = function() {
 		mySelfImg.src = "images/my_self_hover.jpeg";
-		backBody.style.background="rgba(138,138,138,0)"
+		backBody.style.background = "rgba(138,138,138,0)"
 	}
 	mySelf.onmouseout = function() {
-		mySelfImg.src = "images/my_self.jpeg";
-		backBody.style.background="rgba(138,138,138,0.6)"
-	}
-
+			mySelfImg.src = "images/my_self.jpeg";
+			backBody.style.background = "rgba(138,138,138,0.6)"
+		}
+		//显示向上按钮；
 	function goTopShow() {
 		if (document.body.scrollTop > 0) {
 			goTop.style.display = "block";
@@ -200,15 +216,56 @@ function init() {
 			goTop.style.display = "none";
 		}
 	}
+	//打字效果;
+	function typeWritr(doms, time,fn) {
+		var arr = [];
+		if (doms.length) {
+			arr = [].slice.call(doms) || doms;
+		} else {
+			arr.push(doms)
+		}
+		var arrValue = [];
+		var times = 0;
+		var f = 0;
+		var e = 0;
+		var c = 0;
 
+		for (var i = 0; i < arr.length; i++) {
+			var html = arr[i].getAttribute("data-value");
+			if (html) {
+				arrValue.push(html)
+				times += html.length;
+			}else{
+				arrValue.push(html)
+			}
+		};
+		var j = arrValue[0].length;
+		var time = setInterval(function() {
+			if (f < j) {
+				arr[e].innerHTML += arrValue[e][c];
+				f++;
+				c++;
+			} else {
+				e++;
+				j += arrValue[e]?arrValue[e].length:0;
+				c = 0;
+			}
+			if (f >= times) {
+				clearInterval(time);
+				fn();
+			}
+		}, time)
+	};
+	
+	typeWritr(document.querySelectorAll("*[data-value]"), 50)
 	goTopShow();
-	util.addEvent(window,"scroll",goTopShow);
+	util.addEvent(window, "scroll", goTopShow);
 	util.animetionScroll(500);
 }
 init();
 //给地址栏添加太阳图标和时间;
 ~ function() {
-	var round = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘","🌘"],
+	var round = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘", "🌘"],
 		i = 0,
 		len = round.length,
 		timeHours = new Date().getHours() + 1;
