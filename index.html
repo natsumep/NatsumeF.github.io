@@ -13,7 +13,7 @@
 		text-decoration:none;
 		color:#000;
 	}
-	html,body,.back_body{
+	html,body,.back_body,.main_body{
 		height: 100%;
 		width: 100%;
 		font-size: 16px;
@@ -30,6 +30,7 @@
 	.main_body{
 		max-width: 1250px;
 		min-width: 800px;
+		height: auto;
 		margin: 0 auto;
 	}
 	header{
@@ -83,9 +84,11 @@
 		color: #fff;
 	}
 	main::after{
-		content: "";
-		display: table;
-		clear: both;
+		content:".";
+		display:block;
+		height:0;
+		clear:both;
+		visibility:hidden
 	}
 	main h1,main h2{
 		display: block;
@@ -146,10 +149,10 @@
 </head>
 <body>
 	<div class="back_body">
-		<div class="main-body">
+		<div class="main_body">
 			<header>
 				<div class="my_self">
-					<a href="https://github.com/NatsumeF"><img src="images/my_self.jpeg" alt="头像" title="头像"></a>
+					<a href=""><img src="images/my_self.jpeg" alt="头像" title="头像"></a>
 				</div>
 				<div class="lists">
 					<ul>
@@ -166,8 +169,6 @@
 				<h1>hello world</h1>
 				<h2>这个博主正在求职,只留下以下信息</h2>
 			</main>
-			
-
 			<a class="go-top" href="#" >
 				<div class="go-top-left"></div>
 				<div class="go-top-main"></div>

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<link rel="icon" href="images/My_icon.jpg" type="image/x-icon">
 	<title>NatsuneF.github.io fangpeng</title>
 	<style>
 	body,img,div,ul,li,a,header,h1,h2,main{
@@ -12,16 +13,23 @@
 		text-decoration:none;
 		color:#000;
 	}
-	html,body{
+	html,body,.back_body{
 		height: 100%;
 		width: 100%;
 		font-size: 16px;
 		font-family: "微软雅黑",arial;
 	}
 	body{
-		background: url("images/body_3.jpg")  ;
+		background: url("images/body_3.jpg") repeat-y;
 		background-size: 100% 200%;
+	}
+	.back_body{
+		background-color: rgba(138,138,138,0.6);
+		transition: background 3s;
+	}
+	.main_body{
 		max-width: 1250px;
+		min-width: 800px;
 		margin: 0 auto;
 	}
 	header{
@@ -73,13 +81,34 @@
 		height:100%;
 		float:right;
 		color: #fff;
+		position: relative;
 	}
 	main::after{
 		content: "";
 		display: table;
 		clear: both;
 	}
-	main li{
+	main .img_lists{
+		display: block;
+		width: 100%;
+		margin:0 auto;
+		font-size:20px;
+		color: #000;
+		position: fixed;
+		z-index: 2;
+	}
+	main .img_lists li{
+		box-sizing: border-box;
+		list-style: none;
+		display: inline-block;
+		padding: 10px 40px;
+		margin-left: 20px;
+		transition: 200ms;
+	}
+	main .img_lists li:hover{
+		transform: scale(1.1);
+	}
+	main .images li{
 		width: 20%;
 		height: auto;
 		list-style: none;
@@ -87,24 +116,24 @@
 		padding:  20px 0;
 
 	}
-	main li img{
+	main .images li img{
 		height: 100px;
 		width: 100px;
 		margin: 0 auto;
 		display: block;
 		transition: all 1500ms;
 	}
-	main li img:hover{
+	main .images li img:hover{
 		transform: scale(2);
 		cursor: pointer;
 	}
-	main ul{
+	main .images ul{
 		margin:20px;
 		border-radius: 20px;
 		background: rgba(55,144,151,0.8);
 		font-size: 0;
 	}
-	main ul p{
+	main .images ul p{
 		padding-top: 20px;
 		font-size: 16px;
 		line-height: 2;
@@ -200,6 +229,18 @@
 		left: 14px;
 		transition: all 0.25s;
 	}
+	.down-all p{
+		display: none;
+		font-size: 20px;
+		height: 200px;
+		width: 200px;
+		position: absolute;
+		left: -160px;
+		top:-15px;
+	}
+	.down-all:hover p{
+		display: block;
+	}
 	.down-all-i::after{
 		content: "";
 		height: 15px;
@@ -223,171 +264,182 @@
 	</style>
 </head>
 <body>
-	<header>
-		<div class="my_self">
-			<a href="https://github.com/NatsumeF"><img src="images/my_self.jpeg" alt="头像" title="头像"></a>
+	<div class="back_body">
+		<div class="main-body">
+			<header>
+				<div class="my_self">
+					<a href="../index.html"><img src="images/my_self.jpeg" alt="头像" title="头像"></a>
+				</div>
+				<div class="lists">
+					<ul>
+						<li><a href="">images</a></li>
+						<li><a href="">demo</a></li>
+						<li><a href="">插件</a></li>
+						<li><a href="">文章</a></li>
+						<li><a href="https://github.com/NatsumeF/NatsuneF.github.io/issues">留言板</a></li>
+					</ul>
+				</div>
+			</header>
+			<main>
+				<ul class="img_lists">
+					<li><a href="#javaScript">javaScript</a></li>
+					<li><a href="#ydontkJs">你不知道的js</a></li>
+					<li class="clear"><a href="#jQuery">jQuery</a></li>
+				</ul>
+				<div class="images">
+					<ul class="images-all" id="javaScript">
+						<p>javaScrip基础 + 《JavaScript高级程序设计 (第3版)(红宝书)》 笔记 * 21</p>
+						<li >
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/js-惰性加载.min.jpg" data-down-src="images/photo-js/js-惰性加载.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu.min.jpg" data-down-src="images/photo-js/jsjichu.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu1.min.jpg" data-down-src="images/photo-js/jsjichu1.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu2.min.jpg" data-down-src="images/photo-js/jsjichu2.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu3.min.jpg" data-down-src="images/photo-js/jsjichu3.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu4.min.jpg" data-down-src="images/photo-js/jsjichu4.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu5.min.jpg" data-down-src="images/photo-js/jsjichu5.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu6.min.jpg" data-down-src="images/photo-js/jsjichu6.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu7.min.jpg" data-down-src="images/photo-js/jsjichu7.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu8.min.jpg" data-down-src="images/photo-js/jsjichu8.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu9.min.jpg" data-down-src="images/photo-js/jsjichu9.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother.min.jpg" data-down-src="images/photo-js/jsother.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother.min.jpg" data-down-src="images/photo-js/jsother.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother2.min.jpg" data-down-src="images/photo-js/jsother2.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother3.min.jpg" data-down-src="images/photo-js/jsother3.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother4.min.jpg" data-down-src="images/photo-js/jsother4.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother5.min.jpg" data-down-src="images/photo-js/jsother5.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother6.min.jpg" data-down-src="images/photo-js/jsother6.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother8.min.jpg" data-down-src="images/photo-js/jsother8.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother9.min.jpg" data-down-src="images/photo-js/jsother9.jpg">
+						</li>
+						<li >
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/js-yangemoshi.min.jpg" data-down-src="images/photo-js/js-yangemoshi.jpg">
+						</li>
+					</ul>
+					<ul class="images-all" id="ydontkJs">
+						<p>《你不知道的JavaScript · 上册》笔记 * 4</p>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs1.min.jpg" data-down-src="images/photo-js/youdonotkownjs1.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs2.min.jpg" data-down-src="images/photo-js/youdonotkownjs2.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs4.min.jpg" data-down-src="images/photo-js/youdonotkownjs4.jpg">
+						</li>
+						<li class="clear-both">
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs5.min.jpg" data-down-src="images/photo-js/youdonotkownjs5.jpg">
+						</li>
+					</ul>
+					<ul class="images-all" id="jQuery">
+						<p>《锋利的jQuery》笔记 * 9</p>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery1.min.jpg" data-down-src="images/photo-js/jQuery1.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery2.min.jpg" data-down-src="images/photo-js/jQuery2.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery3.min.jpg" data-down-src="images/photo-js/jQuery3.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery4.min.jpg" data-down-src="images/photo-js/jQuery4.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery5.min.jpg" data-down-src="images/photo-js/jQuery5.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery6.min.jpg" data-down-src="images/photo-js/jQuery6.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery7.min.jpg" data-down-src="images/photo-js/jQuery7.jpg">
+						</li>
+						<li>
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery8.min.jpg" data-down-src="images/photo-js/jQuery8.jpg">
+						</li>
+						<li >
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery9.min.jpg" data-down-src="images/photo-js/jQuery9.jpg">
+						</li>
+					</ul>
+				</div>
+			</main>
 		</div>
-		<div class="lists">
-			<ul>
-				<li><a href="">images</a></li>
-				<li><a href="">demo</a></li>
-				<li><a href="">插件</a></li>
-				<li><a href="">文章</a></li>
-				<li><a href="https://github.com/NatsumeF/NatsuneF.github.io/issues">留言板</a></li>
-			</ul>
-		</div>
-	</header>
-	
-	<main>
-		<div>
-			<ul class="images-all">
-				<p>javaScrip基础 + 《JavaScript高级程序设计 (第3版)(红宝书)》 笔记 * 21</p>
-				<li >
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/js-惰性加载.min.jpg" data-down-src="images/photo-js/js-惰性加载.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu.min.jpg" data-down-src="images/photo-js/jsjichu.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu1.min.jpg" data-down-src="images/photo-js/jsjichu1.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu2.min.jpg" data-down-src="images/photo-js/jsjichu2.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu3.min.jpg" data-down-src="images/photo-js/jsjichu3.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu4.min.jpg" data-down-src="images/photo-js/jsjichu4.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu5.min.jpg" data-down-src="images/photo-js/jsjichu5.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu6.min.jpg" data-down-src="images/photo-js/jsjichu6.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu7.min.jpg" data-down-src="images/photo-js/jsjichu7.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu8.min.jpg" data-down-src="images/photo-js/jsjichu8.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsjichu9.min.jpg" data-down-src="images/photo-js/jsjichu9.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother.min.jpg" data-down-src="images/photo-js/jsother.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother.min.jpg" data-down-src="images/photo-js/jsother.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother2.min.jpg" data-down-src="images/photo-js/jsother2.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother3.min.jpg" data-down-src="images/photo-js/jsother3.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother4.min.jpg" data-down-src="images/photo-js/jsother4.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother5.min.jpg" data-down-src="images/photo-js/jsother5.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother6.min.jpg" data-down-src="images/photo-js/jsother6.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother8.min.jpg" data-down-src="images/photo-js/jsother8.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jsother9.min.jpg" data-down-src="images/photo-js/jsother9.jpg">
-				</li>
-				<li >
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/js-yangemoshi.min.jpg" data-down-src="images/photo-js/js-yangemoshi.jpg">
-				</li>
-			</ul>
-			<ul class="images-all">
-				<p>《你不知道的JavaScript · 上册》笔记 * 4</p>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs1.min.jpg" data-down-src="images/photo-js/youdonotkownjs1.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs2.min.jpg" data-down-src="images/photo-js/youdonotkownjs2.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs4.min.jpg" data-down-src="images/photo-js/youdonotkownjs4.jpg">
-				</li>
-				<li class="clear-both">
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs5.min.jpg" data-down-src="images/photo-js/youdonotkownjs5.jpg">
-				</li>
-			</ul>
-			<ul class="images-all">
-				<p>《锋利的jQuery》笔记 * 9</p>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery1.min.jpg" data-down-src="images/photo-js/jQuery1.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery2.min.jpg" data-down-src="images/photo-js/jQuery2.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery3.min.jpg" data-down-src="images/photo-js/jQuery3.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery4.min.jpg" data-down-src="images/photo-js/jQuery4.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery5.min.jpg" data-down-src="images/photo-js/jQuery5.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery6.min.jpg" data-down-src="images/photo-js/jQuery6.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery7.min.jpg" data-down-src="images/photo-js/jQuery7.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery8.min.jpg" data-down-src="images/photo-js/jQuery8.jpg">
-				</li>
-				<li >
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery9.min.jpg" data-down-src="images/photo-js/jQuery9.jpg">
-				</li>
-			</ul>
-		</div>
-	</main>
-	
+	</div>
 	<div class="down-all">
 		<i class="down-all-i"></i>
+		<p class="say_all">点击下载全部图片</p>
 	</div>
 	<a class="go-top" href="#" >
 		<div class="go-top-left"></div>
 		<div class="go-top-main"></div>
 		<div class="go-top-right"></div>
 	</a>
-	<br>
-	<br>
 
-	<br>
 </body>
 <script src="js/util.js"></script>
 <script src="js/imageDraws.js"></script>
 <script src="js/ImgLazyLoad.js"></script>
 <script>
 function init() {
-	var my_self = document.querySelector(".my_self"),
-		my_self_img = document.querySelector("img"),
+	var mySelf = document.querySelector(".my_self"),
+		mySelfImg = mySelf.querySelector("img"),
+		backBody=document.querySelector(".back_body"),
+		downAll=document.querySelector(".down-all"),
 		goTop = document.querySelector(".go-top"),
-		downAll=document.querySelector(".down-all");
-	my_self.onmouseover = function() {
-		my_self_img.src = "images/my_self_hover.jpeg";
+		imgLists=document.querySelector(".img_lists");
+	mySelf.onmouseover = function() {
+		mySelfImg.src = "images/my_self_hover.jpeg";
+		backBody.style.background="rgba(138,138,138,0)"
 	}
-	my_self.onmouseout = function() {
-		my_self_img.src = "images/my_self.jpeg";
+	mySelf.onmouseout = function() {
+		mySelfImg.src = "images/my_self.jpeg";
+		backBody.style.background="rgba(138,138,138,0.6)"
 	}
 
 	function goTopShow() {
-		if (util.getScrollTop() > 0) {
+		if (document.body.scrollTop > 0) {
 			goTop.style.display = "block";
-		} else if (util.getScrollTop() === 0) {
+			//imgLists.style.position="fixed";
+		} else if (document.body.scrollTop === 0) {
 			goTop.style.display = "none";
+			//imgLists.style.position="absolute";
 		}
 	}
 	goTopShow();
@@ -434,11 +486,11 @@ init();
 				position: "absolute",
 				bottom: 0,
 				left: 0,
-				background: "linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.8))",
+				background: "linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.5))",
 			},
 			pStyle = {
 				position: "absolute",
-				color: "#00515c",
+				color: "rgba(0,0,0,.8)",
 				fontSize: "20px",
 				lineHeight: "80px",
 				left: "50%",
