@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<link rel="icon" href="images/My_icon.jpg" type="image/x-icon">
 	<title>NatsuneF.github.io fangpeng</title>
 	<style>
 	body,img,div,ul,li,a,header,h1,h2,main{
@@ -12,16 +13,23 @@
 		text-decoration:none;
 		color:#000;
 	}
-	html,body{
+	html,body,.back_body{
 		height: 100%;
 		width: 100%;
 		font-size: 16px;
 		font-family: "微软雅黑",arial;
 	}
 	body{
-		background: url("images/body.jpeg") repeat-y ;
-		background-size: cover;
+		background: url("images/body_3.jpg") repeat-y;
+		background-size: 100% 200%;
+	}
+	.back_body{
+		background-color: rgba(138,138,138,0.6);
+		transition: background 3s;
+	}
+	.main_body{
 		max-width: 1250px;
+		min-width: 800px;
 		margin: 0 auto;
 	}
 	header{
@@ -44,7 +52,6 @@
 		border-radius: 50%;
 	}
 	header a img:hover{
-		background: url("images/body.jpeg") no-repeat ;
 		transform: scale(1.2);
 	}
 	header .lists ul{
@@ -138,48 +145,51 @@
 	</style>
 </head>
 <body>
-	<header>
-		<div class="my_self">
-			<a href="https://github.com/NatsumeF"><img src="images/my_self.jpeg" alt="头像" title="头像"></a>
-		</div>
-		<div class="lists">
-			<ul>
-				<li><a href="my-photo/index.html">images</a></li>
-				<li><a href="">demo</a></li>
-				<li><a href="">插件</a></li>
-				<li><a href="">文章</a></li>
-				<li><a href="https://github.com/NatsumeF/NatsuneF.github.io/issues">留言板</a></li>
-			</ul>
-		</div>
-	</header>
-	
-	<main>
-		<h1>hello world</h1>
-		<h2>这个博主正在求职,只留下以下信息</h2>
-	</main>
-	
+	<div class="back_body">
+		<div class="main-body">
+			<header>
+				<div class="my_self">
+					<a href="https://github.com/NatsumeF"><img src="images/my_self.jpeg" alt="头像" title="头像"></a>
+				</div>
+				<div class="lists">
+					<ul>
+						<li><a href="my-photo/index.html">images</a></li>
+						<li><a href="">demo</a></li>
+						<li><a href="">插件</a></li>
+						<li><a href="">文章</a></li>
+						<li><a href="https://github.com/NatsumeF/NatsuneF.github.io/issues">留言板</a></li>
+					</ul>
+				</div>
+			</header>
+			
+			<main>
+				<h1>hello world</h1>
+				<h2>这个博主正在求职,只留下以下信息</h2>
+			</main>
+			
 
-	<a class="go-top" href="#" >
-		<div class="go-top-left"></div>
-		<div class="go-top-main"></div>
-		<div class="go-top-right"></div>
-	</a>
-	<br>
-	<br>
-
-	<br>
+			<a class="go-top" href="#" >
+				<div class="go-top-left"></div>
+				<div class="go-top-main"></div>
+				<div class="go-top-right"></div>
+			</a>
+		</div>
+	</div>
 </body>
 <script src="js/util.js"></script>
 <script>
 function init() {
-	var my_self = document.querySelector(".my_self"),
-		my_self_img = document.querySelector("img"),
+	var mySelf = document.querySelector(".my_self"),
+		mySelfImg = mySelf.querySelector("img"),
+		backBody=document.querySelector(".back_body"),
 		goTop = document.querySelector(".go-top");
-	my_self.onmouseover = function() {
-		my_self_img.src = "images/my_self_hover.jpeg";
+	mySelf.onmouseover = function() {
+		mySelfImg.src = "images/my_self_hover.jpeg";
+		backBody.style.background="rgba(138,138,138,0)"
 	}
-	my_self.onmouseout = function() {
-		my_self_img.src = "images/my_self.jpeg";
+	mySelf.onmouseout = function() {
+		mySelfImg.src = "images/my_self.jpeg";
+		backBody.style.background="rgba(138,138,138,0.6)"
 	}
 
 	function goTopShow() {
@@ -193,7 +203,6 @@ function init() {
 	goTopShow();
 	util.addEvent(window,"scroll",goTopShow);
 	util.animetionScroll(500);
-	util.addBr(10);
 }
 init();
 //给地址栏添加太阳图标和时间;

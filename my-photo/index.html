@@ -19,8 +19,8 @@
 		font-family: "微软雅黑",arial;
 	}
 	body{
-		background: url("images/body.jpeg") repeat-y ;
-		background-size: cover;
+		background: url("images/body_3.jpg")  ;
+		background-size: 100% 200%;
 		max-width: 1250px;
 		margin: 0 auto;
 	}
@@ -44,7 +44,6 @@
 		border-radius: 50%;
 	}
 	header a img:hover{
-		background: url("images/body.jpeg") no-repeat ;
 		transform: scale(1.2);
 	}
 	header .lists ul{
@@ -101,7 +100,8 @@
 	}
 	main ul{
 		margin:20px;
-		background: #363;
+		border-radius: 20px;
+		background: rgba(55,144,151,0.8);
 		font-size: 0;
 	}
 	main ul p{
@@ -160,39 +160,65 @@
 		top:0;
 		right:0;
 	}
-
+	
 	.down-all{
 		height: 30px;
 		width: 30px;
 		position: fixed;
-		bottom: 70px;
+		bottom: 75px;
 		right: 30px;
 		cursor: pointer;
+		transition: all 0.5s;
+	}
+	
+	.down-all:hover{
+		bottom: 70px;
+	}
+	.down-all:hover .down-all-i{
+		height: 20px;
+		border-color: #000;
+	}
+	.down-all:hover .down-all-i::after{
+		height: 10px;
+		left:-7px;
+		bottom: -2px;
+		transform: rotate(-35deg);
+		border-color: #000;
+	}
+	.down-all:hover .down-all-i::before{
+		height: 10px;
+		left:3px;
+		bottom: -2px;
+		transform: rotate(35deg);
+		border-color: #000;
 	}
 	.down-all-i{
 		height: 26px;
 		border: 2px solid #3f3a3a;
-		position: fixed;
-		bottom: 72px;
-		right: 42px;
+		position: absolute;
+		bottom: 0px;
+		left: 14px;
+		transition: all 0.25s;
 	}
 	.down-all-i::after{
 		content: "";
 		height: 15px;
 		border: 2px solid #3f3a3a;
-		position: fixed;
-		bottom: 70px;
-		right: 51px;
-		transform: rotate(125deg);
+		position: absolute;
+		bottom: -3px;
+		left: -10px;
+		transition: all 0.25s;
+		transform: rotate(-45deg);
 	}
 	.down-all-i::before{
 		content: "";
 		height: 15px;
 		border: 2px solid #3f3a3a;
-		position: fixed;
-		bottom: 70px;
-		right: 33px;
-		transform: rotate(-125deg);
+		position: absolute;
+		bottom: -3px;
+		left: 6px;
+		transition: all 0.25s;
+		transform: rotate(45deg);
 	}
 	</style>
 </head>
@@ -281,15 +307,12 @@
 				</li>
 			</ul>
 			<ul class="images-all">
-				<p>《你不知道的JavaScript · 上册》笔记 * 5</p>
+				<p>《你不知道的JavaScript · 上册》笔记 * 4</p>
 				<li>
 					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs1.min.jpg" data-down-src="images/photo-js/youdonotkownjs1.jpg">
 				</li>
 				<li>
 					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs2.min.jpg" data-down-src="images/photo-js/youdonotkownjs2.jpg">
-				</li>
-				<li>
-					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs3.min.jpg" data-down-src="images/photo-js/youdonotkownjs3.jpg">
 				</li>
 				<li>
 					<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/youdonotkownjs4.min.jpg" data-down-src="images/photo-js/youdonotkownjs4.jpg">

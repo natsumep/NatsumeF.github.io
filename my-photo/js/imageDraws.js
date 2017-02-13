@@ -3,7 +3,7 @@
 	var ImageDraws = function(doms) {
 		var arr = [];
 		if (doms.length) {
-			arr = [].slice.call(doms) || doms || document.body;
+			arr = [].slice.call(doms) || doms;
 		} else {
 			arr.push(doms)
 		}
@@ -128,20 +128,22 @@
 		}
 		//获取body的宽
 	ImageDraws.prototype.getBodyWidth = function() {
-			return this.getWidth(document.body)
+			return this.getWidth(document.body);
 		}
 		//让图片可以移动
 	ImageDraws.prototype.move = function() {
 		var me = this;
-		me.image.addEventListener("mousedown", function(e) {
+		this.image.addEventListener("mousedown", function(e) {
+			var e = e ||window.event;
 			e.stopPropagation();
 			e.preventDefault();
 			var x = e.clientX,
 				y = e.clientY,
 				//这里通过加上一个margin来补偿多减去的offsetLeft
-				clickX = x - me.image.offsetLeft + parseInt(window.getComputedStyle(me.image).marginLeft),
-				clickY = y - me.image.offsetTop + parseInt(window.getComputedStyle(me.image).marginTop),
+				clickX = x - me.image.offsetLeft + parseInt(me.getStyle(me.image,"marginLeft")),
+				clickY = y - me.image.offsetTop + parseInt(me.getStyle(me.image,"marginTop")),
 				_move = function(e) {
+					var e  = e||window.event;
 					me.image.style.left = e.clientX - clickX + "px";
 					me.image.style.top = e.clientY - clickY + "px";
 					e.preventDefault()
@@ -154,7 +156,6 @@
 	};
 	//获取当前图片src;
 	ImageDraws.prototype.getSrc=function(dom){
-		console.log(dom.getAttribute("data-down-src")||dom.getAttribute("src"))
 		return dom.getAttribute("data-down-src")||dom.getAttribute("src");
 	}
 	//创建放大的图片
@@ -183,6 +184,7 @@
 				me.shade.appendChild(me.image);
 				me.move(me.image)
 				me.image.addEventListener("mousewheel",function(e){
+					var e  = e||window.event;
 					e.preventDefault();
 					if(e.wheelDelta>0){
 						me.addSize(0.1)
@@ -191,6 +193,7 @@
 				}
 			})
 				me.image.addEventListener("DOMMouseScroll",function(e){
+					var e  = e||window.event;
 					e.preventDefault();
 					if(e.detail>0){
 						me.addSize(0.1)
@@ -213,13 +216,23 @@
 	ImageDraws.prototype.hideImg=function(){
 		this.shade.removeChild(this.image);
 	}
-	//获取元素的高
+	//获取style
+	ImageDraws.prototype.getStyle=function(dom,style){
+		if(getComputedStyle){
+			console.log(window.getComputedStyle(dom,null)[style])
+			return window.getComputedStyle(dom,null)[style];
+		}else if( dom.currentStyle){
+			console.log(dom.currentStyle)
+			return dom.currentStyle[style];
+		}
+	}
+		//获取元素的高
 	ImageDraws.prototype.getHeight = function(dom) {
-			return parseInt(window.getComputedStyle(dom).height);
+			return parseInt(this.getStyle(dom,"height"));
 		}
 		//获取元素的宽
 	ImageDraws.prototype.getWidth = function(dom) {
-			return parseInt(window.getComputedStyle(dom).width);
+			return parseInt(this.getStyle(dom,"width"));
 		}
 		//图片放大
 	ImageDraws.prototype.addSize = function(size) {
@@ -251,11 +264,13 @@
 			};*/
 			//事件委托到window上;
 			window.addEventListener("click",function(e){
-				if(e.target.tagName==="IMG"){
+				var e  = e||window.event;
+				var target = e.target||e.srcElement;
+				if(target.tagName==="IMG"){
 					for(let i = 0 ; i<me.dom.length;i++){
-						if(e.target===me.dom[i]){
-								me.createImg(e.target);
-					me.getAlt(e.target);
+						if(target===me.dom[i]){
+								me.createImg(target);
+					me.getAlt(target);
 					me.index=i;
 					me.goButtonChangeColor();
 					if(me.removeDown){
@@ -267,17 +282,19 @@
 				}
 			})
 			this.shade.addEventListener("click", function(e) {
+				var e  = e||window.event,
+					target=e.target||e.srcElement;
 				e.preventDefault()
 				if (e.target === me.close) {
 					me.hide();
 					me.closeCallBackFn&&me.closeCallBackFn();
-				} else if (e.target === me.shade) {
+				} else if (target === me.shade) {
 					me.hide();
-				} else if (e.target === me.downLoad) {
+				} else if (target === me.downLoad) {
 					me.downImage(me.getSrc(me.dom[me.index]));
-				} else if (e.target === me.max) {
+				} else if (target === me.max) {
 					me.addSize(0.2);
-				} else if (e.target === me.min) {
+				} else if (target === me.min) {
 					me.reduceSize(0.2);
 				}
 			});
