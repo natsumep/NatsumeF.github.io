@@ -77,6 +77,9 @@
 		transform: scale(1.2);
 		color: #fff;
 	}
+	header .about_me{
+		display: none;
+	}
 	main{
 		width: 75%;
 		height:100%;
@@ -180,7 +183,7 @@
 						<li><a href="">插件</a></li>
 						<li><a href="">文章</a></li>
 						<li><a href="https://github.com/NatsumeF/NatsuneF.github.io/issues">留言板</a></li>
-						<li><a href="">关于我</a></li>
+						<li><a href="" class="about_me">关于我</a></li>
 					</ul>
 				</div>
 			</header>
@@ -270,7 +273,8 @@ function init() {
 	};
 	
 	typeWritr(document.querySelectorAll("*[data-value]"), 50,function(){
-		document.querySelector(".call-me").style.display="block"
+		document.querySelector(".call-me").style.display="block";
+		document.querySelector(".about_me").style.display="block";
 	})
 	goTopShow();
 	util.addEvent(window, "scroll", goTopShow);
