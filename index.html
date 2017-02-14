@@ -98,11 +98,94 @@
 		margin-bottom: 0; 
 		text-align:center;
 	}
+	main .click-me{
+		height: 80px;
+		width:80px;
+		margin: 0 auto;
+		position: relative;
+		font-size: 25px;
+		color:#000;
+		font-weight: 700;
+	}
+	main .click-me i{
+		height: 80px;
+		width: 80px;
+		background: url("images/index.png") no-repeat ;
+		position: absolute;
+		overflow: hidden;
+		cursor: pointer;
+		top: 40px;
+		left: 0;
+		transform: scale(0);
+		transition: left 500ms,top 500ms, transform 500ms;
+	}
+	main .click-me .github{	
+		background-position:0 -200px ;
+	}
+	main .click-me .github:hover{	
+		background-position:-100px -200px ;
+	}
+	main .click-me .weixin{	
+		background-position:0 -100px ;
+	}
+	main .click-me .wxurl{
+		display: none;
+		height: 150px;
+		width: 150px;
+		background: url("images/winxinurl.png")  no-repeat ;
+		background-size: 100% 100%;
+		transform: translate(-115px,-270px);
+		position: relative;
+	}
+	main .click-me .weixin:hover+.wxurl{
+		display: block;
+	}
+	main .click-me .wxurl::before{
+		content: "";
+		height: 80px;
+		border-left:1px solid #000;
+		position: absolute;
+		left: 75px;
+		top: 150px;
+	}
+	main .click-me .weixin:hover{	
+		background-position:-100px -100px ;
+	}
+	main .click-me .email{
+		background-position:0 -300px ;
+	}
+	main .click-me .gmail{
+		display: block;
+		height: 50px;
+		width: 150px;
+		transform: translate(-10px,-130px);
+		display: none;
+	}
+	main .click-me .email:hover{
+		background-position:-100px -300px ;
+	}
+	main .click-me .email:hover+.gmail{
+		display: block;
+	}
+	main .click-me .my-phone{
+		display: block;
+		height: 50px;
+		width: 250px;
+		transform: translate(130px,-130px);
+		display: none;
+	}
+	main .click-me .telephone:hover{
+		background-position:-100px 0 ;
+	}
+	main .click-me .telephone:hover+.my-phone{
+		display: block;
+	}
 	main .call-me{
 		height: 80px;
 		font-size: 25px;
 		width:80px;
 		display: none;
+		position: absolute;
 		margin: 40px auto;
 		border-radius: 50%;
 		border:0;
@@ -196,9 +279,16 @@
 				<h3 data-value="喜欢造轮子，坚持使用原生js写代码。"></h3>
 				<h3 data-value="能熟练运用闭包，面向对象写出能复用的封装良好的代码"></h3>
 				<h3 data-value="如果您还缺一个喜欢思考、喜欢琢磨的“前端工程师”，就联系我吧！"></h3>
-				<a href="https://github.com/NatsumeF/NatsuneF.github.io/issues">
-					<button class="call-me">戳我</button>
-				</a>
+				<div class="click-me">
+					<button class="call-me">move</button>
+					<a href="https://github.com/NatsumeF"><i class="github" title="点击进入"></i></a>
+					<i class="weixin" title="快拿出微信扫一扫吧"></i>
+					<div class="wxurl"></div>
+					<i class="email" title="点击复制邮箱"></i>
+					<div class="gmail">LLandpp11@gmail.com</div>
+					<i class="telephone" title="点击复制电话"></i>
+					<div class="my-phone">+86 188-7483-0084</div>
+				</div>
 			</main>
 			<a class="go-top" href="#" >
 				<div class="go-top-left"></div>
@@ -231,6 +321,40 @@ function init() {
 			goTop.style.display = "none";
 		}
 	}
+	//复制文字；
+	function copyText(text){
+		if(document.execCommand){
+			var inputText = document.createElement('input');
+	        document.body.appendChild(inputText);
+	        inputText.value=text;
+	        inputText.focus();
+	        inputText.setSelectionRange(0, inputText.value.length);
+	        document.execCommand('copy', true);
+	   		document.body.removeChild(inputText);
+		}else{
+			alert("sorry,目前无法复制当前内容")
+		}
+	}
+	document.querySelector(".email").addEventListener("mousedown",function(e){
+		this.style.backgroundPosition="-200px -300px";
+		this.style.transform="scale(0.8)";
+		this.style.transform="scale(0.8)";
+		copyText("LLandpp11@gmail.com");
+		document.querySelector(".telephone").style.backgroundPosition="0 0";
+
+	})
+	document.querySelector(".email").addEventListener("mouseup",function(e){
+		this.style.transform="scale(1)"
+	})
+	document.querySelector(".telephone").addEventListener("mousedown",function(e){
+		this.style.backgroundPosition="-200px 0";
+		this.style.transform="scale(0.8)"
+		copyText("+86 188-7483-0084");
+		document.querySelector(".email").style.backgroundPosition="0 -300px";
+	})
+	document.querySelector(".telephone").addEventListener("mouseup",function(e){
+		this.style.transform="scale(1)"
+	})
 	//打字效果;
 	function typeWritr(doms, time,fn) {
 		var arr = [];
@@ -272,10 +396,46 @@ function init() {
 		}, time)
 	};
 	
-	typeWritr(document.querySelectorAll("*[data-value]"), 50,function(){
-		document.querySelector(".call-me").style.display="block";
-		document.querySelector(".about_me").style.display="block";
-	})
+	typeWritr(document.querySelectorAll("*[data-value]"), 30, (function() {
+		var flag = true;
+		var callMe = document.querySelector(".call-me");
+		var callI = document.querySelector(".click-me").querySelectorAll("i");
+		var left=-225;
+		function changeFont(){
+			if (flag) {
+				callMe.innerHTML = "戳我";
+			} else {
+				callMe.innerHTML = "隐藏";
+			}
+		}
+		return function() {
+			callMe.style.display = "block";
+			document.querySelector(".about_me").style.display = "block";
+			callMe.addEventListener("mouseover", changeFont)
+			callMe.addEventListener("mouseout", function() {
+				callMe.innerHTML = "move";
+			})
+			callMe.addEventListener("click", function() {
+				if (flag) {
+					for (var i = 0; i < callI.length; i++) {
+						callI[i].style.left=left+i*150+"px";
+						callI[i].style.top="-60px";
+						callI[i].style.transform="scale(1)";
+					}
+					flag = false;
+					changeFont();
+				} else {
+					for (var i = 0; i < callI.length; i++) {
+						callI[i].style.left=0;
+						callI[i].style.top="40px";
+						callI[i].style.transform="scale(0)";
+					}
+					flag = true;
+					changeFont();
+				}
+			})
+		}
+	})())
 	goTopShow();
 	util.addEvent(window, "scroll", goTopShow);
 	util.animetionScroll(500);

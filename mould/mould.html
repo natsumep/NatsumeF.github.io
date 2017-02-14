@@ -156,7 +156,6 @@
 						<li><a href="">插件</a></li>
 						<li><a href="">文章</a></li>
 						<li><a href="https://github.com/NatsumeF/NatsuneF.github.io/issues">留言板</a></li>
-						<li><a href="">关于我</a></li>
 					</ul>
 				</div>
 			</header>
@@ -188,9 +187,9 @@ function init() {
 		}
 		//显示向上按钮；
 	function goTopShow() {
-		if (document.body.scrollTop > 0) {
+		if (util.getScrollTop() > 0) {
 			goTop.style.display = "block";
-		} else if (document.body.scrollTop === 0) {
+		} else if (util.getScrollTop() === 0) {
 			goTop.style.display = "none";
 		}
 	}
