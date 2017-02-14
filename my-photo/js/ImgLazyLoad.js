@@ -16,14 +16,27 @@
 		this.addEvent();
 		this.show();
 	}
-	//实现图片加载
+	//获取滚动条位置兼容
 	ImgLazyLoad.prototype.getScrollTop = function() {
-		if (document.documentElement && document.documentElement.scrollTop) {
+		if(window.pageYOffset){
+			return window.pageYOffset;
+		}else if (document.documentElement && document.documentElement.scrollTop) {
 			return document.documentElement.scrollTop;
 		} else {
 			return document.body.scrollTop;
 		}
 	}
+	//获取可视窗口
+	ImgLazyLoad.prototype.getClientHeight =function(){
+		if(window.innerHeight){
+			return window.innerHeight;
+		}else if(document.documentElement&&document.documentElement.clientHeight){
+			return document.documentElement.clientHeight;
+		}else{
+			return document.body.clientHeight;
+		}
+	}
+	//实现图片加载
 	ImgLazyLoad.prototype.show = function() {
 		for (let i = 0; i < this.dom.length; i++) {
 			if (!this.dom[i]["flag"]) {
@@ -48,11 +61,13 @@
 			return str;
 		}
 	}
+	//获取图片顶部距离页面底端的距离;
 	ImgLazyLoad.prototype.getDomTop=function(dom){
-		return (this.getDomClientHeight(dom) - window.innerHeight);
+		return (this.getDomClientHeight(dom) - this.getClientHeight());
 	}
+	//获取图片底部距离页面顶端的距离
 	ImgLazyLoad.prototype.getDomBotton=function(dom){
-		return (this.getDomClientHeight(dom) + parseInt(window.getComputedStyle(dom).height));
+		return (this.getDomClientHeight(dom) + parseInt(window.getComputedStyle?window.getComputedStyle(dom)["height"]:dom.currentStyle["height"]))
 	}
 	//给document添加鼠标滚动事件
 	ImgLazyLoad.prototype.addEvent = function() {
