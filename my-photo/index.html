@@ -372,7 +372,7 @@
 					<ul class="images-all" id="jQuery">
 						<p>《锋利的jQuery》笔记 * 9</p>
 						<li>
-							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery1.min.jpg" data-down-src="images/photo-js/jQuery1.jpg">
+							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jquery1.min.jpg" data-down-src="images/photo-js/jquery1.jpg">
 						</li>
 						<li>
 							<img class="down-images" src="images/load.gif" alt="javaScript" data-src="images/photo-js/min/jQuery2.min.jpg" data-down-src="images/photo-js/jQuery2.jpg">
@@ -433,13 +433,11 @@ function init() {
 		mySelfImg.src = "images/my_self.jpeg";
 		backBody.style.background="rgba(138,138,138,0.6)"
 	}
-	{
-		function goTopShow() {
-			if (util.getScrollTop() > 0) {
-				goTop.style.display = "block";
-			} else if (util.getScrollTop() === 0) {
-				goTop.style.display = "none";
-			}
+	function goTopShow() {
+		if (util.getScrollTop() > 0) {
+			goTop.style.display = "block";
+		} else if (util.getScrollTop() === 0) {
+			goTop.style.display = "none";
 		}
 	}
 	goTopShow();
