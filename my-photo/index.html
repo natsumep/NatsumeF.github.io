@@ -433,14 +433,13 @@ function init() {
 		mySelfImg.src = "images/my_self.jpeg";
 		backBody.style.background="rgba(138,138,138,0.6)"
 	}
-
-	function goTopShow() {
-		if (document.body.scrollTop > 0) {
-			goTop.style.display = "block";
-			//imgLists.style.position="fixed";
-		} else if (document.body.scrollTop === 0) {
-			goTop.style.display = "none";
-			//imgLists.style.position="absolute";
+	{
+		function goTopShow() {
+			if (util.getScrollTop() > 0) {
+				goTop.style.display = "block";
+			} else if (util.getScrollTop() === 0) {
+				goTop.style.display = "none";
+			}
 		}
 	}
 	goTopShow();

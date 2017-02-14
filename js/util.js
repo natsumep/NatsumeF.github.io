@@ -243,10 +243,11 @@ var util = {
 	//rgb转16进制, 
 	//传入(xxx,xxx,xxx);
 	getColor: function(rgb1, rgb2, rgb3) {
+		console.log(rgb1,rgb2,rgb3)
 		if (rgb1 >= 0 && rgb1 <= 255 && rgb2 >= 0 && rgb2 <= 255 && rgb3 >= 0 && rgb3 <= 255) {
-			a = parseInt(rgb1).toString(16)
-			b = parseInt(rgb2).toString(16)
-			c = parseInt(rgb3).toString(16)
+			var a = parseInt(rgb1).toString(16),
+			b = parseInt(rgb2).toString(16),
+			c = parseInt(rgb3).toString(16);
 			if (a.length == b.length == b.length == 2) {
 				return "#" + a + b + c
 			}
@@ -393,6 +394,26 @@ var util = {
 			})
 		}
 	},
+	//获取当前页面可视窗口
+	getClientHeight :function(){
+		if(window.innerHeight){
+			return window.innerHeight;
+		}else if(document.documentElement&&document.documentElement.clientHeight){
+			return document.documentElement.clientHeight;
+		}else{
+			return document.body.clientHeight;
+		}
+	},
+	//获取滚动条位置
+    getScrollTop:function() {
+		if(window.pageYOffset){
+			return window.pageYOffset;
+		}else if (document.documentElement && document.documentElement.scrollTop) {
+			return document.documentElement.scrollTop;
+		} else {
+			return document.body.scrollTop;
+		}
+	}
 
 };
 

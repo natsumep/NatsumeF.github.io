@@ -225,9 +225,9 @@ function init() {
 		}
 		//显示向上按钮；
 	function goTopShow() {
-		if (document.body.scrollTop > 0) {
+		if (util.getScrollTop() > 0) {
 			goTop.style.display = "block";
-		} else if (document.body.scrollTop === 0) {
+		} else if (util.getScrollTop() === 0) {
 			goTop.style.display = "none";
 		}
 	}
