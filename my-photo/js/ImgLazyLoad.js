@@ -43,9 +43,13 @@
 				if (this.getDomTop(this.dom[i]) < (this.getScrollTop() + this.height) && this.getDomBotton(this.dom[i]) > 
 					this.getScrollTop()) {
 					this.dom[i]["flag"]=true;
-					setInterval(function() {
+					var time=setInterval(function() {
 						if (this.dom[i].getAttribute("data-src")) {
 							this.dom[i].src = this.dom[i].getAttribute("data-src");
+							this.dom[i].onerror=function(){
+								this.dom[i].src="";
+								clearInterval(time)
+							}.bind(this)
 						}
 					}.bind(this), this.time)
 				}

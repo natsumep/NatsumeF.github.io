@@ -157,9 +157,12 @@
 	main .click-me .gmail{
 		display: block;
 		height: 50px;
-		width: 150px;
+		width: 200px;
 		transform: translate(-10px,-130px);
 		display: none;
+	}
+	main .click-me .email-back-position{
+		background-position:-200px -300px;
 	}
 	main .click-me .email:hover{
 		background-position:-100px -300px ;
@@ -176,6 +179,9 @@
 	}
 	main .click-me .telephone:hover{
 		background-position:-100px 0 ;
+	}
+	main .click-me .phone-back-position{
+		background-position:-200px 0 ;
 	}
 	main .click-me .telephone:hover+.my-phone{
 		display: block;
@@ -274,7 +280,7 @@
 			<main>
 				<h1 data-value="hello world"></h1>
 				<h2 data-value="这个博主正在求职,并留下下列信息"></h2>
-				<h3 data-value="自学前段，目前正在寻找一份前端相关工作，能写页面，能写js，能写插件"></h3>
+				<h3 data-value="自学前端，目前正在寻找一份前端相关工作，能写页面，能写js，能写插件"></h3>
 				<h3 data-value="能干活，不偷懒，能加班。"></h3>
 				<h3 data-value="喜欢造轮子，坚持使用原生js写代码。"></h3>
 				<h3 data-value="能熟练运用闭包，面向对象写出能复用的封装良好的代码"></h3>
@@ -331,30 +337,46 @@ function init() {
 	        inputText.setSelectionRange(0, inputText.value.length);
 	        document.execCommand('copy', true);
 	   		document.body.removeChild(inputText);
+	   		return true;
 		}else{
 			alert("sorry,目前无法复制当前内容")
+			return false;
 		}
 	}
 	document.querySelector(".email").addEventListener("mousedown",function(e){
-		this.style.backgroundPosition="-200px -300px";
 		this.style.transform="scale(0.8)";
-		this.style.transform="scale(0.8)";
-		copyText("LLandpp11@gmail.com");
-		document.querySelector(".telephone").style.backgroundPosition="0 0";
-
+		if(copyText("LLandpp11@gmail.com")){
+			this.classList.add("email-back-position");
+			document.querySelector(".telephone").classList.remove("phone-back-position");
+			document.querySelector(".gmail").innerHTML="快去粘贴吧☺"
+			document.querySelector(".gmail").style.transform="translate(40px,-130px)";
+		}
+	})
+	document.querySelector(".email").addEventListener("mouseout", function(e) {
+		document.querySelector(".gmail").innerHTML = "LLandpp11@gmail.com"
+		document.querySelector(".gmail").style.transform = "translate(-10px,-130px)";
 	})
 	document.querySelector(".email").addEventListener("mouseup",function(e){
 		this.style.transform="scale(1)"
 	})
 	document.querySelector(".telephone").addEventListener("mousedown",function(e){
-		this.style.backgroundPosition="-200px 0";
 		this.style.transform="scale(0.8)"
-		copyText("+86 188-7483-0084");
-		document.querySelector(".email").style.backgroundPosition="0 -300px";
+		if(copyText("+86 188-7483-0084")){
+			this.classList.add("phone-back-position");
+			document.querySelector(".my-phone").innerHTML="快去粘贴吧☺"
+			document.querySelector(".my-phone").style.transform="translate(200px,-130px)";
+			document.querySelector(".email").classList.remove("email-back-position");
+		}
+	})
+	document.querySelector(".telephone").addEventListener("mouseout",function(e){
+		document.querySelector(".my-phone").innerHTML="+86 188-7483-0084"
+		document.querySelector(".my-phone").style.transform="translate(130px,-130px)";
 	})
 	document.querySelector(".telephone").addEventListener("mouseup",function(e){
 		this.style.transform="scale(1)"
 	})
+
+
 	//打字效果;
 	function typeWritr(doms, time,fn) {
 		var arr = [];
@@ -396,7 +418,7 @@ function init() {
 		}, time)
 	};
 	
-	typeWritr(document.querySelectorAll("*[data-value]"), 30, (function() {
+	typeWritr(document.querySelectorAll("*[data-value]"), 40, (function() {
 		var flag = true;
 		var callMe = document.querySelector(".call-me");
 		var callI = document.querySelector(".click-me").querySelectorAll("i");
