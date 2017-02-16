@@ -1,6 +1,6 @@
 "use strict"
 ~ function(window, undefined) {
-	var ImgLazyLoad = function(doms,time,height) {
+	var ImgLazyLoad = function(doms,height) {
 		var arr = [];
 		if (doms.length) {
 			arr = [].slice.call(doms) || doms || document.body;
@@ -8,7 +8,6 @@
 			arr.push(doms)
 		}
 		this.dom = arr;
-		this.time=time||1000;
 		this.height=height||200;
 		this.init();
 	}
@@ -38,20 +37,19 @@
 	}
 	//实现图片加载
 	ImgLazyLoad.prototype.show = function() {
-		for (let i = 0; i < this.dom.length; i++) {
+		var me = this;
+		for (var i = 0; i < this.dom.length; i++) {
 			if (!this.dom[i]["flag"]) {
-				if (this.getDomTop(this.dom[i]) < (this.getScrollTop() + this.height) && this.getDomBotton(this.dom[i]) > 
+				if (this.getDomTop(this.dom[i]) < (this.getScrollTop() + this.height) && this.getDomBotton(this.dom[i]) >
 					this.getScrollTop()) {
-					this.dom[i]["flag"]=true;
-					var time=setInterval(function() {
-						if (this.dom[i].getAttribute("data-src")) {
-							this.dom[i].src = this.dom[i].getAttribute("data-src");
-							this.dom[i].onerror=function(){
-								this.dom[i].src="";
-								clearInterval(time)
-							}.bind(this)
+					this.dom[i]["flag"] = true;
+					if (this.dom[i].getAttribute("data-src")) {
+						this.dom[i].src = this.dom[i].getAttribute("data-src");
+						this.dom[i].onerror = function() {
+							this.dom[i].src = "";
+							clearInterval(time)
 						}
-					}.bind(this), this.time)
+					}
 				}
 			}
 		}

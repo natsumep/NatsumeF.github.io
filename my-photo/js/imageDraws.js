@@ -51,7 +51,6 @@
 					right: "2px",
 					height: " 50px",
 					width: "50px",
-					background: "transparent",
 					border: 0,
 					outline: 0,
 					fontSize: "55px",
@@ -80,13 +79,11 @@
 					fontSize: "14px",
 					lineHeight: 1,
 					marginRight: 0,
-					background: "#444",
 					background: "rgba(200, 203, 102, .8)"
 				},
 				gobuttonStyle={
 					height:"60px",
 					width:"60px",
-					background:"#999",
 					position:"absolute",
 					zIndex:1000,
 					top:"50%",
@@ -97,23 +94,23 @@
 					borderRadius: "10px",
 					transform: "translateY(-50%)",
 					border: "0",
-					cursor: "pointer",
+					cursor: "pointer"
 				};
-			for (let i in shadeStyle) {
+			for (var i in shadeStyle) {
 				this.shade.style[i] = shadeStyle[i];
 			};
-			for (let i in closeStyle) {
+			for (var i in closeStyle) {
 				this.close.style[i] = closeStyle[i];
 			};
-			for (let i in shareStyle) {
+			for (var i in shareStyle) {
 				this.share.style[i] = shareStyle[i];
 			};
-			for (let i in shareButtonStyle) {
+			for (var i in shareButtonStyle) {
 				this.max.style[i] = shareButtonStyle[i];
 				this.min.style[i] = shareButtonStyle[i];
 				this.downLoad.style[i] = shareButtonStyle[i];
 			};
-			for(let i in gobuttonStyle){
+			for(var i in gobuttonStyle){
 				this.goNext.style[i]=gobuttonStyle[i];
 				this.goPrev.style[i]=gobuttonStyle[i];
 			};
@@ -178,7 +175,7 @@
 			cursor: "move",
 			transform: "translate(-50%,-50%)"
 		}
-		for (let i in imageStyle) {
+		for (var i in imageStyle) {
 			me.image.style[i] = imageStyle[i];
 		}
 		me.shade.appendChild(me.image);
@@ -260,7 +257,7 @@
 	}
 	ImageDraws.prototype.addEvent = function() {
 			var me = this;
-			/*for (let i = 0; i < this.dom.length; i++) {
+			/*for (var i = 0; i < this.dom.length; i++) {
 				this.dom[i].addEventListener("click", function(e) {
 					me.createImg(this);
 					me.alt=me.dom[i].alt||null;
@@ -277,7 +274,7 @@
 				var e  = e||window.event;
 				var target = e.target||e.srcElement;
 				if(target.tagName==="IMG"){
-					for(let i = 0 ; i<me.dom.length;i++){
+					for(var i = 0 ; i<me.dom.length;i++){
 						if(target===me.dom[i]){
 								me.createImg(target);
 					me.getAlt(target);
@@ -333,7 +330,7 @@
 		}
 		//下载给定的元素数组所有的图片
 	ImageDraws.prototype.downImageAll = function() {
-		for (let i = 0; i < this.dom.length; i++) {
+		for (var i = 0; i < this.dom.length; i++) {
 			this.downImage(this.getSrc(this.dom[i]))
 		}
 	}
