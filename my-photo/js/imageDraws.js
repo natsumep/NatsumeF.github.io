@@ -9,6 +9,7 @@
 		}
 		this.dom = arr;
 		this.init();
+		this.index=0;
 	}
 	ImageDraws.prototype.init = function() {
 			this.removeDown=false;
@@ -160,49 +161,58 @@
 	}
 	//创建放大的图片
 	ImageDraws.prototype.createImg = function(dom) {
-			this.image = document.createElement("img");
-			this.image.src = this.getSrc(dom);
-			var height,
-				me = this,
-				width;
-			this.image.onload = function() {
-				var height = me.image.height,
-					width = me.image.width;
-				var imageStyle = {
-					height: (me.getBodyWidth() * 0.5 * (height / width)) + "px",
-					width: me.getBodyWidth() * 0.5 + "px",
-					position: "absolute",
-					left: "50%",
-					top: "50%",
-					zIndex: 999,
-					cursor: "move",
-					transform: "translate(-50%,-50%)"
-				}
-				for (let i in imageStyle) {
-					me.image.style[i] = imageStyle[i];
-				}
-				me.shade.appendChild(me.image);
-				me.move(me.image)
-				me.image.addEventListener("mousewheel",function(e){
-					var e  = e||window.event;
-					e.preventDefault();
-					if(e.wheelDelta>0){
-						me.addSize(0.1)
-					}else if(e.wheelDelta<0){
-						me.reduceSize(0.1)
-				}
-			})
-				me.image.addEventListener("DOMMouseScroll",function(e){
-					var e  = e||window.event;
-					e.preventDefault();
-					if(e.detail>0){
-						me.addSize(0.1)
-					}else if(e.detail<0){
-						me.reduceSize(0.1)
-					}
-				})
-			}
+		this.image = document.createElement("img");
+		this.image.src = dom.src;
+		var height,
+			me = this,
+			width;
+		var height = me.image.height,
+			width = me.image.width;
+		var imageStyle = {
+			height: (me.getBodyWidth() * 0.2 * (height / width)) + "px",
+			width: me.getBodyWidth() * 0.2 + "px",
+			position: "absolute",
+			left: "50%",
+			top: "50%",
+			zIndex: 999,
+			cursor: "move",
+			transform: "translate(-50%,-50%)"
 		}
+		for (let i in imageStyle) {
+			me.image.style[i] = imageStyle[i];
+		}
+		me.shade.appendChild(me.image);
+		me.move(me.image)
+		me.image.addEventListener("mousewheel", function(e) {
+			var e = e || window.event;
+			e.preventDefault();
+			if (e.wheelDelta > 0) {
+				me.addSize(0.1)
+			} else if (e.wheelDelta < 0) {
+				me.reduceSize(0.1)
+			}
+		})
+		me.image.addEventListener("DOMMouseScroll", function(e) {
+			var e = e || window.event;
+			e.preventDefault();
+			if (e.detail > 0) {
+				me.addSize(0.1)
+			} else if (e.detail < 0) {
+				me.reduceSize(0.1)
+			}
+		})
+		var _img = document.createElement("img");
+		_img.src = this.getSrc(dom);
+		_img.onload = function() {
+			me.image.src = _img.src;
+			me.imgge.style.height=(me.getBodyWidth() * 0.5 * (height / width)) + "px";
+			me.imgge.style.width= me.getBodyWidth() * 0.5 + "px";
+		}
+		_img.onerror = function() {
+			me.imgErrorFn && me.imgErrorFn();
+		}
+	}
+
 		//显示图片
 	ImageDraws.prototype.show = function() {
 			document.body.appendChild(this.shade);
@@ -219,7 +229,7 @@
 	//获取style
 	ImageDraws.prototype.getStyle=function(dom,style){
 		if(getComputedStyle){
-			console.log(window.getComputedStyle(dom,null)[style])
+			//console.log(window.getComputedStyle(dom,null)[style])
 			return window.getComputedStyle(dom,null)[style];
 		}else if( dom.currentStyle){
 			console.log(dom.currentStyle)
@@ -368,6 +378,9 @@
 	//移除下载按钮
 	ImageDraws.prototype.removeDown=function(){
 		this.removeDown= true;
+	}
+	ImageDraws.prototype.imgAddError=function(fn){
+		this.imgErrorFn=fn;
 	}
 	window.ImageDraws = window.ImageDraws || ImageDraws;
 }(window)
