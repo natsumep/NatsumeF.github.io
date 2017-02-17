@@ -49,6 +49,7 @@
 			}
 			randomSay();
 		},
+
 		say: function(data) {
 			for (let i = 0; i < this.status.length; i++) {
 				if (this.status[i]) {
@@ -92,7 +93,7 @@
 		}
 	};
 	//对按钮进行初始化；
-	$(".new-car-but").on("click", function() {
+	function newCarButClick() {
 		if (flycar.id.length > 0) {
 			flycar.sortId();
 			var i = flycar.id.shift(),
@@ -110,7 +111,8 @@
 				$($(".move")[i - 1]).show();
 			}, 300)
 		}
-	})
+	}
+	$(".new-car-but").on("click", newCarButClick)
 		//按键效果
 	$(".new-car-but").on("mousedown",function(){
 		$(".new-car-but").css("transform","scale(0.9)")
@@ -141,5 +143,8 @@
 			}	
 		}
 	})
-	
+	function init(){
+		newCarButClick();
+	}
+	init();
 })(window)
