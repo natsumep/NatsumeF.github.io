@@ -202,8 +202,8 @@
 		_img.src = this.getSrc(dom);
 		_img.onload = function() {
 			me.image.src = _img.src;
-			me.imgge.style.height=(me.getBodyWidth() * 0.5 * (height / width)) + "px";
-			me.imgge.style.width= me.getBodyWidth() * 0.5 + "px";
+			me.image.style.height=(me.getBodyWidth() * 0.5 * (height / width)) + "px";
+			me.image.style.width= me.getBodyWidth() * 0.5 + "px";
 		}
 		_img.onerror = function() {
 			me.imgErrorFn && me.imgErrorFn();
