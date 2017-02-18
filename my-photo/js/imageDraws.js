@@ -199,7 +199,6 @@
 			}
 		})
 		var _img = document.createElement("img");
-		_img.src = this.getSrc(dom);
 		_img.onload = function() {
 			me.image.src = _img.src;
 			me.image.style.height=(me.getBodyWidth() * 0.5 * (height / width)) + "px";
@@ -208,6 +207,7 @@
 		_img.onerror = function() {
 			me.imgErrorFn && me.imgErrorFn();
 		}
+		_img.src = this.getSrc(dom);
 	}
 
 		//显示图片
@@ -276,7 +276,7 @@
 				if(target.tagName==="IMG"){
 					for(var i = 0 ; i<me.dom.length;i++){
 						if(target===me.dom[i]){
-								me.createImg(target);
+							me.createImg(target);
 					me.getAlt(target);
 					me.index=i;
 					me.goButtonChangeColor();

@@ -45,10 +45,6 @@
 					this.dom[i]["flag"] = true;
 					if (this.dom[i].getAttribute("data-src")) {
 						this.dom[i].src = this.dom[i].getAttribute("data-src");
-						this.dom[i].onerror = function() {
-							this.dom[i].src = "";
-							clearInterval(time)
-						}
 					}
 				}
 			}

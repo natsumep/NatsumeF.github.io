@@ -5,7 +5,11 @@
 	<link rel="icon" href="images/My_icon.jpg" type="image/x-icon">
 	<title>NatsuneF.github.io fangpeng</title>
 	<style>
-	body,img,div,ul,li,a,header,h1,h2,main{
+	html,body{
+		height: 100%;
+		width: 100%;
+	}
+	body,img,div,ul,li,a,header,h1,h2,main,p{
 		padding: 0;
 		margin: 0;
 	}
@@ -29,7 +33,7 @@
 	}
 	.main_body{
 		max-width: 1250px;
-		min-width: 800px;
+		min-width: 900px;
 		height: auto;
 		margin: 0 auto;
 	}
@@ -79,9 +83,10 @@
 	}
 	main{
 		width: 75%;
-		height:100%;
+		height:1300px;
 		float:right;
 		color: #fff;
+		position: relative;
 	}
 	main::after{
 		content:".";
@@ -89,6 +94,80 @@
 		height:0;
 		clear:both;
 		visibility:hidden
+	}
+	main .main-left,main .main-right{
+		height: 100%;
+		width: 50%;
+		float: left;
+		position: relative;
+		top: -30px;
+		box-sizing: border-box;
+	}
+	main .main-left{
+		border-right:2px solid #fff; 
+	}
+
+	main .main-right{
+		border-left:2px solid #fff; 
+	}
+	main .main-right::after{
+		content:".";
+		display:block;
+		height:0;
+		clear:both;
+		visibility:hidden
+	}
+	main .demo{
+		background: #0099CC;
+		width: 300px;
+		position: absolute;
+	}
+	main .main-left .demo{
+		right: 60px;
+	}
+	main .main-left .demo::after{
+		content: "";
+		height: 0;
+		width:61px;
+		border-bottom:4px solid #fff; 
+		position: absolute;
+		right: -61px;
+		top:50%;
+	}
+	main .main-right .demo{
+		left: 60px;
+	}
+	main .main-right .demo::before{
+		content: "";
+		height: 0;
+		width:61px;
+		border-bottom:4px solid #fff; 
+		position: absolute;
+		left: -61px;
+		top:50%;
+	}
+	main .demo img{
+		width: 100px;
+		height: 100px;
+		display:block;
+		margin: auto;
+		padding: 10px;
+	}
+	main .demo h3,p{
+		text-align:center;	
+	}
+	main .demo-load {
+		width: 100%;
+		height: 30px;
+		font-size: 20px;
+		line-height: 30px;
+		text-align:center;
+		padding-bottom: 10px;
+		font-weight: 700;
+		color: #fff;
+		position: absolute;
+		bottom:-10px;
+		display: none;
 	}
 	.go-top{
 		display: none;
@@ -147,7 +226,7 @@
 		<div class="main_body">
 			<header>
 				<div class="my_self">
-					<a href="../index.htm"><img src="images/my_self.jpeg" alt="头像" title="头像"></a>
+					<a href="../index.html"><img src="images/my_self.jpeg" alt="头像" title="头像"></a>
 				</div>
 				<div class="lists">
 					<ul>
@@ -161,22 +240,27 @@
 			</header>
 			
 			<main>
-				<div class="demo demo-1">
-					<img src="" alt="">
-					<a href="list/spaceship/index.html">
-						<p>指挥官控制飞船小游戏:指挥官通过发送命令来控制飞船运行、停止、摧毁，同时相应的数据会有飞船发送到指挥官的显示屏上
-						</p>
-					</a>
+				 <div class="main-left">
+							
+				
+					<!-- <div class="demo demo-1">
+					<a href="list/spaceship/index.html"><img src="images/demo.png" alt="">
+						<h3>我是指挥官:指挥宇宙飞船</h3>
+							<p>在一个平行宇宙 有一个指挥官 他有一个遥控器 他能控制飞船起飞、停止、摧毁
+							   飞船在空中 他的显示屏还能看到飞船的状态 由于科技比较高级， 指挥官发送的信号总是
+							   可以发送到飞船上 但是有时候 难免会让信号 在空中短暂停留；
+							</p>
+						</a>
+					 -->
+				 
 				</div>
-				<div class="demo demo-2">
-					<img src="" alt="">
-					<p> </p>
+				<div class="main-right">
+				
 				</div>
-				<div class="demo demo-3">
-					<img src="" alt="">
-					<p> </p>
+				
+				<div class="demo-load">
+					<p>加载中······</p>
 				</div>
-			
 			</main>
 
 
@@ -216,15 +300,156 @@ function init() {
 	util.animetionScroll(500);
 }
 init();
+
+~function(){
+	var datas=[
+		{
+			href:"https://natsumef.github.io/bing-demo/cn.bing.com.html",
+			title:"bing-首页",
+			content:"通过jsons跨域的方式，调用百度搜索的list在bing.com中搜索",
+			index : 0
+		},
+		{
+			href:"list/spaceship/index.html",
+			title:"我是指挥官:指挥宇宙飞船",
+			content:"在一个平行宇宙 有一个指挥官 他有一个遥控器 他能控制飞船起飞、停止、摧毁飞船在空中 他的显示屏还能看到飞船的状态 由于科技比较高级， 指挥官发送的信号总是可以发送到飞船上 但是有时候 难免会让信号 在空中短暂停留",
+			index : 1
+		},
+		{
+			href:"list/findFood.html",
+			title:"findFood",
+			content:"让dom可以朝着 8个方向移动的 一个小游戏（UI有点。。。。）",
+			index:2
+		},
+		{
+			href:"https://natsumef.github.io/bing-demo/cn.bing.com.html",
+			title:"bing-首页",
+			content:"通过jsons跨域的方式，调用百度搜索的list在bing.com中搜索",
+			index:3
+		},
+		{
+			href:"list/spaceship/index.html",
+			title:"我是指挥官:指挥宇宙飞船",
+			content:"在一个平行宇宙 有一个指挥官 他有一个遥控器 他能控制飞船起飞、停止、摧毁飞船在空中 他的显示屏还能看到飞船的状态 由于科技比较高级， 指挥官发送的信号总是可以发送到飞船上 但是有时候 难免会让信号 在空中短暂停留",
+			index:4
+		},
+		{
+			href:"list/findFood.html",
+			title:"findFood",
+			content:"让dom可以朝着 8个方向移动的 一个小游戏（UI有点。。。。）",
+			index:5
+		}
+	]
+	//模拟ajax
+	function LoadList(data){
+		this.data=data;
+		this.dom=document.querySelector("main");
+		this.doms=[document.querySelector(".main-left"),document.querySelector(".main-right")]
+		this.top=30;
+		this.index=0;
+		this.flag=true;
+		this.init();
+	}
+	LoadList.prototype.init=function(){
+		var i= 0;
+		while(i<3){
+			this.creatrDom(this.data[i])
+			i++
+		}
+		this.addEvents()
+	}
+	LoadList.prototype.getDomClientHeight = function(dom) {
+		var str = dom.offsetTop;
+		if (dom.offsetParent) {
+			return str + this.getDomClientHeight(dom.offsetParent);
+		} else {
+			return str;
+		}
+	}
+	//获取可视高度
+	LoadList.prototype.getClientHeight =function(){
+		if(window.innerHeight){
+			return window.innerHeight;
+		}else if(document.documentElement&&document.documentElement.clientHeight){
+			return document.documentElement.clientHeight;
+		}else{
+			return document.body.clientHeight;
+		}
+	}
+	//获取滚动条高度
+	LoadList.prototype.getScrollTop=function(){
+		if(document.body&&document.body.scrollTop){
+			return document.body.scrollTop;
+		}else{
+			return document.documentElement.scrollTop;
+		}
+	}
+	//获取整个文档高度
+	LoadList.prototype.getWindowHeight=function(){
+		if(document.body){
+			return document.body.scrollHeight;
+		}else{
+			return document.documentElement.scrollHeight;
+		}
+
+	}
+	LoadList.prototype.creatrDom = function(data) {
+		var dom = document.createElement("div");
+		dom.innerHTML =
+			'<a href="' + data["href"] + '">'+
+				'<img src="images/demo.png" alt="">' +
+				'<h3>' + data["title"] + '</h3>' +
+				'<p>' + data["content"] + '</p>' +
+			'</a>';
+		dom.className="demo "+"demo"+(data["index"]);
+		dom.style.top = this.top + 30 + "px";
+		this.doms[data["index"] % 2].appendChild(dom);
+		var demo = document.querySelectorAll(".demo");
+		this.index++;
+		var topArr=[];
+		for(var i = 0 ; i<demo.length;i++){
+			var top = this.getDomClientHeight(demo[i])+ parseInt(window.getComputedStyle?window.getComputedStyle(demo[i])["height"]:demo[i].currentStyle["height"]);
+			topArr.push(top);
+		}
+		topArr.sort(function(a,b){
+			return a-b;
+		})
+		this.top = topArr[topArr.length-1]
+		this.dom.style.height = this.top + 60 + "px";
+		
+	}
+	LoadList.prototype.addEvents=function(){
+		var me = this;
+		var show=function(){
+			if(me.getClientHeight()+me.getScrollTop()>=me.getWindowHeight()-100&&me.flag){
+				var data=me.data[me.index];
+				document.querySelector(".demo-load").style.display="block";
+				if(me.index===me.data.length){
+					document.querySelector(".demo-load").innerHTML="没了！~";
+					return
+				}
+				me.flag=false;
+				setTimeout(function(){
+					document.querySelector(".demo-load").style.display="none";
+					me.creatrDom(data)
+					me.flag=true;
+				},~~(Math.random()*1200+500))
+			}
+		}
+		util.addEvent(window,"scroll",show)
+	}
+	new LoadList(datas);
+}()
+util.addEvent("doucument","click",function(){alert(1)})
 //给地址栏添加太阳图标和时间;
 ~ function() {
 	var round = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘", "🌘"],
 		i = 0,
 		len = round.length,
-		timeHours = new Date().getHours() + 1;
+		timeHours = new Date().getHours() ;
 	history.replaceState({}, "", "#" + round[~~(timeHours / 3)] + String(timeHours) + "时");
 	setInterval(function() {
-		var timeHours = new Date().getHours() + 1;
+		var timeHours = new Date().getHours() ;
 		history.replaceState({}, "", "#" + round[~~(timeHours / 3)] + String(timeHours) + "时")
 		i++;
 	}, 6000 * 60)
