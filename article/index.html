@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="images/My_icon.jpg" type="image/x-icon">
+	<title>NatsuneF.github.io fangpeng</title>
+	<style>
+	body,img,div,ul,li,a,header,h1,h2,main{
+		padding: 0;
+		margin: 0;
+	}
+	a{
+		text-decoration:none;
+		color:#000;
+	}
+	html,body,.back_body,.main_body{
+		height: 100%;
+		width: 100%;
+		font-size: 16px;
+		font-family: "微软雅黑",arial;
+	}
+	body{
+		background: url("images/body_3.jpg") repeat-y;
+		background-size: 100% 200%;
+	}
+	.back_body{
+		background-color: rgba(138,138,138,0.6);
+		transition: background 3s;
+	}
+	.main_body{
+		max-width: 1250px;
+		min-width: 800px;
+		height: auto;
+		margin: 0 auto;
+	}
+	header{
+		width: 25%;
+		height: 100%;
+		box-sizing: border-box;
+		padding-top: 40px;
+		float:left;
+	}
+	header div{
+		width: 150px;
+		margin:0 auto;
+	}
+	header a img{
+		display: inline-block;
+		height: 150px;
+		width: 150px;
+		transition: .5s;
+		border: 7px solid #669;
+		border-radius: 50%;
+	}
+	header a img:hover{
+		transform: scale(1.2);
+	}
+	header .lists ul{
+		padding-top: 20px;
+		margin:0 auto;
+	}
+	header .lists li{
+		font-size: 20px;
+		display: block;
+		text-align: center;
+		text-decoration: none;
+		list-style: none;
+		width: auto;
+		margin: 30px auto;
+	}
+	header .lists li a {
+		color: #fff;
+	}
+	header .lists li:hover{
+		font-weight: 700;
+		text-decoration: underline;
+		transform: scale(1.2);
+		color: #fff;
+	}
+	main{
+		width: 75%;
+		height:1001px;
+		float:right;
+		color: #fff;
+	}
+	main h3{
+		padding-top: 90px;
+		padding-left: 180px;
+	}
+	main::after{
+		content:".";
+		display:block;
+		height:0;
+		clear:both;
+		visibility:hidden
+	}
+	.go-top{
+		display: none;
+		position: fixed;
+		bottom:30px;
+		right: 30px;
+		height:30px;
+		width: 30px;
+	}
+	.go-top div{
+		transition: all 0.4s;
+	}
+	.go-top .go-top-main{
+		width: 26px;
+		height: 0;
+		border: 2px solid #000;
+		position: absolute;
+		top: 13px;
+	}
+	.go-top .go-top-left{
+		content: "";
+		width: 26px;
+		height: 0;
+		border: 2px solid #000;
+		position: absolute;
+		top: 3px;
+	}
+	.go-top .go-top-right{
+		content: "";
+		width: 26px;
+		height: 0;
+		border: 2px solid #000;
+		position: absolute;
+		bottom: 3px;
+	}
+	.go-top:hover .go-top-main{
+		transform: rotate(90deg);
+		top:8px;
+	}
+	.go-top:hover .go-top-left{
+		transform: rotate(-45deg);
+		width: 12px;
+		top:0;
+		left:0;
+	}
+	.go-top:hover .go-top-right{
+		transform: rotate(45deg);
+		width: 12px;
+		top:0;
+		right:0;
+	}
+	</style>
+</head>
+<body>
+	<div class="back_body">
+		<div class="main_body">
+			<header>
+				<div class="my_self">
+					<a href="../index.html"><img src="images/my_self.jpeg" alt="头像" title="头像"></a>
+				</div>
+				<div class="lists">
+					<ul>
+						<li><a href="../my-photo/index.html">images</a></li>
+						<li><a href="../demo/index.html">demo</a></li>
+						<li><a href="../plug/index.html">插件</a></li>
+						<li><a href="">文章</a></li>
+						<li><a href="https://github.com/NatsumeF/NatsuneF.github.io/issues">留言板</a></li>
+					</ul>
+				</div>
+			</header>
+			
+			<main>
+				<h3>目前还没有文章</h3>
+			</main>
+			<a class="go-top" href="#" >
+				<div class="go-top-left"></div>
+				<div class="go-top-main"></div>
+				<div class="go-top-right"></div>
+			</a>
+		</div>
+	</div>
+</body>
+<script src="js/util.js"></script>
+<script>
+function init() {
+	var mySelf = document.querySelector(".my_self"),
+		mySelfImg = mySelf.querySelector("img"),
+		backBody = document.querySelector(".back_body"),
+		goTop = document.querySelector(".go-top");
+	mySelf.onmouseover = function() {
+		mySelfImg.src = "images/my_self_hover.jpeg";
+		backBody.style.background = "rgba(138,138,138,0)"
+	}
+	mySelf.onmouseout = function() {
+			mySelfImg.src = "images/my_self.jpeg";
+			backBody.style.background = "rgba(138,138,138,0.6)"
+		}
+		//显示向上按钮；
+	function goTopShow() {
+		if (util.getScrollTop() > 0) {
+			goTop.style.display = "block";
+		} else if (util.getScrollTop() === 0) {
+			goTop.style.display = "none";
+		}
+	}
+	goTopShow();
+	util.addEvent(window, "scroll", goTopShow);
+	util.animetionScroll(500);
+}
+init();
+//给地址栏添加太阳图标和时间;
+~ function() {
+	var round = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘", "🌘"],
+		i = 0,
+		len = round.length,
+		timeHours = new Date().getHours() + 1;
+	history.replaceState({}, "", "#" + round[~~(timeHours / 3)] + String(timeHours) + "时");
+	setInterval(function() {
+		var timeHours = new Date().getHours() + 1;
+		history.replaceState({}, "", "#" + round[~~(timeHours / 3)] + String(timeHours) + "时")
+		i++;
+	}, 6000 * 60)
+}()
+</script>
+</html>
