@@ -25,7 +25,7 @@
 		width: 50px;
 		left:750px;
 		top: 420px;
-		background: #5d3b3b;
+		background: rgba(93,59,59,0.5);
 		overflow: hidden;
 		z-index: 1;
 	}
@@ -54,7 +54,7 @@
 		width: 60px;
 		left:800px;
 		top: 40px;
-		background: #2d3b3b;
+		background: rgba(45,59,59,0.5);
 		overflow: hidden;
 		z-index: 1;
 	}
@@ -83,7 +83,7 @@
 		width: 90px;
 		left:60px;
 		top: 240px;
-		background: #21233b;
+		background: rgba(33,35,59,0.5);
 		overflow: hidden;
 		z-index: 1;
 	}
