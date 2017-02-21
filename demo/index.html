@@ -299,142 +299,162 @@ function init() {
 }
 init();
 
-~function(){
-	var datas=[
-		{
-			href:"https://natsumef.github.io/bing-demo/cn.bing.com.html",
-			title:"bing-首页",
-			content:"通过jsons跨域的方式，调用百度搜索的list在bing.com中搜索",
-			index : 0
-		},
-		{
-			href:"list/spaceship/index.html",
-			title:"我是指挥官:指挥宇宙飞船",
-			content:"在一个平行宇宙 有一个指挥官 他有一个遥控器 他能控制飞船起飞、停止、摧毁飞船在空中 他的显示屏还能看到飞船的状态 由于科技比较高级， 指挥官发送的信号总是可以发送到飞船上 但是有时候 难免会让信号 在空中短暂停留",
-			index : 1
-		},
-		{
-			href:"list/findFood.html",
-			title:"findFood",
-			content:"让dom可以朝着 8个方向移动的 一个小游戏（UI有点。。。。）",
-			index:2
-		},
-		{
-			href:"https://natsumef.github.io/bing-demo/cn.bing.com.html",
-			title:"bing-首页",
-			content:"通过jsons跨域的方式，调用百度搜索的list在bing.com中搜索",
-			index:3
-		},
-		{
-			href:"list/spaceship/index.html",
-			title:"我是指挥官:指挥宇宙飞船",
-			content:"在一个平行宇宙 有一个指挥官 他有一个遥控器 他能控制飞船起飞、停止、摧毁飞船在空中 他的显示屏还能看到飞船的状态 由于科技比较高级， 指挥官发送的信号总是可以发送到飞船上 但是有时候 难免会让信号 在空中短暂停留",
-			index:4
-		},
-		{
-			href:"list/findFood.html",
-			title:"findFood",
-			content:"让dom可以朝着 8个方向移动的 一个小游戏（UI有点。。。。）",
-			index:5
-		}
-	]
-	//模拟ajax
-	function LoadList(data){
-		this.data=data;
-		this.dom=document.querySelector("main");
-		this.doms=[document.querySelector(".main-left"),document.querySelector(".main-right")]
-		this.top=30;
-		this.index=0;
-		this.flag=true;
+~ function() {
+	var datas = [{
+			href: "https://natsumef.github.io/bing-demo/cn.bing.com.html",
+			title: "bing-首页",
+			content: "通过jsons跨域的方式，调用百度搜索的list在bing.com中搜索",
+			index: 0
+		}, {
+			href: "list/spaceship/index.html",
+			title: "我是指挥官:指挥宇宙飞船",
+			content: "在一个平行宇宙 有一个指挥官 他有一个遥控器 他能控制飞船起飞、停止、摧毁飞船在空中 他的显示屏还能看到飞船的状态 由于科技比较高级， 指挥官发送的信号总是可以发送到飞船上 但是有时候 难免会让信号 在空中短暂停留",
+			index: 1
+		}, {
+			href: "list/findFood.html",
+			title: "findFood",
+			content: "让dom可以朝着 8个方向移动的 一个小游戏（UI有点。。。。）",
+			index: 2
+		}, {
+			href: "https://natsumef.github.io/bing-demo/cn.bing.com.html",
+			title: "bing-首页",
+			content: "通过jsons跨域的方式，调用百度搜索的list在bing.com中搜索",
+			index: 3
+		}, {
+			href: "list/spaceship/index.html",
+			title: "我是指挥官:指挥宇宙飞船",
+			content: "在一个平行宇宙 有一个指挥官 他有一个遥控器 他能控制飞船起飞、停止、摧毁飞船在空中 他的显示屏还能看到飞船的状态 由于科技比较高级， 指挥官发送的信号总是可以发送到飞船上 但是有时候 难免会让信号 在空中短暂停留",
+			index: 4
+		}, {
+			href: "list/findFood.html",
+			title: "findFood",
+			content: "让dom可以朝着 8个方向移动的 一个小游戏（UI有点。。。。）",
+			index: 5
+		}, {
+			href: "https://natsumef.github.io/bing-demo/cn.bing.com.html",
+			title: "bing-首页",
+			content: "通过jsons跨域的方式，调用百度搜索的list在bing.com中搜索",
+			index: 6
+		}, {
+			href: "list/spaceship/index.html",
+			title: "我是指挥官:指挥宇宙飞船",
+			content: "在一个平行宇宙 有一个指挥官 他有一个遥控器 他能控制飞船起飞、停止、摧毁飞船在空中 他的显示屏还能看到飞船的状态 由于科技比较高级， 指挥官发送的信号总是可以发送到飞船上 但是有时候 难免会让信号 在空中短暂停留",
+			index: 7
+		}, {
+			href: "list/findFood.html",
+			title: "findFood",
+			content: "让dom可以朝着 8个方向移动的 一个小游戏（UI有点。。。。）",
+			index: 8
+		}, {
+			href: "https://natsumef.github.io/bing-demo/cn.bing.com.html",
+			title: "bing-首页",
+			content: "通过jsons跨域的方式，调用百度搜索的list在bing.com中搜索",
+			index: 9
+		}, {
+			href: "list/spaceship/index.html",
+			title: "我是指挥官:指挥宇宙飞船",
+			content: "在一个平行宇宙 有一个指挥官 他有一个遥控器 他能控制飞船起飞、停止、摧毁飞船在空中 他的显示屏还能看到飞船的状态 由于科技比较高级， 指挥官发送的信号总是可以发送到飞船上 但是有时候 难免会让信号 在空中短暂停留",
+			index: 10
+		}, {
+			href: "list/findFood.html",
+			title: "findFood",
+			content: "让dom可以朝着 8个方向移动的 一个小游戏（UI有点。。。。）",
+			index: 11
+		}]
+		//模拟ajax
+	function LoadList(data) {
+		this.data = data;
+		this.dom = document.querySelector("main");
+		this.doms = [document.querySelector(".main-left"), document.querySelector(".main-right")]
+		this.top = 30;
+		this.index = 0;
+		this.flag = true;
 		this.init();
 	}
-	LoadList.prototype.init=function(){
-		var i= 0;
-		while(i<3){
+	LoadList.prototype.init = function() {
+		var i = 0;
+		while (i < 3) {
 			this.creatrDom(this.data[i])
 			i++
 		}
-		this.addEvents()
+		var me = this;
+		util.addEvent(window, "scroll", me.showMoreList.bind(me));
+		this.showMoreList();
 	}
 	LoadList.prototype.getDomClientHeight = function(dom) {
-		var str = dom.offsetTop;
-		if (dom.offsetParent) {
-			return str + this.getDomClientHeight(dom.offsetParent);
-		} else {
-			return str;
+			var str = dom.offsetTop;
+			if (dom.offsetParent) {
+				return str + this.getDomClientHeight(dom.offsetParent);
+			} else {
+				return str;
+			}
 		}
-	}
-	//获取可视高度
-	LoadList.prototype.getClientHeight =function(){
-		if(window.innerHeight){
-			return window.innerHeight;
-		}else if(document.documentElement&&document.documentElement.clientHeight){
-			return document.documentElement.clientHeight;
-		}else{
-			return document.body.clientHeight;
+		//获取可视高度
+	LoadList.prototype.getClientHeight = function() {
+			if (window.innerHeight) {
+				return window.innerHeight;
+			} else if (document.documentElement && document.documentElement.clientHeight) {
+				return document.documentElement.clientHeight;
+			} else {
+				return document.body.clientHeight;
+			}
 		}
-	}
-	//获取滚动条高度
-	LoadList.prototype.getScrollTop=function(){
-		if(document.body&&document.body.scrollTop){
-			return document.body.scrollTop;
-		}else{
-			return document.documentElement.scrollTop;
+		//获取滚动条高度
+	LoadList.prototype.getScrollTop = function() {
+			if (document.body && document.body.scrollTop) {
+				return document.body.scrollTop;
+			} else {
+				return document.documentElement.scrollTop;
+			}
 		}
-	}
-	//获取整个文档高度
-	LoadList.prototype.getWindowHeight=function(){
-		if(document.body){
+		//获取整个文档高度
+	LoadList.prototype.getWindowHeight = function() {
+		if (document.body) {
 			return document.body.scrollHeight;
-		}else{
+		} else {
 			return document.documentElement.scrollHeight;
 		}
-
 	}
 	LoadList.prototype.creatrDom = function(data) {
 		var dom = document.createElement("div");
 		dom.innerHTML =
-			'<a href="' + data["href"] + '">'+
-				'<img src="images/demo.png" alt="">' +
-				'<h3>' + data["title"] + '</h3>' +
-				'<p>' + data["content"] + '</p>' +
+			'<a href="' + data["href"] + '">' +
+			'<img src="images/demo.png" alt="">' +
+			'<h3>' + data["title"] + '</h3>' +
+			'<p>' + data["content"] + '</p>' +
 			'</a>';
-		dom.className="demo "+"demo"+(data["index"]);
+		dom.className = "demo " + "demo" + (data["index"]);
 		dom.style.top = this.top + 30 + "px";
 		this.doms[data["index"] % 2].appendChild(dom);
 		var demo = document.querySelectorAll(".demo");
 		this.index++;
-		var topArr=[];
-		for(var i = 0 ; i<demo.length;i++){
-			var top = this.getDomClientHeight(demo[i])+ parseInt(window.getComputedStyle?window.getComputedStyle(demo[i])["height"]:demo[i].currentStyle["height"]);
+		var topArr = [];
+		for (var i = 0; i < demo.length; i++) {
+			var top = this.getDomClientHeight(demo[i]) + parseInt(window.getComputedStyle ? window.getComputedStyle(demo[i])["height"] : demo[i].currentStyle["height"]);
 			topArr.push(top);
 		}
-		topArr.sort(function(a,b){
-			return a-b;
+		topArr.sort(function(a, b) {
+			return a - b;
 		})
-		this.top = topArr[topArr.length-1]
+		this.top = topArr[topArr.length - 1]
 		this.dom.style.height = this.top + 60 + "px";
-		
 	}
-	LoadList.prototype.addEvents=function(){
-		var me = this;
-		var show=function(){
-			if(me.getClientHeight()+me.getScrollTop()>=me.getWindowHeight()-100&&me.flag){
-				var data=me.data[me.index];
-				document.querySelector(".demo-load").style.display="block";
-				if(me.index===me.data.length){
-					document.querySelector(".demo-load").innerHTML="没了！~";
-					return
-				}
-				me.flag=false;
-				setTimeout(function(){
-					document.querySelector(".demo-load").style.display="none";
-					me.creatrDom(data)
-					me.flag=true;
-				},~~(Math.random()*1200+500))
+	LoadList.prototype.showMoreList = function() {
+		if (this.getClientHeight() + this.getScrollTop() >= this.getWindowHeight() - 100 && this.flag) {
+			var data = this.data[this.index];
+			document.querySelector(".demo-load").style.display = "block";
+			if (this.index === this.data.length) {
+				document.querySelector(".demo-load").innerHTML = "没了！~";
+				return
 			}
+			this.flag = false;
+			setTimeout(function() {
+				document.querySelector(".demo-load").style.display = "none";
+				this.creatrDom(data)
+				this.flag = true;
+				this.showMoreList();
+			}.bind(this), ~~(Math.random() * 1200 + 500))
 		}
-		util.addEvent(window,"scroll",show)
 	}
 	new LoadList(datas);
 }()
