@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body,div{
+		padding: 0;
+		margin:0;
+	}
+	#center{
+		height: 200px;
+		width: 400px;
+		background: #ccc;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin:-100px 0 0 -200px;
+		overflow: hidden;
+	}
+	.radiu{
+		position: absolute;
+		background: #fc0;
+		width: 100px;
+		height: 100px;
+	}
+	.top-left{
+		left: -50px;
+		top: -50px;
+		border-radius: 50%;
+	}
+	.right-bottom{
+		right:-50px;
+		bottom:-50px;
+		border-radius: 50%;
+	}
+	</style>
+</head>
+<body>
+	<div id="center">
+		<div class="radiu top-left"></div>
+		<div class="radiu right-bottom"></div>
+	</div>	
+</body>
+</html>

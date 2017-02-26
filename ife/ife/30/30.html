@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		 html, body {
+            font-family: "Microsoft YaHei";
+            font-size: 70px;
+        }
+
+		main{
+			height: 0.8rem;
+			width: 9rem;
+			margin:0.2rem auto; 
+		}
+		input{
+			width: 5.4rem;
+			height: 0.66rem;
+			border-radius: 0.07rem;
+			border: 2px solid #ccc;
+			outline: 0px;
+			line-height: 0.66rem;
+			color: #565656;
+			font-size: 0.28rem;
+			text-indent: 0.3rem;
+			font-weight: 580;
+		}
+		span {
+			display: inline-block;
+			width: 1.2rem;
+			line-height:0.68rem;
+			margin-right: 0.1rem;
+			font-size: 0.28rem;
+			font-weight: 500;
+		}
+		button{
+			height: 0.68rem;
+			width: 1.07rem;
+			border-radius: 0.07rem;
+			font-size: 0.27rem;
+			line-height: 0.68rem;
+			background: #2f79ba;
+			cursor: pointer;
+			border: 0;
+			color: #fff;
+			position: relative;
+		}
+		.prompt{
+			margin-left:1.6rem; 
+			font-size: 0.22rem;
+			color: #a8a8a8;
+			width: 3rem;
+			font-weight: 400px;
+			display: none;
+		}
+		.input-erorr{
+			border: 2px solid red;
+			
+		}
+		.input-ok{
+			border: 2px	solid #5dbc45;
+			
+		}
+		.span-erorr{
+			color: red;
+			display:block;
+
+		}
+		.span-ok{
+			color: #5dbc45;
+			display:block;
+		}
+		.show{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<div>
+			<span>名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span>
+			<input type="text">
+		</div>
+		<span class="prompt ">必填:长度为4~16个字符</span>
+		<div class="pass">
+			<span>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span>
+			<input type="password">
+		</div>
+		<span class="prompt">必填:长度为4~16个字符</span>
+		<div class="mail">
+			<span>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</span>
+			<input type="text">
+		</div>
+			<span class="prompt">必填:长度为4~16个字符</span>
+		<div class="phone">
+			<span>电话号码</span>
+			<input type="text">
+			<button>验&nbsp;&nbsp;证</button>
+		</div>
+		<span class="prompt">必填:长度为4~16个字符</span>
+	
+	</main>
+</body>
+<script>
+(function() {
+	var prompt1 = document.getElementsByClassName("prompt")[0],
+		prompt2 = document.getElementsByClassName("prompt")[1],
+		prompt3 = document.getElementsByClassName("prompt")[2],
+		prompt4 = document.getElementsByClassName("prompt")[3],
+		input1 = document.getElementsByTagName("input")[0],
+		input2 = document.getElementsByTagName("input")[1],
+		input3 = document.getElementsByTagName("input")[2],
+		input4 = document.getElementsByTagName("input")[3],
+		but = document.getElementsByTagName("button")[0];
+		function form(input,prompt){
+			var value=input.value.trim(),
+				length=value.replace(/[^\x00-\xFF]/g, "zh").length;
+			if(length===0){
+				input.classList.add("input-erorr");
+				prompt.innerHTML="姓名不能為空";
+				prompt.classList.add("span-erorr");
+				return false;
+			}else if(length<4){
+				input.classList.add("input-erorr");
+				prompt.innerHTML="長度不能小於4字符";
+				prompt.classList.add("span-erorr");
+				return false;
+			}else if(length>16){
+				input.classList.add("input-erorr");
+				prompt.innerHTML="長度不能大於16字符";
+				prompt.classList.add("span-erorr");
+				return false;
+			}else{
+				input.classList.add("input-ok");
+				prompt.innerHTML="驗證通過";
+				prompt.classList.add("span-ok");
+				return true;
+			}
+		}
+		input1.onfocus=function(){
+			prompt1.classList.add("show");
+		}
+		input1.onblur=function(){
+			form(input1,prompt1)
+		}
+		input2.onfocus=function(){
+			prompt2.classList.add("show");
+		}
+		input2.onblur=function(){
+			form(input2,prompt2)
+		}
+		input3.onfocus=function(){
+			prompt3.classList.add("show");
+		}
+		input3.onblur=function(){
+			form(input3,prompt3)
+		}
+		input4.onfocus=function(){
+			prompt4.classList.add("show");
+		}
+		input4.onblur=function(){
+			form(input4,prompt4)
+		}
+
+		but.onclick=function(){
+			var a=form(input1,prompt1),
+				b=form(input2,prompt2),
+				c=form(input3,prompt3),
+				d=form(input4,prompt4);
+				if(a&&b&&c&&d){
+					alert("验证通过")
+				}else{
+					alert("提交失败")
+				}
+
+		}
+
+})()
+</script>
+</html>

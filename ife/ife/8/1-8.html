@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body,div,main{
+		padding: 0;
+		margin:0;
+		box-sizing: border-box;
+	}
+	main{
+		padding: 10px;
+
+	}
+	[class ^=col-]{
+		padding: 10px;
+		float: left;
+	}
+	.cenert{
+		border: 1px solid #999;
+		height: 20px;
+		background: #eee;
+	}
+	@media (min-width:768px ){
+		.col-md-1{
+			width:8.3334%;
+		}
+		.col-md-2{
+			width: 16.6667%
+		}
+		.col-md-3{
+			width: 25%;
+		}
+		.col-md-4{
+			width: 33.3334%;
+		}
+		.col-md-6{
+			width: 50%;
+		}
+	}
+	/* 经过测试max-width是<=767 min-width>=768 */
+	@media (max-width: 767px){
+		.col-sm-2{
+			width: 16.6667%;
+		}
+		.col-sm-3{
+			width: 25%;
+		}
+		.col-sm-6{
+			width: 50%;
+		}
+		.col-sm-8{
+			width: 66.6667%;
+		}
+		.col-sm-12{
+			width: 100%;
+		}
+	}
+
+	</style>
+</head>
+<body>
+	<main>
+		<div class="col-md-4 col-sm-6">
+			<div class="cenert"></div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="cenert"></div>
+		</div>
+		<div class="col-md-4 col-sm-12">
+			<div class="cenert"></div>
+		</div>
+		<div class="col-md-3 col-sm-3">
+			<div class="cenert"></div>
+		</div>
+		<div class="col-md-6 col-sm-6">
+			<div class="cenert"></div>
+		</div>
+		<div class="col-md-3 col-sm-3">
+			<div class="cenert"></div>
+		</div>
+		<div class="col-md-1 col-sm-2">
+			<div class="cenert"></div>
+		</div>
+		<div class="col-md-1 col-sm-2">
+			<div class="cenert"></div>
+		</div>
+		<div class="col-md-2 col-sm-8">
+			<div class="cenert"></div>
+		</div>
+		<div class="col-md-2 col-sm-3">
+			<div class="cenert"></div>
+		</div>
+		<div class="col-md-6 col-sm-3">
+			<div class="cenert"></div>
+		</div>
+
+	</main>
+</body>
+</html>

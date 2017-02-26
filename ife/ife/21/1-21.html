@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.show-likes div,.show-like div{
+			height: 40px;
+			display: inline-block;
+			white-space:nowrap; 
+			color: #fff;
+			background:#9ff;
+			margin: 10px;
+			font-size: 25px;
+			line-height: 40px;
+		}
+		.user-like .show-like{
+			min-height: 40px;
+		}
+		.show-likes .mouseDiv,.show-like .mouseDiv{
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="user-like">
+		<span>tag:</span>
+		<input type="text" class="input-like"/>
+		<div class="show-like">
+		</div>
+	</div>
+	<div>	
+		<textarea name="textarea" class="input-likes-arr" cols="30" rows="5"></textarea>
+		<button class="add-likes">确认兴趣爱好</button>
+	</div>
+	<div class="show-likes">
+	</div>
+</body>
+<script>
+"use strict"
+
+function $(ele, flag) {
+	if (flag) {
+		return document.getElementsByClassName(ele);
+	}
+	return document.getElementsByClassName(ele)[0];
+};
+
+function AddLike(ele, text) {
+	this.ele = ele;
+	this.text = this.initArr(text);
+	this.createDiv();
+};
+
+AddLike.prototype = {
+	createDiv: function() {
+		var _html = ""
+		for (let i = 0; i < this.text.length; i++) {
+			_html += "<div>" + this.text[i] + "</div>"
+		}
+		this.ele.innerHTML = _html;
+		this.addMouse();
+	},
+	addMouse: function() {
+		var that = this;
+		for (let i = 0; i < this.ele.children.length; i++) {
+			console.log(this.ele.children[i])
+			this.ele.children[i].addEventListener("mouseover", function(e) {
+				if (this.tagName === "DIV") {
+					this.innerHTML = "点击删除 " + that.text[i];
+					this.classList.add("mouseDiv");
+				}
+			})
+			this.ele.children[i].addEventListener("mouseout", function(e) {
+				if (this.tagName === "DIV") {
+					this.innerHTML = that.text[i];
+					this.classList.remove("mouseDiv")
+				}
+			})
+			this.ele.children[i].addEventListener("click", function(e) {
+				if (this.tagName === "DIV") {
+					that.text.splice(i, 1)
+					that.createDiv()
+				}
+			})
+		}
+	},
+	initArr: function(data) {
+		if (typeof data.length === "string" && typeof data != undefined) {
+			var _arr = [];
+			_arr.push(data);
+			data = _arr;
+		}
+		var newArr = [];
+		if (data.length > 0) {
+			for (let i = 0; i < data.length; i++) {
+				if (newArr.indexOf(data[i]) === -1) {
+					newArr.push(data[i]);
+				}
+			}
+			if (newArr.length > 10) {
+				newArr = newArr.slice(newArr.length - 10, newArr.length);
+			}
+		}
+		return newArr;
+	}
+};
+(function() {
+	var arr = [],
+		arrs = [],
+		inputLike = $("input-like"),
+		showLike = $("show-like"),
+		inputLikes = $("input-likes-arr"),
+		showLikes = $("show-likes"),
+		addLikes = $("add-likes");
+	inputLike.addEventListener("keyup", function(e) {
+		var str = inputLike.value;
+		if (e.keyCode === 13 || (/(,| |\,)$/.test(str))) {
+			str = str.trim();
+			if (str != "") {
+				str=str.split(" ")[0];
+				arr.push(str);
+			}
+			inputLike.value = "";
+			new AddLike(showLike, arr);
+		}
+	})
+	showLike.addEventListener("click", function() {
+		arr = []
+		for (let i = 0; i < showLike.children.length; i++) {
+			arr.push(showLike.children[i].innerHTML)
+		}
+		console.log(arr)
+	})
+	addLikes.addEventListener("click", function(e) {
+		arrs =arrs.concat(inputLikes.value.trim().split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/));
+		new AddLike(showLikes, arrs);
+		inputLikes.value="";
+		console.log(arrs)
+	})
+	showLikes.addEventListener("click", function(e) {
+		arrs = [];
+		for (let i = 0; i < showLikes.children.length; i++) {
+			arrs.push(showLikes.children[i].innerHTML)
+		}
+		console.log(arrs)
+	})
+})()
+</script>
+</html>

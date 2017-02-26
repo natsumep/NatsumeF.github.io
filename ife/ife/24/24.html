@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{
+		    display: flex;
+		    flex: 1;
+		    padding: 10px 0px;
+		    margin: 10px;
+		    border: 1px solid red;
+		    line-height: 15px;
+		    background-color:#fff;
+		}
+		.show{
+			background: #0f0;
+		}
+	</style>
+</head>
+<body>
+<div class="main">super
+	<div class="box1">people
+		<div class="box2">man
+			<div class="box3">xiaoming</div>
+			<div class="box3">xiaoli</div>
+			<div class="box3">xiaogang</div>
+			<div class="box3">xiaoqiang</div>
+		</div>
+		<div class="box2">woman
+			<div class="box3">xiaolan</div>
+			<div class="box3">xiaoqing</div>
+		</div>
+	</div>
+	<div class="box1">school
+		<div class="box2">books
+			<div class="box3">yuwen</div>
+			<div class="box3">shuxue</div>
+		</div>
+		<div class="box2">times
+			<div class="box3">8</div>
+			<div class="box3">8</div>
+			<div class="box3">14</div>
+			<div class="box3">8</div>
+		</div>
+	</div>
+</div>
+<button>点击遍历</button>
+<button>点击遍历</button>
+<br>
+<br>
+<input type="text" class="find-data">
+<button>寻找方法1</button>
+<button>寻找方法2</button>
+<br>
+<br>
+
+<input type="text" class="add-div">
+<button>添加节点</button>
+<button class="remove-div">删除节点</button>
+</body>
+<script>
+"use strict";
+(function() {
+	var but1 = document.getElementsByTagName("button")[0],
+		but2 = document.getElementsByTagName("button")[1],
+		but3 = document.getElementsByTagName("button")[2],
+		but4 = document.getElementsByTagName("button")[3],
+		but5 = document.getElementsByTagName("button")[4],
+		but6 = document.getElementsByTagName("button")[5],
+		div = document.getElementsByClassName('main')[0],
+		find = document.getElementsByClassName('find-data')[0],
+		add = document.getElementsByClassName('add-div')[0],
+		time = null,
+		showArr = []
+		//当用户在动画过程中点击另一个动画时 初始化样式
+	function init() {
+		for (let i = 0; i < showArr.length; i++) {
+			showArr[i][0].style.background = "#fff"
+		}
+		showArr = [];
+		clearInterval(time)
+	}
+
+	//将遍历的结果数组通过动画展示出来
+	//增加一个data参数用来展示查找数据的结果.如果不传入data,就只展示遍历过程动画
+	function show(arr, data) {
+		var length = arr.length,
+			i = 0,
+			_arr = [],
+			index = 0;
+		time = setInterval(function() {
+			if (i < length) {
+				arr[i][0].style.background = "red";
+				if (data && arr[i][1] == data) {
+					_arr.push(i)
+					index++
+				}
+				if (i > 0) {
+					arr[i - 1][0].style.background = "#fff"
+				}
+				i++;
+			} else {
+				clearInterval(time);
+				arr[length - 1][0].style.background = "#fff"
+				if (data) {
+					if (index === 0) {
+						alert("sorry,查找不到你输入的数据!")
+					} else {
+						for (let i = 0; i < _arr.length; i++) {
+							arr[_arr[i]][0].style.background = "#00f"
+						}
+
+					}
+				}
+			}
+		}, 200)
+	}
+
+	//遍历方法1 按顺序传入数组遍历的元素和元素的第一个文本节点;
+	function push1(data) {
+		if (data) {
+			var _arr = [];
+			_arr.push(data, data.firstChild.nodeValue.trim());
+			showArr.push(_arr);
+
+			for (let i = 0; i < data.children.length; i++) {
+				push1(data.children[i])
+			}
+		}
+	}
+
+	//遍历方法2 同上
+	function push2(data) {
+		if (data) {
+			for (let i = 0; i < data.children.length; i++) {
+				push2(data.children[i])
+			}
+			var _arr = [];
+			_arr.push(data, data.firstChild.nodeValue.trim());
+			showArr.push(_arr)
+		}
+	}
+
+	//寻找点击变色的div 如果传入thing,表示需要添加div,div的内容为thing;
+	//如果没有传入thing 就删除变色的div 
+	function findDiv(div, thing) {
+		if (div) {
+			for (let i = 0; i < div.children.length; i++) {
+				findDiv(div.children[i], thing)
+			}
+			if (div.classList.contains("show")) {
+				if (thing) {
+					var _data = document.createElement("div");
+					_data.innerHTML = thing;
+					div.appendChild(_data)
+					clickColor(div)
+				} else {
+					div.parentNode.removeChild(div)
+				}
+			}
+		}
+	}
+	//移除所有div的颜色
+	function clickColor(data) {
+		if (data) {
+			for (let i = 0; i < data.children.length; i++) {
+				clickColor(data.children[i])
+			}
+			data.classList.remove("show")
+		}
+	}
+	//事件委托到document上
+	document.addEventListener("click", function(e) {
+		if (e.target.tagName === "DIV") {
+			clickColor(div);
+			e.target.classList.add("show")
+		};
+		switch (e.target) {
+			case but6:
+				findDiv(div);
+				break;
+			case but5:
+				var _str = add.value.trim();
+				if (_str) {
+					findDiv(div, _str)
+				}
+				break;
+			case but4:
+				var data = find.value.trim();
+				if (!data) {
+					return
+				}
+				init()
+				push2(div);
+				show(showArr, data)
+				break;
+			case but3:
+				var data = find.value.trim();
+				if (!data) {
+					return
+				}
+				init()
+				push1(div);
+				show(showArr, data)
+				break;
+			case but2:
+				init();
+				push2(div);
+				show(showArr);
+				break;
+			case but1:
+				init();
+				push1(div);
+				show(showArr);
+				break;
+		}
+	})
+})()
+</script>
+</html>

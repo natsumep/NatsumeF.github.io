@@ -1,0 +1,59 @@
+
+*{
+	padding: 0;
+	margin: 0;
+}
+button:focus{
+	outline:none;
+}
+html{
+	height: 100%;
+	width: 100%;
+	font-size: 16px;
+}
+main{
+	margin: 100px 400px;
+	width:600px;
+	position: relative;
+}
+#aqi-city-input,#aqi-value-input{
+	height: 30px;
+	width: 200px;
+	border-radius: 5px;
+	box-shadow: 1px 1px 1px #aaa;
+	margin: 10px 0;
+	font-size: 20px;
+	color: #111;
+}
+#aqi-city-input{
+	margin-left: 32px;		
+}
+.aqi-error{
+	color: red;
+}
+#add-btn{
+	height: 30px;
+	width: 80px;
+	background: #aaf;
+	color: #fff;
+	margin-left: 245px;
+	border-radius: 8px;
+}
+#aqi-table{
+	font-size: 16px;
+}
+#aqi-table th{
+	font-size: 20px;
+}
+
+#aqi-table th,td{
+	padding-right:25px;
+}
+
+
+.hidde{
+	display: none;
+}
+.show{
+	display: inline-block;
+}

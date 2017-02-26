@@ -1,0 +1,267 @@
+
+	*{
+		padding: 0;
+		margin:0;
+	}
+	body{
+		height: 100%;
+		box-sizing: border-box;
+	}
+	@keyframes animation{
+		form {
+			transform:rotate(0deg);
+		}
+		to{
+			transform:rotate(360deg);
+		}
+	}
+	[class^="background"]{
+		animation: animation 60s linear;
+		border-radius: 50%;
+		position: absolute;
+	}
+	.background1{
+		height: 50px;
+		width: 50px;
+		left:750px;
+		top: 420px;
+		background: #5d3b3b;
+		overflow: hidden;
+		z-index: 1;
+	}
+	.background1::after{
+		content: "";
+		height: 10px;
+		width: 10px;
+		border-radius: 50%;
+		position: absolute;
+		left: 42px;
+		top: 12px;
+		background:#f2a;
+	}
+	.background1::before{
+		content: "";
+		height:20px;
+		width: 20px;
+		border-radius: 50%;
+		position: absolute;
+		left: 12px;
+		top: 23px;
+		background:#746277;
+	}
+	.background2{
+		height:60px;
+		width: 60px;
+		left:800px;
+		top: 40px;
+		background: #2d3b3b;
+		overflow: hidden;
+		z-index: 1;
+	}
+	.background2::after{
+		content: "";
+		height: 20px;
+		width: 20px;
+		border-radius: 50%;
+		position: absolute;
+		left: 12px;
+		top: 12px;
+		background:#fd442a;
+	}
+	.background2::before{
+		content: "";
+		height:20px;
+		width: 20px;
+		border-radius: 50%;
+		position: absolute;
+		left: 42px;
+		top: 23px;
+		background:#746277;
+	}
+	.background3{
+		height:90px;
+		width: 90px;
+		left:60px;
+		top: 240px;
+		background: #21233b;
+		overflow: hidden;
+		z-index: 1;
+	}
+	.background3::after{
+		content: "";
+		height: 25px;
+		width: 25px;
+		border-radius: 50%;
+		position: absolute;
+		left: 12px;
+		top: 72px;
+		background:#fa4a2a;
+	}
+	.background3::before{
+		content: "";
+		height:40px;
+		width: 40px;
+		border-radius: 50%;
+		position: absolute;
+		left: 52px;
+		top: 23px;
+		background:#746277;
+	}
+
+
+	.all{
+		height: 550px;
+		width: 70%;
+		position: relative;
+		top:0;
+		left: 0;
+	}
+	#main{
+		background: #02071d; 
+		height: 550px;
+		position: relative;
+	}
+   	.big{
+  		height: 100px;
+  		width: 100px;
+  		background: #33f;
+  		border-radius: 50%;
+  		float:right;
+  		position: absolute;
+  		top: 50%;
+  		left: 50%;
+		transform: translate(-50%,-50%);
+  	}
+  	.look-my-car{
+  		height: 550px;
+  		width: 30%;
+  		background: #9cfdf0;
+  		position: absolute;
+  		right: 0;
+  		top: 0;
+  		font-size: 14px;
+  	}
+  	.table{
+  		margin: 20px auto;
+	    text-align: center;
+	    background-color: #fff;
+	    border: 2px solid #00bfa5;
+	    border-radius: 5px;
+	    padding: 5px;
+  	}
+  	.look-my-car th{
+  		padding: 5px;
+ 		background: #eee;
+  	}
+
+	[class*="ball"]{
+		border-radius: 50%;
+		border:1px solid #fff;
+		background: transparent;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		text-align: center;
+		color: #000;
+	}
+	.ball1{
+		height: 250px;
+		width: 250px;
+		margin-left: -125px;
+		margin-top: -125px;
+		display: none;
+	}
+	.ball2{
+		height: 340px;
+		width: 340px;
+		margin-left: -170px;
+		margin-top: -170px;
+		display: none;
+	}
+	.ball3{
+		height: 430px;
+		width:430px;
+		margin-left: -215px;
+		margin-top: -215px;
+		display: none;
+	}
+	.ball4{
+		height: 520px;
+		width: 520px;
+		margin-left: -260px;
+		margin-top: -260px;
+		display: none;
+	}
+	[class^="car"]{
+		height: 20px;
+		width: 40px;
+		position: absolute;
+		left: 50%;
+		top: 0;
+		transform: translate(-50%,-50%);
+		border-radius: 10px;
+		background: #fa4a2a;
+		overflow: hidden;
+	}
+	[class^="number"]{
+		display: inline-block;
+		height: 20px;
+		width: 40px;
+		position: relative;
+		font-weight: bold;
+		z-index:10;
+	}
+	[class^="oback"]{
+		z-index: 2;
+		height: 20px;
+		width: 40px;
+		background: #fff;
+		position: absolute;
+		top:0;
+		left: -40px;
+	}
+	#footer .move{
+		padding: 17px;
+		float: left;
+		border:1px #456456 solid;
+		text-align:center;
+		display: none;
+	}
+	#footer button{
+		height: 40px;
+		width: 40px;
+		border-radius: 50%;
+		outline: none;
+		color: #fff;
+		font-weight: 500;
+		background: #451210;
+		margin:10px;
+	}
+	#footer .new-car .new-car-but{
+		height: 80px;
+		width: 80px;
+		border-radius: 50%;
+		outline: none;
+		background: #f44;
+		color: #fff;
+		margin:10px;
+		font-size: 22px;
+	}
+	#footer .move{
+		padding: 17px;
+		float: left;
+		border:1px #456456 solid;
+		text-align:center;
+		
+	}
+	#footer .move span{
+		display: block;
+	}
+	#footer .new-car{
+		padding: 5px;
+		float: left;
+		color:black;
+		font-size: 16px;
+	}
+
+

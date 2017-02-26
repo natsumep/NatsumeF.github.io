@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin:0;
+            padding: 0;
+        }
+    td{
+    width: 50px;
+    height: 50px;
+    text-align: center;
+        
+    }
+    tr:nth-child(n+2)>td:nth-child(n+2){
+        border: 1px solid #cccccc;
+        margin: -1px;
+     }
+        #box{
+            height: 50px;
+            width: 50px;
+            background: red;
+            position: absolute;
+            margin: 0;
+            top:50px;
+            left:50px;
+            transition: left  0.5s ,top  0.5s ease-in,transform 0.3s;
+        }
+        #box::after{
+            content: "";
+             margin: 0;
+            height: 10px;
+            width: 50px;
+            position: absolute;
+            left: 0;
+            top:0;
+            background: #00f;
+        }
+        form{
+            margin:10px 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <table border="0" cellspacing="0" cellpadding="0" id="Table">
+    <tr>
+        <td ></td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+    <div id="box"></div>
+        <input type="text" autofocus>
+        <button type="submit">确认</button>
+        <br>
+    <span>
+        ps:     go :往蓝色方向走一格;
+                tunlef :向左转;
+                tunrig :向右转;
+                tunbac :向后转;
+                tarlef:向左移动,方向不变;
+                tarrig:向右移动,方向不变;
+                tartop:向上移动,方向不变;
+                tarbot:向下移动,方向不变;
+                movlef:向左移动,方向改变;
+                movrig:向右移动,方向改变;
+                movbot:向下移动,方向改变;
+                movtop:向上移动,方向改变;
+        pss:大小写都可以噢.
+    </span>
+</body>
+<script>
+
+"use strict";
+var deg = 0,
+    box = document.getElementById("box"),
+    input = document.getElementsByTagName("input")[0],
+    but = document.getElementsByTagName("button")[0];
+
+function changeMove(x, y) {
+    if (x > 500) {
+        x = 500;
+        alert("right出界啦,不能继续走啦!");
+    } else if (x < 50) {
+        x = 50
+        alert("left出界啦,不能继续走啦!");
+    };
+    if (y > 500) {
+        y = 500;
+        alert("bottom出界啦,不能继续走啦!");
+    } else if (y < 50) {
+        y = 50;
+        alert("top出界啦,不能继续走啦!");
+    }
+    return {
+        x: x,
+        y: y
+    }
+}
+
+function changeDeg(deg) {
+    if (deg >= 360) {
+        deg = deg - 360;
+    } else if (deg < 0) {
+        deg = 360 + deg;
+    }
+    box.style.transform = "rotate(" + deg + "deg)";
+}
+
+
+//移动
+var divMove = {
+    move: function(dec) {
+        var left = parseInt(window.getComputedStyle(box).left),
+            top = parseInt(window.getComputedStyle(box).top);
+        switch (dec) {
+            case 0:
+                top -= 50;
+                break;
+            case 1:
+                left += 50;
+                break;
+            case 2:
+                top += 50;
+                break
+            case 3:
+                left -= 50;
+                break;
+        }
+        var _data = changeMove(left, top);
+        box.style.left = _data.x + "px";
+        box.style.top = _data.y + "px";
+    },
+    go: function() {
+        this.move(deg / 90);
+    },
+    tunlef: function() {
+        deg -= 90;
+        deg = changeDeg(deg);
+    },
+    tunrig: function() {
+        deg += 90;
+        deg = changeDeg(deg);
+        box.style.transform = "rotate(" + deg + "deg)";
+    },
+    tunbac: function() {
+        deg += 180;
+        deg = changeDeg(deg);
+        box.style.transform = "rotate(" + deg + "deg)";
+    },
+    tralef: function() {
+        this.move(3)
+    },
+    trarig: function() {
+        this.move(1)
+    },
+    tratop: function() {
+        this.move(0)
+    },
+    trabot: function() {
+        this.move(2);
+    },
+    movlef: function() {
+        deg = 270;
+        changeDeg(deg)
+        this.go()
+    },
+    movrig: function() {
+        deg = 90;
+        changeDeg(deg)
+        this.go()
+    },
+    movtop: function() {
+        deg = 0;
+        changeDeg(deg)
+        this.go()
+    },
+    movbot: function() {
+        deg = 180;
+        changeDeg(deg)
+        this.go()
+    }
+}
+but.onclick = (function() {
+    //防止在0.5s内重复点击导致div错位;
+    var last = new Date().getTime();
+    return function() {
+        var now = new Date().getTime();
+        if (now - last < 500) {
+            console.log("不要点太快 忙不过来啦")
+            return false;
+        }
+        last = now;
+        var value = input.value.trim().replace(/\s/g,"").toLowerCase();
+        divMove[value]&&divMove[value]();
+    }
+})()
+</script>
+</html>

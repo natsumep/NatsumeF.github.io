@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin:0;
+            padding: 0;
+        }
+        table td{
+        width: 50px;
+        height: 50px;
+        text-align: center;  
+        }
+        table tr:nth-child(n+2)>td:nth-child(n+2){
+            border: 1px solid #cccccc;
+            margin: -1px;
+         }
+        #box{
+            height: 50px;
+            width: 50px;
+            background: red;
+            position: absolute;
+            margin: 0;
+            top:50px;
+            left:50px;
+            transition: left  0.5s ,top  0.5s ease-in,transform 0.3s;
+        }
+        #box::after{
+            content: "";
+            margin: 0;
+            height: 10px;
+            width: 50px;
+            position: absolute;
+            left: 0;
+            top:0;
+            background: #00f;
+        }
+
+        .show{
+            margin:10px 0 0 50px;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            background: #eaaaaf;
+        }
+        .show .show-left{
+            display: inline-block;
+            float: left;
+            width: 20px;
+            height: 100px;
+            position: relative;
+            text-align:center;
+        }
+        .show .show-left span{
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            text-align:center;
+             word-break: break-all;
+            font-weight: 600;
+            color:#fff;
+            font-size: 16px;
+        }
+        textarea{
+            float: left;
+            background: #000;
+            font-size: 16px;
+            word-wrap: break-word;
+            color: #0f0;
+        }
+        
+        .erorr{
+            display: inline-block;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+
+    <table border="0" cellspacing="0" cellpadding="0" id="Table">
+    <tr>
+        <td ></td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+    <div id="box"></div>
+        <div class="show">
+            <div class="show-left"></div>
+            <textarea class="user-in" name="" id="" cols="30" rows="10" autofocus></textarea>
+        </div>
+         <button type="submit">确认</button>
+        <br>
+    <span>
+        ps:     go :往蓝色方向走一格;
+                tunlef :向左转;
+                tunrig :向右转;
+                tunbac :向后转;
+                tarlef:向左移动,方向不变;
+                tarrig:向右移动,方向不变;
+                tartop:向上移动,方向不变;
+                tarbot:向下移动,方向不变;
+                movlef:向左移动,方向改变;
+                movrig:向右移动,方向改变;
+                movbot:向下移动,方向改变;
+                movtop:向上移动,方向改变;
+        pss:大小写都可以噢.
+    </span>
+</body>
+<script>
+"use strict";
+var deg = 0,
+    box = document.getElementById("box"),
+    input = document.getElementsByTagName("textarea")[0],
+    showLeft = document.getElementsByClassName("show-left")[0],
+    valueArr = [],
+    but = document.getElementsByTagName("button")[0],
+    _moveArr = ["go", "tunlef", "tunrig", "tunbac", "tralef", "tranrig", "trabot", "tratop", "movbot", "movlef", "movtop", "movrig"];
+
+showLeft.style.height = window.getComputedStyle(input).height;
+input.addEventListener("keyup", function(e) {
+    valueArr = input.value.trim().split("\n").map(function(item) {
+        return item.trim().replace(/\s/g, "").toLowerCase();
+    });
+    valueArr.go = true;
+    showLeft.innerHTML = "";
+    valueArr.forEach(function(item, index) {
+        if (_moveArr.indexOf(item) != -1) {
+            showLeft.innerHTML += "<span>" + (index + 1) + "<sapn>"
+        } else {
+            showLeft.innerHTML += "<span class='erorr'>" + (index + 1) + "<sapn>"
+            valueArr.go = false;
+        }
+    })
+})
+//修正div的left和top,给出出界提示
+function changeMove(left, top) {
+    if (left > 500) {
+        left = 500;
+        console.log("right出界啦,不能继续走啦!");
+    } else if (left < 50) {
+        left = 50
+        console.log("left出界啦,不能继续走啦!");
+    };
+    if (top > 500) {
+        top = 500;
+        console.log("bottom出界啦,不能继续走啦!");
+    } else if (top < 50) {
+        top = 50;
+        console.log("top出界啦,不能继续走啦!");
+    }
+    return {
+        left: left,
+        top: top
+    }
+}
+//修正角度值并旋转div
+function changeDeg(deg) {
+    if (deg >= 360) {
+        deg = deg - 360;
+    } else if (deg < 0) {
+        deg = 360 + deg;
+    }
+    box.style.transform = "rotate(" + deg + "deg)";
+}
+
+
+//移动
+var divMove = {
+    move: function(dec) {
+        var left = parseInt(window.getComputedStyle(box).left),
+            top = parseInt(window.getComputedStyle(box).top);
+        switch (dec) {
+            case 0:
+                top -= 50;
+                break;
+            case 1:
+                left += 50;
+                break;
+            case 2:
+                top += 50;
+                break
+            case 3:
+                left -= 50;
+                break;
+        }
+        var _data = changeMove(left, top);
+        box.style.left = _data.left + "px";
+        box.style.top = _data.top + "px";
+    },
+    go: function() {
+        this.move(deg / 90);
+    },
+    tunlef: function() {
+        deg -= 90;
+        deg = changeDeg(deg);
+    },
+    tunrig: function() {
+        deg += 90;
+        deg = changeDeg(deg);
+        box.style.transform = "rotate(" + deg + "deg)";
+    },
+    tunbac: function() {
+        deg += 180;
+        deg = changeDeg(deg);
+        box.style.transform = "rotate(" + deg + "deg)";
+    },
+    tralef: function() {
+        this.move(3);
+    },
+    trarig: function() {
+        this.move(1);
+    },
+    tratop: function() {
+        this.move(0);
+    },
+    trabot: function() {
+        this.move(2);
+    },
+    movlef: function() {
+        deg = 270;
+        changeDeg(deg)
+        this.go();
+    },
+    movrig: function() {
+        deg = 90;
+        changeDeg(deg)
+        this.go();
+    },
+    movtop: function() {
+        deg = 0;
+        changeDeg(deg)
+        this.go();
+    },
+    movbot: function() {
+        deg = 180;
+        changeDeg(deg);
+        this.go();
+    }
+}
+input.addEventListener("scroll",function(){
+    showLeft.style.top =-this.scrollTop+"px";
+    console.log(showLeft.style.top)
+})
+but.addEventListener("click", (function() {
+    //防止在0.5s内重复点击导致div错位;
+    //防止多次点击导致定时器bug
+    var last = new Date().getTime(),
+        time = null;
+    return function() {
+        var _valueArr = valueArr,
+            length = _valueArr.length,
+            now = new Date().getTime();
+        clearInterval(time);
+        if (now - last < length * 500) {
+            console.log("不要点太快 忙不过来啦");
+            return false;
+        }
+        last = now;
+        if (valueArr.go) {
+            var i = 0;
+            time = setInterval(function() {
+                if (i >= length) {
+                    //结束清空
+                    clearInterval(time);
+                    input.value = "";
+                    showLeft.innerHTML = "";
+                    valueArr = [];
+                } else {
+                    divMove[_valueArr[i]] && divMove[_valueArr[i]]();
+                    i++;
+                }
+            }, 1500)
+        }
+    }
+})())
+</script>
+</html>

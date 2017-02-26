@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{
+		padding:0;
+		margin:0;
+	}
+	.mian{
+		height: 600px;
+		width: 1000px;
+		margin: auto;
+		border: 2px solid #1ee;
+		border-radius: 15px;
+		position: relative;
+	}
+	.input{
+		margin:20px auto;
+		text-align: center;
+	}
+	.inputArr{
+		height: 40px;
+		width:400px;
+		font-size: 22px;
+	}
+	.input button{
+		height: 42px;
+		width: 80px;
+		font-size: 22px;
+		line-height: 22px;
+		background: #11e;
+		color: #fff;
+		border-radius: 10px;
+		border: 0;
+		cursor: pointer;
+		outline: none;
+		box-shadow:3px 1px 3px #e111ee;
+	}
+	.input button:active{
+		box-shadow: none;
+	}
+	.showArr{
+		height: 500px;
+		width: 900px;
+		margin-left:-450px;
+		border-bottom: 0;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+	}
+	.showArr div{
+		background: #1ff;
+		position: absolute;
+		bottom: 0;
+		width: 7px;
+	}
+	</style>
+</head>
+<body>
+	<div class="mian">
+		<div class="input">
+			<input class="inputArr" type="text">
+			<button class="addArr">添加</button>
+			<button class="sortArr">排序</button>
+			<button class="randomArr">随机</button>
+		</div>
+		<div class="showArr">
+		</div>
+	</div>
+</body>
+<script>
+"use strict"
+var arr = [],
+	inputArr = document.getElementsByClassName("inputArr")[0],
+	addArr = document.getElementsByClassName("addArr")[0],
+	sortArr = document.getElementsByClassName("sortArr")[0],
+	showArr = document.getElementsByClassName("showArr")[0],
+	randomArr = document.getElementsByClassName('randomArr')[0];
+document.addEventListener("click", function(e) {
+	if(e.target.classList.contains("close")){
+		e.target.parentNode.removeChild(e.target);
+		var index=e.target.getAttribute("data-index");
+		arr.splice(index,1);
+		renderChart();
+	}
+	if (e.target === addArr) {
+		if (inputArr.value % 1 !== 0 || inputArr.value < 10 || inputArr.value > 100) {
+			alert("请输入10-100的整数");
+		} else if (arr.length > 60) {
+			alert("队列元素不能超过60")
+		} else {
+			arr.push(inputArr.value);
+			renderChart()
+		}
+	}else if (e.target === randomArr) {
+		for (let i =arr.length; i < 60; i++) {
+			arr.push(Math.floor(Math.random() * 91 + 10))
+		}
+		renderChart();
+	}else if (e.target === sortArr) {
+		var i = 0,
+			j = 1,
+			index = 0,
+			time = setInterval(srotChart, 0);
+			
+		function srotChart() {
+			if (i < arr.length) {
+				if (j < arr.length) {
+					index++
+					if (arr[i] > arr[j]) {
+						arr[i] = arr[i] ^ arr[j];
+						arr[j] = arr[i] ^ arr[j];
+						arr[i] = arr[i] ^ arr[j];
+						renderChart();
+					}
+					showArr.getElementsByTagName("div")[j].style.background = "red";
+					for (let s = 0; s < i; s++) {
+						showArr.getElementsByTagName("div")[s].style.background = "#ddd";
+					}
+					j++
+				} else {
+					i++
+					j = i + 1;
+					for (let s = 0; s < i; s++) {
+						showArr.getElementsByTagName("div")[s].style.background = "#ddd";
+					}
+				}
+			} else {
+				clearInterval(time);
+				console.log("运行了" + index + "次")
+			}
+		}
+	};
+})
+function renderChart() {
+	var _html = "";
+	for (let i = 0; i < arr.length; i++) {
+		_html += "<div class=\"close\" data-index=\""+i+"\" style=height:" + (arr[i] * 4) + "px;" + "left:" + (15 * i + 10) + "px;\"></div>"
+	}
+	showArr.innerHTML = _html;
+}
+</script>
+</html>

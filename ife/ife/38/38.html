@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ife 38</title>
+	<style>
+	table{
+		margin: 120px auto;
+	    text-align: center;
+	    width:600px;
+	    position: relative;
+	    border-collapse:collapse;
+	}
+	table thead tr:first-child td{
+		background: #eef111;
+	}
+	table td{
+		padding: 10px 30px;
+		margin:0;
+		position: relative;
+		border: 1px solid #000;
+	}
+	thead{
+		position: relative;
+		width:600px;
+		height: 80px;
+	}
+	tbody{
+		margin-top: 80px;
+	}
+	.up{
+		height: 0;
+		width: 0;
+		border-bottom: 10px solid #000;
+		border-top:0px;
+		border-right:5px solid transparent;
+		border-left:5px solid transparent;
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		cursor: pointer;
+	}
+	.down{
+		height: 0;
+		width: 0;
+		border-top: 10px solid #000;
+		border-bottom:0px;
+		border-right:5px solid transparent;
+		border-left:5px solid transparent;
+		position: absolute;
+		right: 5px;
+		top: 0px;
+		margin-top:20px;
+		cursor: pointer;
+	}
+	</style>
+</head>
+<body>
+	<table cellspacing="0" cellpadding=0;>
+		<thead>
+			<tr> 
+				<td>姓名</td>
+				<td>语文<div class="up"></div><div class="down"></div></td>
+				<td>数学<div class="up"></div><div class="down"></div></td>
+				<td>英语<div class="up"></div><div class="down"></div></td>
+				<td>政治<div class="up"></div><div class="down"></div></td> 
+				<td>生物<div class="up"></div><div class="down"></div></td> 
+			</tr>
+		</thead>
+		<tbody>
+	
+		</tbody>
+	</table>
+</body>
+<script>
+"use strict"
+	var arr=[
+		["小红",91,71,72,81,81],
+		["小明",51,83,58,55,88],
+		["小李",98,88,71,21,22],
+		["校长",4,81,55,75,21],
+		["小红",91,71,72,81,81],
+		["小明",51,83,58,55,88],
+		["小李",98,88,71,21,22],
+		["校长",4,81,55,75,21],
+		["小红",91,71,72,81,81],
+		["小明",51,83,58,55,88],
+		["小李",98,88,71,21,22],
+		["校长",4,81,55,75,21],
+		["小红",91,71,72,81,81],
+		["小明",51,83,58,55,88],
+		["小李",98,88,71,21,22],
+		["校长",4,81,55,75,21],
+		["小红",91,71,72,81,81],
+		["小明",51,83,58,55,88],
+		["小李",98,88,71,21,22],
+		["校长",4,81,55,75,21],
+
+
+	],
+		table=document.getElementsByTagName("tbody")[0];
+
+	function show(){
+		var _html="";
+		for(let i=0;i<arr.length;i++){
+			var __html="";
+			for(let j=0;j<arr[i].length;j++){
+				__html+="<td>"+ arr[i][j]+"</td>"
+			}
+			_html+="<tr>"+__html+"</tr>"
+		}
+		table.innerHTML=_html;
+	};
+	function arrSort(i,flag){
+		arr.sort(function(a,b){
+			return a[i+1]-b[i+1];
+		})
+		if(flag){
+			arr.reverse();
+		}
+	}
+	var up=document.getElementsByClassName("up"),
+		down=document.getElementsByClassName("down");
+	for(let i = 0 ;i<up.length;i++){
+		up[i].onclick=function(){
+			arrSort(i);
+			show()
+		}
+		down[i].onclick=function(){
+			arrSort(i,true);
+			show()
+		}
+	}
+	show()
+</script>
+</html>

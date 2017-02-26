@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.showDiv div{
+			display:inline-block;
+			height: 40px;
+			color: #fff;
+			background: red;
+			margin: 10px;
+			font-size: 25px;
+		}
+		.push{
+			margin-right: 20px;
+		}
+		.addColor1{
+			background: #999; 
+		}
+		.addColor2{
+			background: #eef;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<textarea name="textarea" class="inputArr" cols="30" rows="5"></textarea>
+		<button class="unshift">左侧入</button>
+		<button class="push">右侧入</button>
+		<button class="shift">左侧出</button>
+		<button class="pop">右侧出</button>
+		<input type="text" class="detecInp">
+		<button class="detecBut">检测</button>	
+	</div>
+	<div class="showDiv">
+
+	</div>
+</body>
+<script>
+	function $(ele){
+		return document.getElementsByClassName(ele);
+	}
+	var unshift=$("unshift")[0],
+		push=$("push")[0],
+		shift=$("shift")[0],
+		pop=$("pop")[0],
+		inputArr=$("inputArr")[0],
+		inputArray,
+		array=[],
+		detecInp=$("detecInp")[0],
+		detecBut=$("detecBut")[0],
+		showDiv=$("showDiv")[0];
+		//忽略IE ;
+		document.addEventListener("click",function(e){
+			inputArray=inputArr.value.trim().split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/).filter(function(item){
+				if(item!==null&&item.length>0){
+					return true;
+				}else{
+					return false;
+				}
+			});
+			if(e.target==unshift){
+				for(let i =0;i<inputArray.length;i++){
+					var div=document.createElement("div");
+					array.unshift(inputArray[i])
+					div.innerHTML=inputArray[i];
+					if(showDiv.children.length===0){
+						showDiv.appendChild(div);
+					}else{
+						showDiv.insertBefore(div,showDiv.children[0]);
+						console.log(showDiv.children[0].innerHTML)
+					}	
+				}
+			}
+			if(e.target==push){
+				for(let i =0;i<inputArray.length;i++){
+					array.push(inputArray[i])
+					var div=document.createElement("div");
+					div.innerHTML=inputArray[i];
+					showDiv.appendChild(div);
+				}
+			}
+			if(e.target===shift){
+				if(showDiv.children.length!==0){
+					array.shift(inputArray[0])
+					showDiv.removeChild(showDiv.children[0]);
+				}
+				
+			}
+			if(e.target===pop){
+				if(showDiv.children.length!==0){
+					array.pop(inputArray[inputArray.length-1])
+					showDiv.removeChild(showDiv.children[showDiv.children.length-1])
+				}				
+			}
+			if(e.target===detecBut){
+				var str=detecInp.value.trim(),
+					_div=showDiv.getElementsByTagName("div"),
+					len=_div.length;
+				for(let i =0;i<len;i++){
+					var html = array[i];
+					_div[i].innerHTML=html;
+					_div[i].innerHTML=html.replace(new RegExp(str, "g"),"<span class='addColor1'>"+str+"</span>");
+				}
+			}
+		})
+
+</script>
+</html>

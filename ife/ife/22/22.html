@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{
+		    display: flex;
+		    flex: 1;
+		    padding: 10px 0px;
+		    margin: 10px;
+		    border: 1px solid red;
+		    line-height: 15px;
+		    background-color:#fff;
+		}
+		
+		.show{
+			background: red;
+		}
+	</style>
+</head>
+<body>
+<div class="main">
+	<div class="box1">
+		<div class="box2">
+			<div class="box3"></div>
+			<div class="box3"></div>
+		</div>
+		<div class="box2">
+			<div class="box3"></div>
+			<div class="box3"></div>
+		</div>
+	</div>
+	<div class="box1">
+		<div class="box2">
+			<div class="box3"></div>
+			<div class="box3"></div>
+		</div>
+		<div class="box2">
+			<div class="box3"></div>
+			<div class="box3"></div>
+		</div>
+	</div>
+</div>
+<button>点击遍历</button>
+<button>点击遍历</button>
+<button>点击遍历</button>
+<button>点击遍历</button>
+</body>
+<script>
+"use strict"
+var but = document.getElementsByTagName("button")[0],
+	but2 = document.getElementsByTagName("button")[1],
+	but3 = document.getElementsByTagName("button")[2],
+	but4 = document.getElementsByTagName("button")[3],
+	div = document.getElementsByClassName('main')[0],
+	time = null,
+	showArr = []
+
+function init() {
+	for (let i = 0; i < showArr.length; i++) {
+		showArr[i].style.background="#fff"
+	}
+	showArr = [];
+	clearInterval(time)
+}
+
+function show(arr) {
+	var length = arr.length,
+		i = 0;
+	time = setInterval(function() {
+		if (i < length) {
+			arr[i].style.background = "red";
+			if (i > 0) {
+				arr[i - 1].style.background = "#fff"
+			}
+			i++;
+		} else {
+			clearInterval(time);
+			arr[length - 1].style.background = "#fff"
+		}
+	}, 1500)
+}
+
+function push1(data){
+	if(!(data==null)){
+		showArr.push(data);
+		push1(data.children[0]);
+		push1(data.children[1]);
+	}
+}
+function push2(data){
+	if(!(data==null)){
+		push2(data.children[0]);
+		showArr.push(data);
+		push2(data.children[1]);
+	}
+}
+
+function push3(data){
+	if(!(data==null)){
+		push3(data.children[0]);
+		push3(data.children[1]);
+		showArr.push(data);
+		console.log(1)
+	}
+}
+function push4(data) {
+	if (data) {
+		showArr.push(data)
+		for (let i = 0; i < data.children.length; i++) {
+			push4(data.children[i])
+		}
+	}
+}
+but.onclick = function() {
+	init();
+	push1(div);
+	show(showArr);
+}
+but2.onclick=function(){
+	init();
+	push2(div);
+	show(showArr);
+}
+but3.onclick=function(){
+	init();
+	push3(div);
+	show(showArr);
+}
+but4.onclick=function(){
+	init();
+	push4(div);
+	show(showArr);
+}
+</script>
+</html>

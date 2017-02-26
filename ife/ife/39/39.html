@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ife 38</title>
+	<style>
+	*{
+		padding: 0;
+		margin:0;
+	}
+	table{
+		box-sizing: border-box;
+		margin: 120px auto;
+	    text-align: center;
+	    width:600px;
+	    position: relative;
+	    border-collapse:collapse;
+	    border-spacing: 0;
+	}
+	table tr:first-child {
+		background: #000;
+		color:#fff;
+		}
+	table td{
+		padding: 10px 30px;
+		width: 39px;
+		position: relative;
+		border: 1px solid #000;
+	}
+	.up{
+		height: 0;
+		width: 0;
+		border-bottom: 10px solid #fff;
+		border-top:0px;
+		border-right:5px solid transparent;
+		border-left:5px solid transparent;
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		cursor: pointer;
+	}
+	.down{
+		height: 0;
+		width: 0;
+		border-top: 10px solid #fff;
+		border-bottom:0px;
+		border-right:5px solid transparent;
+		border-left:5px solid transparent;
+		position: absolute;
+		right: 5px;
+		top: 0px;
+		margin-top:20px;
+		cursor: pointer;
+	}
+	.fixed{
+		position: fixed;
+		top: 0;
+		z-index: 999;
+	}
+	</style>
+</head>
+<body>
+
+</body>
+<script>
+;(function() {
+	"use strict"
+	//数据接口[[表头],[内容]]
+	function Table(ele,data){
+		this.ele=ele;
+		this.data=data;
+		this.table=document.createElement("table");
+		this.showHead();
+		this.tr=[];
+	}
+
+	Table.prototype.showHead= function () {
+		var _html="";
+		for(let i=0;i<this.data[0].length;i++){
+			if(i===0){
+				_html+="<td>"+this.data[0][0]+"</td>";
+				console.log(data[0][0])
+			}else{
+				_html+="<td>"+this.data[0][i]+"<div class='up'></div><div class='down'></div></td>";
+			}
+		}
+		
+		 _html="<tr>"+_html+"</tr>";
+		this.table.innerHTML=_html;
+		this.ele.appendChild(this.table);
+	}
+	Table.prototype.showBody=function(){
+
+		for (let i = 0; i < this.data[1].length; i++) {
+			this.tr[i] = document.createElement("tr");
+			for (let j = 0; j < this.data[1][i].length; j++) {
+				var td=document.createElement("td")
+				if (this.data[1][i][j]) {
+					td.innerHTML=this.data[1][i][j];
+				} else {
+					td.innerHTML="";
+				}
+				this.tr[i].appendChild(td);
+			}
+			this.table.appendChild(this.tr[i]);
+		}
+	};
+	Table.prototype.removeBody=function(){
+		for(let i =0;i<this.tr.length;i++){
+			this.table.removeChild(this.tr[i]);
+		}
+	}
+	Table.prototype.arrSort=function (i, flag) {
+		this.data[1].sort(function(a,b) {
+			return a[i+1] - b[i+1];
+		})
+		console.log(data)
+		if (flag) {
+			this.data[1].reverse();
+		}
+	};
+	//表头固定
+	Table.prototype.fixed=function(ele) {
+		//获取元素到最外层dom的距离;
+		function findOffset(ele, style) {
+			var str = ele[style];
+			if (ele.offsetParent) {
+				return str + findOffset(ele.offsetParent, style);
+			} else {
+				return str;
+			}
+		};
+		//节流函数 传入3个参数; fn 节流的函数, time节流的间隔时间,默认50 , context :函数作用域,默认window ;
+		var throttlev=(function (){
+			var old=new Date().getTime();
+			return function (fn,time,context){
+				var now = new Date().getTime(),
+					time=time?time:50;
+				if(now-old>time){
+					fn.apply(context);
+					old=now;
+				}
+			}
+		})();
+
+		var top = findOffset(ele, "offsetTop"),
+			height = parseInt(window.getComputedStyle(this.table).height);
+			console.log(height)
+		function _fixed() {
+			//这里-40px 让表头消失和表尾消失显得不那么生硬;
+			if (document.body.scrollTop > top&&document.body.scrollTop<top+height-40) {  
+				ele.classList.add("fixed");
+			//	console.log(ele.classList)
+			}else {
+				ele.classList.remove("fixed");
+			}
+		};
+		var time = null;
+		document.addEventListener("scroll", function() {
+			throttlev(_fixed);
+		})
+	};
+
+	//初始化
+	Table.prototype.init=function() {
+			this.showBody();
+			//var table = document.getElementsByTagName("table")[0],
+			var up = this.table.getElementsByClassName("up"),
+				down = this.table.getElementsByClassName("down"),
+				thead= this.table.getElementsByTagName("tr")[0],
+				me=this;
+		for (let i = 0; i < up.length; i++) {
+			up[i].onclick = function() {
+				me.arrSort(i);
+				me.removeBody();
+				me.init();
+
+			};
+			down[i].onclick = function() {
+				me.arrSort(i, true);
+				me.removeBody();
+				me.init();
+			};
+		};
+		this.fixed(thead)
+	};
+
+
+	var data = [
+			["姓名", "语文", "数学", "英语", "政治", "地理"],
+			[
+				["小红", 91, 71, 72, 81, 81],
+				["小明", 51, 83, 58, 55, 88],
+				["小李", 98, 88, 71, 21, 22],
+				["校长", 4, 81, 55, 75, 21],
+				["小红", 91, 71, 72, 81, 81],
+				["小明", 51, 83, 58, 55, 88],
+				["小李", 98, 88, 71, 21, 22],
+				["校长", 4, 81, 55, 75, 21],
+				["小红", 91, 71, 72, 81, 81],
+				["小明", 51, 83, 58, 55, 88],
+				["小李", 98, 88, 71, 21, 22],
+				["校长", 4, 81, 55, 75, 21],
+				["小红", 91, 71, 72, 81, 81],
+				["小明", 51, 83, 58, 55, 88],
+				["小李", 98, 88, 71, 21, 22],
+				["校长", 4, 81, 55, 75, 21],
+				["小红", 91, 71, 72, 81, 81],
+				["小明", 51, 83, 58, 55, 88],
+				["小李", 98, 88, 71, 21, 22],
+				["校长", 4, 81, 55, 75, 21]
+			]
+		];
+		new Table(document.body,data).init()
+		for (var i = 40; i >= 0; i--) {
+			var br=document.createElement("br")
+			document.body.appendChild(br)
+		}
+})()
+</script>
+</html>

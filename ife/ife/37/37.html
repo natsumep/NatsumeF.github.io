@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>pop-up-box</title>
+	<style>
+		/* 让页面可以滚动 */
+		*{
+			padding: 0;
+			margin:0;
+			box-sizing: border-box;
+		}
+		html,body{
+			height: 200%;
+			width: 100%;
+		}
+		input{
+			height: 60px;
+			width: 280px;
+			border-radius: 10px;
+			background: #f55;
+			outline: none;
+			position: absolute;
+			top:50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			font-size: 30px;
+			line-height: 60px;
+			color: #fff;
+		}
+	
+	/* pop-up-box组件样式 */
+		.pop-up-wrapper{
+			height: 200px;
+			width: 400px;
+			min-height: 100px;
+			min-width: 300px;
+			border-radius: 5px;
+			position: fixed;
+			left: 50%;
+			top: 50%;
+			background: #fff;
+			transform: translate(-50%,-50%);
+			overflow: hidden;
+			z-index: 999;
+			box-shadow: 4px 4px 2px #eee,-4px -4px 2px #eee;
+		}
+		.pop-up-header{
+			min-width: 150px;
+			min-height: 15px; 
+			background: #15b8cf;
+			line-height: 30px;
+			color: #fff;
+		}
+		.pop-up-close{
+			color: #fff;
+			position: absolute;
+			top:0;
+			right: 2px;
+			height: 30px;
+			width: 30px;
+			background:  transparent;
+			border: 0;
+			outline: 0;
+			font-size: 25px;
+			line-height: 30px;
+			transform: rotate(45deg);
+			transition: all 0.3s ;
+		}
+		.pop-up-close:hover{
+			transform: rotate(0deg);
+		}		
+		.pop-up-body{
+			padding: 20px;
+		}
+		.pop-up-button{
+			height: 30px;
+			width:45px;
+			border-radius: 5px;
+			position: absolute;
+			bottom: 20px;
+			right: 40px;
+			outline: none;
+		}
+		.pop-up-button.success{
+			right: 100px;
+		}
+		.pop-up-shade{
+			height: 100%;
+			width: 100%;
+			position: fixed;
+			left: 0;
+			top: 0;
+			z-index: 998;
+			background:rgba(224, 224, 224, .8);
+			z-index: 998;
+		}
+		.pop-up-darg{
+			height: 10px;
+			width: 10px;
+			position: absolute;
+			right: 0;
+			bottom: 0;
+
+		}
+		/*拖动鼠标箭头 */
+		.darg{
+
+			cursor: nw-resize;
+		}
+	</style>
+</head>
+<body>
+	<input type="button" value="点我弹出窗口">
+</body>
+<script>
+
+	util = {
+		//bod:需要更改大小的目标,dom出发拖拽的目标,flag:ture非等比例缩放;false:按X方向等比例缩放
+		darg: function(bod, dom, flag) {
+			dom.addEventListener("mousedown", function(e) {
+				var x = e.clientX,
+					y = e.clientY,
+					height = parseInt(window.getComputedStyle(bod).height),
+					width = parseInt(window.getComputedStyle(bod).width),
+					_darg = function(e) {
+						e.preventDefault();
+						var _x = e.clientX,
+							_y = e.clientY,
+							X = _x - x,
+							Y = _y - y;
+						if (flag) {
+							bod.style.height = height + X + "px";
+							bod.style.width = width + X + "px"
+						} else {
+							bod.style.height = height + Y + "px";
+							bod.style.width = width + X + "px";
+						}
+					};
+				document.addEventListener("mousemove", _darg)
+				document.addEventListener("mouseup", function() {
+					document.removeEventListener("mousemove", _darg);
+				})
+			})
+		},
+		move: function(bod, ele) { //移动 bod 是需要移动的dom ele是可以触发移动的子dom
+			ele = ele ? ele : bod; //如果只传一个参数  那就全部可以移动
+			ele.addEventListener("mousedown", function(e) {
+				var x = e.clientX,
+					y = e.clientY,
+					clickX = x - bod.offsetLeft,
+					clickY = y - bod.offsetTop,
+					_move = function(e) {
+						e.stopPropagation();
+						//console.log(clickX)
+						bod.style.left = e.clientX - clickX + "px";
+						bod.style.top = e.clientY - clickY + "px";
+						e.preventDefault()
+					};
+				document.addEventListener("mousemove", _move);
+				ele.addEventListener("mouseup", function() {
+					document.removeEventListener("mousemove", _move);
+				})
+			})
+		},
+		extend:function(a,b){
+			console.log(a+" "+b)
+			for(var x in b){
+				a[x]=b[x];
+			}
+		}
+	}
+
+	;
+	(function() {
+		"use strict"
+
+		function popUpBox(data) {
+			this.data = {
+				headerText:"这是一个浮出层",
+				bodyText:"我是弹窗",
+				closeFn:null,
+				successFn:null,
+				cancelFn:null
+			}
+			util.extend(this.data,data)
+			console.log(this.data)
+			this.init();
+		};
+		popUpBox.prototype.creartMain = function() {
+			this.div = document.createElement("div");
+			var _html = `<div class='pop-up-shade'> 
+			<div class='pop-up-wrapper'>
+				<div class = 'pop-up-header'>
+					<span> ${this.data.headerText} </span> 
+					<button class = 'pop-up-close' > × </button>
+				</div>
+				<div class = 'pop-up-body' >
+					<span class ='pop-up-span' > ${this.data.bodyText} </span> 
+					<button class = 'pop-up-button success' > 确定 </button> 
+					<button class ='pop-up-button cancel'> 取消 </button> 
+					<div class = 'pop-up-darg' > </div> 
+				</div> 
+			</div> 
+		</div>`
+			this.div.innerHTML = _html;
+			document.body.appendChild(this.div)
+		};
+		popUpBox.prototype.hide = function() {
+			document.body.removeChild(this.div);
+		}
+		popUpBox.prototype.init = function() {
+			this.creartMain()
+			var me = this;
+			var init = function(e) {
+				if (e.target.classList.contains("pop-up-close")){
+					me.data.closeFn&&me.data.closeFn();
+					me.hide();
+				} else if (e.target.classList.contains("cancel")) {
+					me.hide();
+					me.data.cancelFn && me.data.cancelFn();
+					e.stopPropagation();
+				} else if (e.target.classList.contains("success")) {
+					me.hide();
+					me.data.successFn && me.data.successFn();
+					e.stopPropagation();
+				}
+			}
+			this.div.addEventListener("click", init);
+			//防止拖拽的时候触发clic事件导致hide()
+			this.div.addEventListener("mousedown",function(e){
+				if (e.target.classList.contains("pop-up-shade")) {
+					me.hide();
+				}
+			})
+			var header=this.div.getElementsByClassName("pop-up-header")[0],
+				wrapper = me.div.getElementsByClassName("pop-up-wrapper")[0];
+				util.move(wrapper,header);				
+			this.div.addEventListener("mouseover", function(e) {
+				if (e.target.classList.contains("pop-up-darg")) {
+					e.target.classList.add("darg");
+					util.darg(wrapper, e.target);
+					return false;
+				}
+			})
+		}
+		window.popUpBox = popUpBox;
+
+		document.getElementsByTagName("input")[0].onclick=function(){
+			new popUpBox({
+			headerText:"点击右上角箭头还会出现一个新的弹出框哟",
+			closeFn:function(){
+				new popUpBox()
+			}
+		})
+		} 
+	})();
+</script>
+</html>

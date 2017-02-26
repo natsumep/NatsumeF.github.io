@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		 html, body {
+            font-family: "Microsoft YaHei";
+            font-size: 80px;
+        }
+
+		main{
+			height: 0.8rem;
+			width: 8rem;
+			margin:0.2rem auto; 
+			position: relative;
+			
+		}
+		input{
+			width: 5.4rem;
+			height: 0.66rem;
+			border-radius: 0.07rem;
+			border: 2px solid #ccc;
+			float: left;
+			outline: 0px;
+			line-height: 0.66rem;
+			color: #565656;
+			font-size: 0.28rem;
+			text-indent: 0.3rem;
+			font-weight: 580;
+		}
+		span {
+			float: left;
+			display: inline-block;
+			line-height:0.68rem;
+			margin-right: 0.4rem;
+			font-size: 0.28rem;
+			font-weight: 500;
+		}
+		button{
+			height: 0.68rem;
+			width: 1.07rem;
+			border-radius: 0.07rem;
+			font-size: 27px;
+			line-height: 0.68rem;
+			background: #2f79ba;
+			cursor: pointer;
+			border: 0;
+			color: #fff;
+			float: left;
+			margin-left: 0.4rem;
+		}
+		.prompt{
+			margin-left:0.99rem; 
+			font-size: 0.22rem;
+			color: #a8a8a8;
+			font-weight: 400px;
+		}
+		.input-erorr{
+			border: 2px solid red;
+			
+		}
+		.input-ok{
+			border: 2px	solid #5dbc45;
+			
+		}
+		.span-erorr{
+			color: red;
+		}
+		.span-ok{
+			color: #5dbc45;
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<div>
+			<span>名称</span>
+			<input type="text">
+		</div>
+		<button>验 证</button>
+		<span class="prompt">必填:长度为4~16个字符</span>
+	</main>
+</body>
+<script>
+(function() {
+	var prompt = document.getElementsByClassName("prompt")[0],
+		input = document.getElementsByTagName("input")[0],
+		but = document.getElementsByTagName("button")[0];
+		but.onclick=function(){
+			var value=input.value.trim(),
+				length=value.replace(/[^\x00-\xFF]/g, "zh").length;
+			if(length===0){
+				input.classList.add("input-erorr");
+				prompt.innerHTML="姓名不能為空";
+				prompt.classList.add("span-erorr");
+			}else if(length<4){
+				input.classList.add("input-erorr");
+				prompt.innerHTML="長度不能小於4字符";
+				prompt.classList.add("span-erorr");
+			}else if(length>16){
+				input.classList.add("input-erorr");
+				prompt.innerHTML="長度不能大於16字符";
+				prompt.classList.add("span-erorr");
+			}else{
+				input.classList.add("input-ok");
+				prompt.innerHTML="驗證通過";
+				prompt.classList.add("span-ok");
+			}
+		}
+
+
+})()
+</script>
+</html>

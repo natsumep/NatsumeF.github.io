@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>31</title>
+	<style>		
+	*{
+		padding: 0;
+		margin:0;
+	}
+	.form-school{
+		height: 400px;
+		width: 600px;
+		margin:40px auto;
+	}
+	.form-school .out-school{
+		margin-left: 50px;
+		height: 40px;
+		line-height: 40px;
+	}
+	.form-shcool [type="radio"]{
+		display: inline-block;
+		height: 15px;
+		width: 15px;
+		border-radius: 50%;
+		border: 1px solid #fee;
+		padding: 20px;
+		background: red;
+		outline: none;
+	}
+	.in-school-lives,.out-school-work{
+		margin-top: 20px;
+	}
+	.in-school-lives select{
+		margin-right: 20px;
+	}
+
+	</style>
+</head>
+<body>
+	<div class="form-school">
+		<form action="#">
+			<label class="in-school">
+				<input type="radio" checked name="school"> 在校生
+			</label>
+			<label class="out-school">
+				<input type="radio" name="school"> 非在校生
+			</label>
+			<br>
+			<div class="in-school-lives">
+			</div>
+			<!-- <div class="out-school-work">
+				就业单位 
+				<input type="text" class="user-work" name="out-school-work">
+			</div> -->
+		</form>
+	
+	</div>
+</body>
+<script>
+"use strict"
+//创建就业单位; //ele 代表需要放置的地方
+function createOutSchool(ele) {
+	ele.innerHTML= `<div class="out-school-work">
+				就业单位 
+				<input type="text" class="user-work">
+			</div>`
+};
+//修改学校和地区 ele代表需要修改的地方 data是数据 格式为[1,2,3,...]
+function createInSchool(data,ele) {
+	var _html = "";
+	for (let i = 0; i < data.length; i++) {
+		_html += " <option value='" + data[i] + "'>" + data[i] + "</option>";
+	}
+	if(ele){
+		ele.innerHTML = _html;
+	}
+	return "<select>"+_html+"<select>";
+};
+//初始化函数
+function init(data) {
+	var schoolLive = document.getElementsByClassName("in-school-lives")[0],
+		form = document.getElementsByClassName("form-school")[0],
+		inSchool = document.getElementsByClassName("in-school")[0],
+		outSchool = document.getElementsByClassName("out-school")[0];
+	function inSchoolInit(ele){
+		/*var inSchoolSection = document.createElement("select");
+			;*/
+		ele.innerHTML="学校"+createInSchool(data[0])+createInSchool(data[1][0]);	
+	};
+	inSchoolInit(schoolLive)
+		//给表格委托事件
+	form.addEventListener("click", function(e) {
+		if (e.target === inSchool) {
+			inSchoolInit(schoolLive);
+		} else if (e.target === outSchool) {
+			createOutSchool(schoolLive);
+		} else if (e.target === schoolLive.getElementsByTagName("select")[0]) {
+			var inSchoolSchool = schoolLive.getElementsByTagName("select")[1]
+			e.target.onchange = function() {
+				var value = this.value,
+					index;
+				for (let i = 0; i < data[0].length; i++) {
+					if (data[0][i] == value) {
+						index = i;
+					}
+				}
+				createInSchool( data[1][index],inSchoolSchool);
+			}
+		}
+	});
+
+}
+var data = [
+	["北京", "厦门", "湖南"],
+	[
+		["北京大学", "清华大学", "创业中~"],
+		["厦门大学", "厦门第一师范", "厦门创业学院", "厦门二中"],
+		["长沙学院", "枣田中学", "一师附中", "创业在读"],
+	]
+]
+init(data)
+</script>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.showDiv div{
+			display:inline-block;
+			height: 40px;
+			color: #fff;
+			background: red;
+			margin: 10px;
+			font-size: 25px;
+		}
+		.push{
+			margin-right: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<input class="inputArr" type="text" name="array" placeholder="请输入数字">
+		<button class="unshift">左侧入</button>
+		<button class="push">右侧入</button>
+		<button class="shift">左侧出</button>
+		<button class="pop">右侧出</button>
+	</div>
+	<div class="showDiv">
+
+	</div>
+</body>
+<script>
+	function $(ele){
+		return document.getElementsByClassName(ele);
+	}
+	var unshift=$("unshift")[0],
+		push=$("push")[0],
+		shift=$("shift")[0],
+		pop=$("pop")[0],
+		inputArr=$("inputArr")[0],
+		inputArray=""
+		showDiv=$("showDiv")[0];
+		//忽略IE ;
+		document.addEventListener("click",function(e){
+			inputArray=inputArr.value;
+			if(e.target==unshift){
+				var div=document.createElement("div");
+				div.innerHTML=inputArray;
+				if(showDiv.children.length===0){
+					showDiv.appendChild(div);
+				}else{
+					showDiv.insertBefore(div,showDiv.children[0]);
+					console.log(showDiv.children[0].innerHTML)
+				}	
+			}
+			if(e.target==push){
+				var div=document.createElement("div");
+				div.innerHTML=inputArray;
+				showDiv.appendChild(div);
+			}
+			if(e.target===shift){
+				if(showDiv.children.length!==0){
+					showDiv.removeChild(showDiv.children[0]);
+				}
+				
+			}
+			if(e.target===pop){
+				if(showDiv.children.length!==0){
+					showDiv.removeChild(showDiv.children[showDiv.children.length-1])
+				}				
+			}
+		})
+
+</script>
+</html>
